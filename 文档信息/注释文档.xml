@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="false" context="methodcomment_context" deleted="false" description="Comment for non-overriding methods" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.methodcomment" name="methodcomment">/**  
+ * &lt;p&gt;Title: ${enclosing_method}&lt;/p&gt;
+ * &lt;p&gt;Description: &lt;/p&gt;
+ * ${tags}
+ */</template><template autoinsert="false" context="overridecomment_context" deleted="false" description="Comment for overriding methods" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.overridecomment" name="overridecomment">/* (non-Javadoc)  
+
+ * &lt;p&gt;Title: ${enclosing_method}&lt;/p&gt;  
+
+ * &lt;p&gt;Description: &lt;/p&gt;  
+
+ * ${tags}  
+
+ * ${see_to_overridden}  
+
+ */</template><template autoinsert="false" context="gettercomment_context" deleted="false" description="Comment for getter method" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.gettercomment" name="gettercomment">/**
+ * @return the ${bare_field_name}
+ */</template><template autoinsert="false" context="constructorcomment_context" deleted="false" description="Comment for created constructors" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.constructorcomment" name="constructorcomment">/**  
+* &lt;p&gt;Title: &lt;/p&gt;  
+* &lt;p&gt;Description: &lt;/p&gt;  
+* ${tags}  
+*/</template><template autoinsert="false" context="fieldcomment_context" deleted="false" description="Comment for fields" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.fieldcomment" name="fieldcomment">/** ${field}*/</template><template autoinsert="false" context="settercomment_context" deleted="false" description="Comment for setter method" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.settercomment" name="settercomment">/**
+ * @param ${param} the ${bare_field_name} to set
+ */</template><template autoinsert="false" context="filecomment_context" deleted="false" description="Comment for created Java files" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.filecomment" name="filecomment">/**  
+* &lt;p&gt;Title: ${file_name}&lt;/p&gt;  
+* &lt;p&gt;Description: &lt;/p&gt;
+* &lt;p&gt;Copyright: javaSpirit&lt;/p&gt;
+* @author fang yuzhen
+* @date ${date}  
+* @version 1.0  
+*/</template><template autoinsert="false" context="delegatecomment_context" deleted="false" description="Comment for delegate methods" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.delegatecomment" name="delegatecomment">/**  
+* ${tags}  
+* ${see_to_target}  
+*/</template><template autoinsert="false" context="typecomment_context" deleted="false" description="Comment for created types" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.typecomment" name="typecomment">/**  
+* &lt;p&gt;Title: ${type_name}&lt;/p&gt;
+* &lt;p&gt;Description: &lt;/p&gt;
+* @author fang yuzhen
+* @date ${date}
+*/</template></templates>
