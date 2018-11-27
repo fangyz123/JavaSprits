@@ -1,10 +1,10 @@
 package team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service;
 
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
-import javax.imageio.ImageIO;
+import javax.media.jai.remote.SerializableRenderedImage;
 
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
@@ -30,11 +30,14 @@ public class SCommunicaIoHandle extends IoHandlerAdapter {
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		// 对接收过来的对象，进行强制类型转换
 		FileContent fileContent = (FileContent) message;
-		// 通过对象获得字节数组
-		byte[] bytes = fileContent.getBytes();
-		// new一个字节输入流，进行读操作
-		ByteArrayInputStream in = new ByteArrayInputStream(bytes);
-		BufferedImage image = ImageIO.read(in);
+		SerializableRenderedImage s = fileContent.getSerializableRenderedImage();
+		int width = s.getWidth();
+		int height = s.getHeight();
+		int type = fileContent.getType();
+		BufferedImage image = new BufferedImage(width, height, type);
+		Graphics2D g = image.createGraphics();
+		g.drawRenderedImage(s, AffineTransform.getScaleInstance(1, 1));
+		g.dispose();
 		// 将读出来的图片在面板上展示
 		screen.display(image);
 	}

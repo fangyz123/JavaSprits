@@ -33,7 +33,7 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 	 */
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
-
+	
 	}
 
 	@Override

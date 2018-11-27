@@ -38,7 +38,7 @@ public class Client {
 
 		// 客户端的实现
 		// 创建一个套接字连接
-		final NioSocketConnector connector = new NioSocketConnector();
+		NioSocketConnector connector = new NioSocketConnector();
 		// 设置连接超时
 		connector.setConnectTimeoutMillis(3000);
 
@@ -62,7 +62,7 @@ public class Client {
 		connector.getSessionConfig().setUseReadOperation(true);
 
 		// 设置默认访问地址localhost
-		connector.setDefaultRemoteAddress(new InetSocketAddress("10.7.84.131", 8998));
+		connector.setDefaultRemoteAddress(new InetSocketAddress("10.7.84.42", 8999));
 		ConnectFuture connectFuture = connector.connect();
 
 		// 写上这句为了得到下面的session 意思是等待连接创建完成 让创建连接由异步变同步
@@ -143,48 +143,7 @@ public class Client {
 			}
 		});
 
-		// 断线重连回调拦截器
-		/*connector.getFilterChain().addFirst("reconnection", new IoFilterAdapter() {
-
-			// 等待时间
-			int waitTime = 0;
-
-			@Override
-			public void sessionClosed(NextFilter nextFilter, IoSession session) throws Exception {
-				System.out.println("111");
-				for (int i = 0; i < 3; i++) {
-
-					try {
-						waitTime = waitTime + 500 * (i + 1);
-						Thread.sleep(waitTime);
-
-						ConnectFuture future = connector.connect();
-
-						future.awaitUninterruptibly();// 等待连接创建成功
-
-						session = future.getSession();// 获取会话
-
-						if (session.isConnected()) {
-							System.out.println("连接成功");
-							FileContent fc = new FileContent();
-							byte b = 1;
-							fc.setCommand(b);
-							session.write(fc);
-
-							break;
-
-						}
-
-					} catch (Exception ex) {
-
-						System.out.println("重连服务器登录失败,5秒再连接一次:" + ex.getMessage());
-
-					}
-				}
-
-			}
-
-		});*/
+		session.getCloseFuture().awaitUninterruptibly();
 
 	}
 
