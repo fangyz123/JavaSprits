@@ -5,23 +5,18 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
- * <p>
- * Title: ShowScreen
- * </p>
- * <p>
- * Description:
- * </p>
- * 
- * @author fang yuzhen
- * @date 2018Äê11ÔÂ19ÈÕ
+* <p>Title: ShowScreen</p>
+* <p>Description: å±å¹•å±•ç¤ºç±»ã€‚
+* å¯¹æ§åˆ¶å°çš„åˆå§‹åŒ–ï¼Œnewç›¸å…³çš„ç»„ä»¶ã€‚
+* å°†ä»æœåŠ¡å™¨å¾—åˆ°çš„å›¾ç‰‡è¿›è¡Œç›¸å¯¹åº”çš„è°ƒæ•´å’Œå±•ç¤ºåœ¨æ§åˆ¶å°ä¸Šã€‚</p>
+* @author Fang Yuzhen
+* @date 2018å¹´11æœˆ28æ—¥
  */
 public class ShowScreen {
 
@@ -29,79 +24,60 @@ public class ShowScreen {
 	private JLabel imag_lab = null;
 
 	/**
-	 * <p>
-	 * Title:
-	 * </p>
-	 * <p>
-	 * Description: ¹¹Ôìº¯Êı¡£newÒ»¸öJFrameºÍJLabel£¬ÉèÖÃÏà¶ÔÓ¦µÄÖµ¡£
-	 * </p>
-	 */
+	* <p>Title: </p>  
+	* <p>Description: å¯¹æ§åˆ¶å°è¿›è¡Œç›¸å¯¹åº”çš„è®¾ç½®å’Œæ·»åŠ å¯¹åº”çš„ç»„ä»¶ã€‚</p>
+	*/
 	public ShowScreen() {
-		jf = new JFrame("¿ØÖÆÌ¨");
-		// ¿ØÖÆÌ¨´óĞ¡
+		jf = new JFrame("è€å¸ˆçš„å±å¹•");
+		// æ§åˆ¶å°å¤§å°
 		imag_lab = new JLabel();
-		// »ñÈ¡ÆÁÄ»µÄ´óĞ¡
+		// è·å–å±å¹•çš„å¤§å°
 		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) screensize.getWidth();
 		int height = (int) screensize.getHeight();
 		jf.setSize(width, height);
 		jf.add(imag_lab);
-		// ÉèÖÃ¿ØÖÆÌ¨¿É¼û
+		// è®¾ç½®æ§åˆ¶å°å¯è§
 		jf.setVisible(true);
-		// ¿ØÖÆÌ¨ÖÃ¶¥
+		// æ§åˆ¶å°ç½®é¡¶
 		jf.setAlwaysOnTop(true);
-		// ¿ØÖÆÌ¨ÍË³öÄ£Ê½
+		// æ§åˆ¶å°é€€å‡ºæ¨¡å¼
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	/**
-	 * <p>
-	 * Title: display
-	 * </p>
-	 * <p>
-	 * Description:
-	 * </p>
-	 * 
-	 * @param image
+	 * <p>Title: display</p>
+	 * <p>Description: å°†å›¾ç‰‡å±•ç¤ºåœ¨æ§åˆ¶å°ä¸Šã€‚</p>
+	 * @param image ä¼ è¿›æ¥çš„BufferedImageç±»å‹çš„å›¾ç‰‡å¯¹è±¡
 	 * @throws IOException
 	 */
-	public void display(BufferedImage image, int x, int y) throws IOException {
+	public void display(BufferedImage image) throws IOException {
 		int width = imag_lab.getWidth();
 		int height = imag_lab.getHeight();
-		BufferedImage newImage = resize(image, width, height, x, y);
-		imag_lab.setIcon(new javax.swing.ImageIcon(newImage));
+		// ä¿®æ”¹å›¾ç‰‡çš„å¤§å°
+		image = resize(image, width, height);
+		imag_lab.setIcon(new javax.swing.ImageIcon(image));
 	}
 
 	/**
-	 * 
-	 *
-	 * <p>
-	 * Title: resize
-	 * </p>
-	 *
-	 * <p>
-	 * Description:
-	 * </p>
-	 *
-	 * @param img
-	 * @param newW
-	 * @param newH
-	 * @return
+	 * <p>Title: resize</p>
+	 * <p>Description: å¯¹å›¾ç‰‡è¿›è¡Œç›¸å¯¹åº”çš„è°ƒæ•´ã€‚</p>
+	 * @param img ä¼ è¿›æ¥çš„è¦ä¿®æ”¹çš„å›¾ç‰‡
+	 * @param newW æ–°å›¾ç‰‡çš„å®½
+	 * @param newH æ–°å›¾ç‰‡çš„é«˜
+	 * @return è¿”å›æ–°çš„å›¾ç‰‡
 	 * @throws IOException
-	 *
 	 */
-	public BufferedImage resize(BufferedImage img, int newW, int newH, int x, int y) throws IOException {
+	public BufferedImage resize(BufferedImage img, int newW, int newH) throws IOException {
 		BufferedImage dimg = new BufferedImage(newW, newH, img.getType());
 		Graphics2D g = dimg.createGraphics();
-		// ¿ªÆôÎÄ×Ö¿¹¾â³İ
+		// å¼€å¯æ–‡å­—æŠ—é”¯é½¿
 		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		// »æÖÆµ±Ç°¿ÉÓÃµÄÖ¸¶¨Í¼ÏñµÄÖ¸¶¨ÇøÓò£¬¶¯Ì¬µØËõ·ÅÍ¼ÏñÊ¹Æä·ûºÏÄ¿±ê»æÖÆ±íÃæµÄÖ¸¶¨ÇøÓò¡£
-		// Í¸Ã÷ÏñËØ²»Ó°Ïì¸Ã´¦ÒÑ´æÔÚµÄÏñËØ
+		// ç»˜åˆ¶å½“å‰å¯ç”¨çš„æŒ‡å®šå›¾åƒçš„æŒ‡å®šåŒºåŸŸï¼ŒåŠ¨æ€åœ°ç¼©æ”¾å›¾åƒä½¿å…¶ç¬¦åˆç›®æ ‡ç»˜åˆ¶è¡¨é¢çš„æŒ‡å®šåŒºåŸŸã€‚
+		// é€æ˜åƒç´ ä¸å½±å“è¯¥å¤„å·²å­˜åœ¨çš„åƒç´ 
 		g.drawImage(img, 0, 0, newW, newH, null);
-		// Ïú»Ù³ÌĞòÖĞÖ¸¶¨µÄÍ¼ĞÎ½çÃæ×ÊÔ´
+		// é”€æ¯ç¨‹åºä¸­æŒ‡å®šçš„å›¾å½¢ç•Œé¢èµ„æº
 		g.dispose();
-		BufferedImage cursor = ImageIO.read(new File("image/cursor_1.png"));
-		dimg.createGraphics().drawImage(cursor, x, y, null);
 		return dimg;
 	}
 

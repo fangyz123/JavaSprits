@@ -1,191 +1,44 @@
 package team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.control;
 
-import java.net.InetSocketAddress;
+import java.io.IOException;
 
-import org.apache.mina.core.future.ConnectFuture;
-import org.apache.mina.core.service.IoService;
-import org.apache.mina.core.service.IoServiceListener;
-import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
-import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
-import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
-import team.javaSpirit.teachingAssistantPlatform.entity.FileContent;
-import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.SCommunicaIoHandle;
+import team.javaSpirit.teachingAssistantPlatform.mina.Configure;
+import team.javaSpirit.teachingAssistantPlatform.mina.SessionListener;
+import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.SendMessage;
 
 /**
- * <p>
- * Title: Client
- * </p>
- * <p>
- * Description: ¿Í»§¶ËÊµÏÖÖ÷Àà¡£Ö÷ÒªÊµÏÖ¿Í»§¶ËÓë·şÎñÆ÷µÄÁ¬½Ó£¬´ïµ½Á½»úÍ¨ĞÅµÄ¹¦ÄÜ
- * </p>
- * 
- * @author fang yuzhen
- * @date 2018Äê11ÔÂ19ÈÕ
+* <p>Title: Client</p>
+* <p>Description: å®¢æˆ·ç«¯å¼€å¯çš„æ¥å£ã€‚</p>
+* @author Fang Yuzhen
+* @date 2018å¹´11æœˆ28æ—¥
  */
 public class Client {
 
 	public static void main(String[] args) {
-		// ±àÂëºÍ½âÂë¹¤³§,¿ÉÒÔ´«´óÊı¾İÁ¿
-		ObjectSerializationCodecFactory objectSerializationCodecFactory = new ObjectSerializationCodecFactory();
-
-		objectSerializationCodecFactory.setDecoderMaxObjectSize(Integer.MAX_VALUE);
-
-		objectSerializationCodecFactory.setEncoderMaxObjectSize(Integer.MAX_VALUE);
-
-		// ¿Í»§¶ËµÄÊµÏÖ
-		// ´´½¨Ò»¸öÌ×½Ó×ÖÁ¬½Ó
-		final NioSocketConnector connector = new NioSocketConnector();
-		// ÉèÖÃÁ¬½Ó³¬Ê±
-		connector.setConnectTimeoutMillis(3000);
-
-		// ÉèÖÃ±àÂë¹ıÂËÆ÷
-		connector.getFilterChain().addLast("codec",
-
-				new ProtocolCodecFilter(objectSerializationCodecFactory));
-		// Ìí¼ÓÄÚÖÃÈÕÖ¾
-		connector.getFilterChain().addLast("logging", new LoggingFilter());
-
-		// ¶ÁĞ´¶¼¿ÕÏĞÊ±¼ä:5Ãë
-//		connector.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 5);
-		// ¶Á(½ÓÊÕÍ¨µÀ)¿ÕÏĞÊ±¼ä:5Ãë
-		connector.getSessionConfig().setIdleTime(IdleStatus.READER_IDLE, 3);
-		// Ğ´(·¢ËÍÍ¨µÀ)¿ÕÏĞÊ±¼ä:5Ãë
-//		connector.getSessionConfig().setIdleTime(IdleStatus.WRITER_IDLE, 5);
-
-		// ÉèÖÃÊÊÅäÆ÷£¨¼àÌı£©
-		connector.setHandler(new SCommunicaIoHandle());
-
-		connector.getSessionConfig().setUseReadOperation(true);
-
-		// ÉèÖÃÄ¬ÈÏ·ÃÎÊµØÖ·localhost
-		connector.setDefaultRemoteAddress(new InetSocketAddress("10.7.84.42", 8998));
-		ConnectFuture connectFuture = connector.connect();
-
-		// Ğ´ÉÏÕâ¾äÎªÁËµÃµ½ÏÂÃæµÄsession ÒâË¼ÊÇµÈ´ıÁ¬½Ó´´½¨Íê³É ÈÃ´´½¨Á¬½ÓÓÉÒì²½±äÍ¬²½
-		FileContent fc = new FileContent();
-		byte b = 1;
-		fc.setCommand(b);
-		connectFuture.awaitUninterruptibly();
-		IoSession session = connectFuture.getSession();
-		session.getConfig().setUseReadOperation(true);
-		session.write(fc);
-
-		connector.addListener(new IoServiceListener() {
-
-			@Override
-			public void sessionDestroyed(IoSession session) throws Exception {
-				// TODO Auto-generated method stub
-				System.out.println("aaa");
-				int waitTime=0;
-				for (int i = 0; i < 3; i++) {
-
-					try {
-						waitTime = waitTime + 2000 * (i + 1);
-						Thread.sleep(waitTime);
-						
-						ConnectFuture connectFuture = connector.connect();
-
-						connectFuture.awaitUninterruptibly();// µÈ´ıÁ¬½Ó´´½¨³É¹¦
-
-						session = connectFuture.getSession();// »ñÈ¡»á»°
-						
-						if (session.isConnected()) {
-							System.out.println("Á¬½Ó³É¹¦");
-
-							break;
-
-						}
-
-					} catch (Exception ex) {
-
-						System.out.println("ÖØÁ¬·şÎñÆ÷µÇÂ¼Ê§°Ü,5ÃëÔÙÁ¬½ÓÒ»´Î:" + ex.getMessage());
-
-					}
-				}
-			}
-
-			@Override
-			public void sessionCreated(IoSession session) throws Exception {
-				System.out.println("sessionCreated");
-				FileContent fc = new FileContent();
-				byte b = 1;
-				fc.setCommand(b);
-				session.write(fc);
-			}
-
-			@Override
-			public void sessionClosed(IoSession arg0) throws Exception {
-				// TODO Auto-generated method stub
-				System.out.println("111");
-
-			}
-
-			@Override
-			public void serviceIdle(IoService arg0, IdleStatus arg1) throws Exception {
-				System.out.println("serviceIdle");
-
-			}
-
-			@Override
-			public void serviceDeactivated(IoService arg0) throws Exception {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void serviceActivated(IoService arg0) throws Exception {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
-		// ¶ÏÏßÖØÁ¬»Øµ÷À¹½ØÆ÷
-		/*connector.getFilterChain().addFirst("reconnection", new IoFilterAdapter() {
-
-			// µÈ´ıÊ±¼ä
-			int waitTime = 0;
-
-			@Override
-			public void sessionClosed(NextFilter nextFilter, IoSession session) throws Exception {
-				System.out.println("111");
-				for (int i = 0; i < 3; i++) {
-
-					try {
-						waitTime = waitTime + 500 * (i + 1);
-						Thread.sleep(waitTime);
-
-						ConnectFuture future = connector.connect();
-
-						future.awaitUninterruptibly();// µÈ´ıÁ¬½Ó´´½¨³É¹¦
-
-						session = future.getSession();// »ñÈ¡»á»°
-
-						if (session.isConnected()) {
-							System.out.println("Á¬½Ó³É¹¦");
-							FileContent fc = new FileContent();
-							byte b = 1;
-							fc.setCommand(b);
-							session.write(fc);
-
-							break;
-
-						}
-
-					} catch (Exception ex) {
-
-						System.out.println("ÖØÁ¬·şÎñÆ÷µÇÂ¼Ê§°Ü,5ÃëÔÙÁ¬½ÓÒ»´Î:" + ex.getMessage());
-
-					}
-				}
-
-			}
-
-		});*/
-
+		//newä¸€ä¸ªminaæ¡†æ¶é…ç½®åŸºæœ¬ä¿¡æ¯çš„å¯¹è±¡
+		Configure configure=new Configure();
+		//å¯¹è¿æ¥çš„å¯¹è±¡çš„åŸºæœ¬ä¿¡æ¯è¿›è¡Œåˆå§‹åŒ–
+		configure.init();
+		try {
+			//è¿æ¥
+			//10.7.84.42
+			configure.connect("10.7.89.163", 8080);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//è·å¾—è¿æ¥å¯¹è±¡
+		NioSocketConnector connector=configure.getConnector();
+		//ç›‘å¬è¿æ¥å¯¹è±¡çš„ä¼šè¯sessionçš„çŠ¶æ€ï¼Œä»¥è¿›è¡Œé‡è¿
+		connector.addListener(new SessionListener());
+		//å¾—åˆ°session
+		IoSession session=configure.getSession();
+		//å‘é€å‘½ä»¤ä¸º1çš„å¯¹è±¡
+		SendMessage sendMessage=new SendMessage();
+		byte comand=1;
+		sendMessage.sendComand(session, comand);
 	}
 
 }
