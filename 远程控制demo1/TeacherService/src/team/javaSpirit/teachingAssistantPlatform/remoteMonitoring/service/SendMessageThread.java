@@ -9,24 +9,26 @@ import javax.imageio.ImageIO;
 
 import org.apache.mina.core.session.IoSession;
 
+import team.javaSpirit.teachingAssistantPlatform.Screen.TScreen;
 import team.javaSpirit.teachingAssistantPlatform.entity.FileContent;
 
 /**
- * ¼Ì³ĞÏß³ÌÀà£¬ÊµÏÖÃ¿500ºÁÃë¸ú¿Í»§¶Ë½øĞĞÍ¨ĞÅ¡£
+ * ç»§æ‰¿çº¿ç¨‹ç±»ï¼Œå®ç°æ¯200æ¯«ç§’è·Ÿå®¢æˆ·ç«¯è¿›è¡Œé€šä¿¡ã€‚
+ * 
  * @author fangyuzhen
  *
  */
 public class SendMessageThread extends Thread {
-	/*»ñµÃÆÁÄ»½ØÍ¼Àà*/
+	/* è·å¾—å±å¹•æˆªå›¾ç±» */
 	private TScreen tScreen = new TScreen();
-	/*·şÎñÆ÷Óë¿Í»§¶ËÍ¨ĞÅµÄ»á»°*/
+	/* æœåŠ¡å™¨ä¸å®¢æˆ·ç«¯é€šä¿¡çš„ä¼šè¯ */
 	private IoSession session = null;
 
 	/**
-	 * ½«ÆÁÄ»µÄ½ØÍ¼Í¨¹ıImageIOĞ´¸ø¿Í»§¶Ë£¬²¢¶ÔFileContent¶ÔÏóÉèÖÃ×Ö½ÚÊı×é¡£
-	 * ·µ»ØFileContent¶ÔÏó¡£
-	 * @param image
-	 * @return
+	 * å°†å±å¹•çš„æˆªå›¾é€šè¿‡ImageIOå†™ç»™å®¢æˆ·ç«¯ï¼Œå¹¶å¯¹FileContentå¯¹è±¡è®¾ç½®å­—èŠ‚æ•°ç»„ã€‚ 
+	 * è¿”å›FileContentå¯¹è±¡ã€‚
+	 * @param image ä¼ è¿›æ¥BufferedImageç±»å‹çš„å›¾ç‰‡
+	 * @return è¿”å›é€šä¿¡çš„å¯¹è±¡
 	 * @throws IOException
 	 */
 	public FileContent writeMessage(BufferedImage image) throws IOException {
@@ -38,20 +40,20 @@ public class SendMessageThread extends Thread {
 	}
 
 	/**
-	 * Ã¿¸ô500ºÁÃë¸ø¿Í»§¶ËĞ´Ò»¸öĞÅÏ¢¡£
+	 * æ¯éš”200æ¯«ç§’ç»™å®¢æˆ·ç«¯å†™ä¸€å¼ å›¾ç‰‡ã€‚
 	 */
 	@Override
 	public void run() {
 		while (true) {
 			BufferedImage image;
 			try {
-				//µÃµ½ÆÁÄ»½ØÍ¼
+				// å¾—åˆ°å±å¹•æˆªå›¾
 				image = tScreen.getScreen();
-				//½«Í¼Æ¬Ğ´¸ø¿Í»§¶Ë
+				// å°†å›¾ç‰‡å†™ç»™å®¢æˆ·ç«¯
 				FileContent fc = writeMessage(image);
-				//½«Ïà¶ÔÓ¦µÄĞÅÏ¢¸³¸øfc¶ÔÏó£¬Ğ´¸ø¿Í»§¶Ë
+				// å°†ç›¸å¯¹åº”çš„ä¿¡æ¯èµ‹ç»™fcå¯¹è±¡ï¼Œå†™ç»™å®¢æˆ·ç«¯
 				session.write(fc);
-				Thread.sleep(500);
+				Thread.sleep(200);
 			} catch (AWTException e2) {
 				e2.printStackTrace();
 			} catch (IOException e) {

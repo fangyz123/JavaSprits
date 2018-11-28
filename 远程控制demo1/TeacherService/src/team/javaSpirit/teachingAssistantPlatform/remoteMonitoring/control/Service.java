@@ -1,59 +1,27 @@
 package team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.control;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
 
-import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
-import org.apache.mina.filter.logging.LoggingFilter;
-import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
-
-import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.TCommunicaIoHandle;
+import team.javaSpirit.teachingAssistantPlatform.mina.Configure;
 
 /**
- * 
-* <p>Title: Service</p>  
-* <p>Description:  ·şÎñÆ÷ÊµÏÖÖ÷Àà¡£Ö÷ÒªÊµÏÖ¿Í»§¶ËÓë·şÎñÆ÷µÄÁ¬½Ó£¬´ïµ½Á½»úÍ¨ĞÅµÄ¹¦ÄÜ</p>  
-* @author fang yuzhen
-* @date 2018Äê11ÔÂ19ÈÕ
+* <p>Title: Service</p>
+* <p>Description: æœåŠ¡å™¨å®ç°ä¸»ç±»ã€‚ä¸»è¦å®ç°å®¢æˆ·ç«¯ä¸æœåŠ¡å™¨çš„è¿æ¥ï¼Œè¾¾åˆ°ä¸¤æœºé€šä¿¡çš„åŠŸèƒ½</p>
+* @author Fang Yuzhen
+* @date 2018å¹´11æœˆ28æ—¥
  */
 public class Service {
 
 	public static void main(String[] args) {
-		// ±àÂëºÍ½âÂë¹¤³§,¿ÉÒÔ´«´óÊı¾İÁ¿
-		ObjectSerializationCodecFactory objectSerializationCodecFactory = new ObjectSerializationCodecFactory();
-
-		objectSerializationCodecFactory.setDecoderMaxObjectSize(Integer.MAX_VALUE);
-
-		objectSerializationCodecFactory.setEncoderMaxObjectSize(Integer.MAX_VALUE);
-
-		NioSocketAcceptor accept = new NioSocketAcceptor();
-		// ÉèÖÃ±àÂë¹ıÂËÆ÷
-		accept.getFilterChain().addLast("codec",
-
-				new ProtocolCodecFilter(objectSerializationCodecFactory));
-		// Ìí¼ÓÄÚÖÃÈÕÖ¾
-		accept.getFilterChain().addLast("logging", new LoggingFilter());
-		// ÉèÖÃÊÊÅäÆ÷£¨¼àÌı£©
-		accept.setHandler(new TCommunicaIoHandle());
-
+		//newä¸€ä¸ªminaæ¡†æ¶é…ç½®åŸºæœ¬ä¿¡æ¯çš„å¯¹è±¡
+		Configure configure=new Configure();
+		//å¯¹è¿æ¥çš„å¯¹è±¡çš„åŸºæœ¬ä¿¡æ¯è¿›è¡Œåˆå§‹åŒ–
+		configure.init();
 		try {
-			accept.bind(new InetSocketAddress(8998));
+			//å¼€å¯æœåŠ¡ï¼Œç«¯å£æ˜¯8080
+			configure.service(8080);
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
-		
-		try {
-			//»ñµÃIP
-			InetAddress addr = InetAddress.getLocalHost();
-			String ip=addr.getHostAddress();
-//			String ip = InetAddress.getLocalHost().getHostAddress();
-			System.out.println(ip);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} 
 	}
 }
