@@ -1,10 +1,10 @@
 package team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service;
 
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
-import javax.imageio.ImageIO;
+import javax.media.jai.remote.SerializableRenderedImage;
 
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
@@ -22,6 +22,8 @@ import team.javaSpirit.teachingAssistantPlatform.ui.ShowScreen;
 public class SCommunicaIoHandle extends IoHandlerAdapter {
 	/* 获得展示面板的对象 */
 	private ShowScreen screen = new ShowScreen();
+	private FileContent fileContent;
+	private BufferedImage image = null;
 
 	/**
 	 * 监听服务器写过来的信息，将其接收并处理。
@@ -29,12 +31,17 @@ public class SCommunicaIoHandle extends IoHandlerAdapter {
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		// 对接收过来的对象，进行强制类型转换
-		FileContent fileContent = (FileContent) message;
-		// 通过对象获得字节数组
-		byte[] bytes = fileContent.getBytes();
-		// new一个字节输入流，进行读操作
-		ByteArrayInputStream in = new ByteArrayInputStream(bytes);
-		BufferedImage image = ImageIO.read(in);
+		fileContent = (FileContent) message;
+		SerializableRenderedImage s = fileContent.getSerializableRenderedImage();
+		if (image == null) {
+			int width = s.getWidth();
+			int height = s.getHeight();
+			int type = fileContent.getType();
+			image = new BufferedImage(width, height, type);
+		}
+		Graphics2D g = image.createGraphics();
+		g.drawRenderedImage(s, AffineTransform.getScaleInstance(1, 1));
+		g.dispose();
 		// 将读出来的图片在面板上展示
 		screen.display(image);
 	}

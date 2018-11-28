@@ -1,19 +1,32 @@
 package team.javaSpirit.teachingAssistantPlatform.entity;
 
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
+import javax.media.jai.remote.SerializableRenderedImage;
+
 /**
- * 保存通信相对应的信息。
+ * 实现Serializable序列化接口。在网络通信的传输。
  * 
  * @author fangyuzhen
  *
  */
 @SuppressWarnings("serial")
 public class FileContent implements Serializable {
-	/* 保存图片字节数组 */
-	private byte[] bytes;
 	/* 保存命令 */
 	private byte command;
+	/* 图片的类型 */
+	private int type;
+	/* 转为可序列化图片对象 */
+	private SerializableRenderedImage serializableRenderedImage;
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
 
 	public byte getCommand() {
 		return command;
@@ -23,12 +36,13 @@ public class FileContent implements Serializable {
 		this.command = command;
 	}
 
-	public byte[] getBytes() {
-		return bytes;
+	public SerializableRenderedImage getSerializableRenderedImage() {
+		return serializableRenderedImage;
 	}
 
-	public void setBytes(byte[] bytes) {
-		this.bytes = bytes;
+	public void setSerializableRenderedImage(BufferedImage image) {
+		this.serializableRenderedImage = new SerializableRenderedImage(image, true);
+		type = image.getType();
 	}
 
 }

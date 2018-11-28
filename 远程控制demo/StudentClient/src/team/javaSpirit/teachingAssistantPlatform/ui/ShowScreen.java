@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -91,8 +92,8 @@ public class ShowScreen {
 	 *
 	 */
 	public BufferedImage resize(BufferedImage img, int newW, int newH) throws IOException {
-		BufferedImage dimg = new BufferedImage(newW, newH, img.getType());
-		Graphics2D g = dimg.createGraphics();
+//		BufferedImage dimg = new BufferedImage(newW, newH, img.getType());
+		Graphics2D g = img.createGraphics();
 		// 开启文字抗锯齿
 		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		// 绘制当前可用的指定图像的指定区域，动态地缩放图像使其符合目标绘制表面的指定区域。
@@ -100,7 +101,7 @@ public class ShowScreen {
 		g.drawImage(img, 0, 0, newW, newH, null);
 		// 销毁程序中指定的图形界面资源
 		g.dispose();
-		return dimg;
+		return img;
 	}
 
 	public JFrame getJf() {
