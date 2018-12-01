@@ -32,7 +32,7 @@ public class Client {
 		//获得连接对象
 		NioSocketConnector connector=configure.getConnector();
 		//监听连接对象的会话session的状态，以进行重连
-		connector.addListener(new SessionListener());
+		connector.addListener(new SessionListener(connector));
 		//得到session
 		IoSession session=configure.getSession();
 		//发送命令为1的对象
