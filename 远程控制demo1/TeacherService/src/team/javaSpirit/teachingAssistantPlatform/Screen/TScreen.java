@@ -5,10 +5,7 @@ import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
-<<<<<<< HEAD
 import java.awt.Robot;
-=======
->>>>>>> f53d67d4cab128083b7fc5ceedb1255838cadeb9
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -47,12 +44,7 @@ public class TScreen {
 		Toolkit tk = java.awt.Toolkit.getDefaultToolkit();
 		Dimension dm = tk.getScreenSize();
 		// 创建Robot对象
-<<<<<<< HEAD
-		Robot robot = null;
-=======
-		java.awt.Robot robot = null;
->>>>>>> f53d67d4cab128083b7fc5ceedb1255838cadeb9
-		robot = new java.awt.Robot();
+		Robot robot = new Robot();
 		Rectangle rec = new Rectangle(dm);
 		// 获得鼠标的位置
 		Point p = MouseInfo.getPointerInfo().getLocation();

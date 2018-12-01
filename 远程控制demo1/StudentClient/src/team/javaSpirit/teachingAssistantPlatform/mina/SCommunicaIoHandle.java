@@ -58,11 +58,7 @@ public class SCommunicaIoHandle extends IoHandlerAdapter {
 		System.out.println("sessionIdle");
 		if (session != null) {
 //			session.getService().dispose(false);
-<<<<<<< HEAD
 			session.close(false);
-=======
-			session.close(true);
->>>>>>> f53d67d4cab128083b7fc5ceedb1255838cadeb9
 		}
 	}
 

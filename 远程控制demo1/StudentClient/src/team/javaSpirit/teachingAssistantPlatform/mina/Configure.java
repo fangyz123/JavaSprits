@@ -67,11 +67,7 @@ public class Configure {
 		// 添加内置日志
 		connector.getFilterChain().addLast("logging", new LoggingFilter());
 
-<<<<<<< HEAD
 		// 读(接收通道)空闲时间:3秒
-=======
-		// 读(接收通道)空闲时间:5秒
->>>>>>> f53d67d4cab128083b7fc5ceedb1255838cadeb9
 		connector.getSessionConfig().setIdleTime(IdleStatus.READER_IDLE, 3);
 
 		// 设置适配器（监听）

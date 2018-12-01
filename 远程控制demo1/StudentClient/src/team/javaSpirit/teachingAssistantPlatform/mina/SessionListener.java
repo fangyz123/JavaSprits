@@ -5,10 +5,9 @@ import org.apache.mina.core.service.IoService;
 import org.apache.mina.core.service.IoServiceListener;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
-<<<<<<< HEAD
+
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
-=======
->>>>>>> f53d67d4cab128083b7fc5ceedb1255838cadeb9
+
 
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.SendMessage;
 
@@ -25,17 +24,10 @@ import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.SendMe
  */
 public class SessionListener implements IoServiceListener {
 	/* mina框架的基本配置对象 */
-<<<<<<< HEAD
 	private NioSocketConnector connector;
 
 	public SessionListener(NioSocketConnector connector) {
 		this.connector=connector;
-=======
-	private Configure configure = null;
-
-	public SessionListener() {
-		configure = new Configure();
->>>>>>> f53d67d4cab128083b7fc5ceedb1255838cadeb9
 	}
 
 	@Override
@@ -79,11 +71,7 @@ public class SessionListener implements IoServiceListener {
 		for (int i = 1; i <= 3; i++) {
 			waitTime = waitTime + 1000 * i;
 			Thread.sleep(waitTime);
-<<<<<<< HEAD
 			ConnectFuture connectFuture = connector.connect();
-=======
-			ConnectFuture connectFuture = configure.getConnector().connect();
->>>>>>> f53d67d4cab128083b7fc5ceedb1255838cadeb9
 			// 等待连接创建成功，同步的方式发送信息
 			connectFuture.awaitUninterruptibly();
 			// 获取会话
