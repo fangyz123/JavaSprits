@@ -25,14 +25,14 @@ public class Client {
 		try {
 			//连接
 			//10.7.84.42  10.7.89.163
-			configure.connect("10.7.84.42", 8080);
+			configure.connect("10.7.81.54", 8080);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		//获得连接对象
 		NioSocketConnector connector=configure.getConnector();
 		//监听连接对象的会话session的状态，以进行重连
-		connector.addListener(new SessionListener());
+		connector.addListener(new SessionListener(connector));
 		//得到session
 		IoSession session=configure.getSession();
 		//发送命令为1的对象
