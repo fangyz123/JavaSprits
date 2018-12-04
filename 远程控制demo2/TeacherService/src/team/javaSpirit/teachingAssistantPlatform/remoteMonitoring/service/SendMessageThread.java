@@ -20,7 +20,7 @@ public class SendMessageThread extends Thread {
 	private FileContent fileContent;
 
 	/**
-	 * 每隔200毫秒给客户端写一张图片。
+	 * 每隔100毫秒给客户端写一张图片。
 	 */
 	@Override
 	public void run() {
@@ -36,7 +36,7 @@ public class SendMessageThread extends Thread {
 				if (index % 10 == 0) {
 					index = 0;
 				}
-				Thread.sleep(200);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

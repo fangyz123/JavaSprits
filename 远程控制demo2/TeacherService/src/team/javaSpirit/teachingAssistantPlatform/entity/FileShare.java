@@ -45,9 +45,7 @@ public class FileShare {
 	public FileContent getFileContent(int index) {
 		try {
 			FileContent f = fileContents.get(index);
-			if (f == null) {
-				Thread.sleep(100);
-			} else if (f.getState() == 2) {
+			if (f != null && f.getState() == 2) {
 				Thread.sleep(100);
 			}
 			return f;
