@@ -25,6 +25,10 @@ public class SendMessageThread extends Thread {
 	@Override
 	public void run() {
 		while (true) {
+			if (session.isClosing()) {
+				break;
+			}
+//			System.out.println("线程发送");
 			try {
 				// 将图片写给客户端
 				fileContent = fileShare.getFileContent(index);

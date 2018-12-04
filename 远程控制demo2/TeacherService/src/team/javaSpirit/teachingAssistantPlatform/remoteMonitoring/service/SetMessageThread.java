@@ -1,6 +1,7 @@
 package team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service;
 
 import team.javaSpirit.teachingAssistantPlatform.entity.FileShare;
+import team.javaSpirit.teachingAssistantPlatform.mina.TCommunicaIoHandle;
 
 /**
  * <p>
@@ -14,9 +15,9 @@ import team.javaSpirit.teachingAssistantPlatform.entity.FileShare;
  * @date 2018年12月1日
  */
 public class SetMessageThread extends Thread {
-	/*数据共享类*/
+	/* 数据共享类 */
 	private FileShare fileShare;
-	/*表面意义上HashMap的下标*/
+	/* 表面意义上HashMap的下标 */
 	public static int index = 0;
 
 	/**
@@ -25,6 +26,10 @@ public class SetMessageThread extends Thread {
 	@Override
 	public void run() {
 		while (true) {
+			if (TCommunicaIoHandle.num == 0) {
+				break;
+			}
+//			System.out.println("线程设置");
 			try {
 				// 设置传输对象
 				fileShare.setFileContent(index);

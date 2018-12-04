@@ -67,7 +67,6 @@ public class FileShare {
 	public void setFileContent(int index) {
 		try {
 			BufferedImage image = tScreen.getScreen();
-//			baos.reset();
 			ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
 			ImageIO.write(image, "jpg", baos1);
 			fileContent.setBytes(baos1.toByteArray());

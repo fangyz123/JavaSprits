@@ -23,6 +23,8 @@ import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.SetMes
 public class TCommunicaIoHandle extends IoHandlerAdapter {
 	private FileShare fileShare;
 	private SetMessageThread setMessage = null;
+	/*连接数量*/
+	public static int num=0;
 
 	/**
 	 * 监听学生端写过来的信息，将其接收并对其内容进行相对应的回复。
@@ -54,18 +56,19 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 		this.fileShare = new FileShare();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
 		System.out.println("exceptionCaught");
 		if (session != null) {
-			session.close(false);
+			session.getCloseFuture();
 		}
 	}
 
 	@Override
 	public void sessionClosed(IoSession session) throws Exception {
 		System.out.println("sessionClosed");
+		num--;
+		System.out.println(num);
 	}
 
 	@Override
@@ -82,6 +85,7 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 	@Override
 	public void sessionOpened(IoSession session) throws Exception {
 		System.out.println("sessionOpened");
+		num++;
 		if (this.setMessage == null) {
 			System.out.println("xinjian");
 			this.setMessage = new SetMessageThread(fileShare);
