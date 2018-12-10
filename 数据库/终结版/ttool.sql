@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/12/10 8:20:02                           */
+/* Created on:     2018/12/10 8:39:32                           */
 /*==============================================================*/
 
 
@@ -104,8 +104,9 @@ create table loadTeacher
 /*==============================================================*/
 create table manager
 (
-   m_id                 varchar(15),
-   password             varchar(25)
+   m_id                 varchar(15) not null,
+   password             varchar(25),
+   primary key (m_id)
 );
 
 /*==============================================================*/
@@ -176,10 +177,11 @@ create table teacher
 /*==============================================================*/
 create table term
 (
-   term_id              int,
+   term_id              int not null,
    time_begin           timestamp,
    time_end             timestamp,
-   status               int
+   status               int,
+   primary key (term_id)
 );
 
 /*==============================================================*/
