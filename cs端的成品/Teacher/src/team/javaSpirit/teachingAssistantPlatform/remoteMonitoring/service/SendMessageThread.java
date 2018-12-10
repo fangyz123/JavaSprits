@@ -19,16 +19,15 @@ public class SendMessageThread extends Thread {
 	private int index;
 	private FileContent fileContent;
 
+	/* 是否继续执行的条件 */
+	private boolean isRun = true;
+
 	/**
 	 * 每隔100毫秒给客户端写一张图片。
 	 */
 	@Override
 	public void run() {
-		while (true) {
-			if (session.isClosing()) {
-				break;
-			}
-//			System.out.println("线程发送");
+		while (isRun) {
 			try {
 				// 将图片写给客户端
 				fileContent = fileShare.getFileContent(index);
@@ -60,6 +59,14 @@ public class SendMessageThread extends Thread {
 
 	public void setSession(IoSession session) {
 		this.session = session;
+	}
+
+	public boolean isRun() {
+		return isRun;
+	}
+
+	public void setRun(boolean isRun) {
+		this.isRun = isRun;
 	}
 
 }

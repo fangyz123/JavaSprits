@@ -81,13 +81,9 @@ public class Index extends JFrame {
 	private JPanel lmenu5;
 	/* 显示当前是第几周是什么课的文本标签 */
 	private JLabel lblNewLabel;
-	/* 中间内容页容器 */
 	private JPanel centerpl;
-	/* 左侧聊天窗口面板 */
 	private JPanel panel_5;
-	/* 界面总的容器 */
 	private GroupLayout gl_bgContentPane;
-	/* 左侧聊天文本编辑框 */
 	private JTextField textField;
 
 	/**
@@ -251,231 +247,7 @@ public class Index extends JFrame {
 	}
 
 	/**
-	 * <p>
-	 * Title: setStuzs
-	 * </p>
-	 * <p>
-	 * Description: 设置学生演示菜单面板，有标记图和按钮
-	 * </p>
-	 */
-	public void setStuzs() {
-		// 学生演示菜单
-		menu4 = new MyJPanel();
-		menu4.setLayout(null);
-		menu4.setForeground(Color.WHITE);
-		menu4.setBorder(null);
-
-		JLabel label_6 = new JLabel("");
-		label_6.setIcon(new ImageIcon("image\\xsys.png"));
-		label_6.setBounds(13, 10, 60, 60);
-		menu4.add(label_6);
-		// 学生演示按钮
-		JButton button = new JButton("\u5B66\u751F\u6F14\u793A");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				jumpSelectstu();
-			}
-		});
-		button.setForeground(new Color(100, 149, 237));
-		button.setFont(new Font("宋体", Font.BOLD, 18));
-		button.setBorder(null);
-		button.setBackground(Color.WHITE);
-		button.setBounds(0, 70, 88, 16);
-		menu4.add(button);
-	}
-
-	/**
-	 * <p>
-	 * Title: setRandomcall
-	 * </p>
-	 * <p>
-	 * Description: 设置随机点名菜单面板，有标记图和按钮
-	 * </p>
-	 */
-	public void setRandomcall() {
-		// 随机点名菜单
-		menu5 = new MyJPanel();
-		menu5.setLayout(null);
-		menu5.setForeground(Color.WHITE);
-		menu5.setBorder(null);
-
-		JLabel label_7 = new JLabel("");
-		label_7.setIcon(new ImageIcon("image\\sjdm.png"));
-		label_7.setBounds(13, 10, 60, 60);
-		menu5.add(label_7);
-		// 随机点名按钮
-		JButton button_9 = new JButton("\u968F\u673A\u70B9\u540D");
-		button_9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button_9.setForeground(new Color(100, 149, 237));
-		button_9.setFont(new Font("宋体", Font.BOLD, 18));
-		button_9.setBorder(null);
-		button_9.setBackground(Color.WHITE);
-		button_9.setBounds(0, 70, 88, 16);
-		menu5.add(button_9);
-	}
-
-	/**
-	 * <p>
-	 * Title: setGroup
-	 * </p>
-	 * <p>
-	 * Description: 设置分组教学菜单面板，有标记图和按钮
-	 * </p>
-	 */
-	public void setGroup() {
-		// 分组教学菜单
-		menu6 = new MyJPanel();
-		menu6.setLayout(null);
-		menu6.setForeground(Color.WHITE);
-		menu6.setBorder(null);
-
-		JLabel label_8 = new JLabel("");
-		label_8.setIcon(new ImageIcon("image\\fzjx.png"));
-		label_8.setBounds(13, 10, 60, 60);
-		menu6.add(label_8);
-		// 分组教学按钮
-		JButton button_10 = new JButton("\u5206\u7EC4\u6559\u5B66");
-		button_10.setForeground(new Color(100, 149, 237));
-		button_10.setFont(new Font("宋体", Font.BOLD, 18));
-		button_10.setBorder(null);
-		button_10.setBackground(Color.WHITE);
-		button_10.setBounds(0, 70, 88, 16);
-		menu6.add(button_10);
-	}
-
-	/**
-	 * <p>
-	 * Title: setClasstest
-	 * </p>
-	 * <p>
-	 * Description: 设置课堂小测菜单面板，有标记图和按钮
-	 * </p>
-	 */
-	public void setClasstest() {
-		// 课堂小测菜单
-		menu7 = new MyJPanel();
-		menu7.setLayout(null);
-		menu7.setForeground(Color.WHITE);
-		menu7.setBorder(null);
-
-		JLabel label_9 = new JLabel("");
-		label_9.setIcon(new ImageIcon("image\\ktxc.png"));
-		label_9.setBounds(13, 10, 60, 60);
-		menu7.add(label_9);
-		// 课堂小测按钮
-		JButton button_11 = new JButton("\u8BFE\u5802\u5C0F\u6D4B");
-		button_11.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button_11.setForeground(new Color(100, 149, 237));
-		button_11.setFont(new Font("宋体", Font.BOLD, 18));
-		button_11.setBorder(null);
-		button_11.setBackground(Color.WHITE);
-		button_11.setBounds(0, 70, 88, 16);
-		menu7.add(button_11);
-	}
-
-	/**
-	 * <p>
-	 * Title: setReleasejob
-	 * </p>
-	 * <p>
-	 * Description: 设置发布作业菜单面板，有标记图和按钮
-	 * </p>
-	 */
-	public void setReleasejob() {
-		// 发布作业菜单
-		menu8 = new MyJPanel();
-		menu8.setLayout(null);
-		menu8.setForeground(Color.WHITE);
-		menu8.setBorder(null);
-
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("image\\fbzy.png"));
-		label_1.setBounds(13, 10, 60, 60);
-		menu8.add(label_1);
-		// 发布作业按钮
-		JButton button_2 = new JButton("\u53D1\u5E03\u4F5C\u4E1A");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button_2.setForeground(new Color(100, 149, 237));
-		button_2.setFont(new Font("宋体", Font.BOLD, 18));
-		button_2.setBorder(null);
-		button_2.setBackground(Color.WHITE);
-		button_2.setBounds(0, 70, 88, 16);
-		menu8.add(button_2);
-	}
-
-	/**
-	 * <p>
-	 * Title: setReleasejob
-	 * </p>
-	 * <p>
-	 * Description: 设置教学反馈菜单面板，有标记图和按钮
-	 * </p>
-	 */
-	public void setTeachback() {
-		// 课堂反馈菜单
-		menu9 = new MyJPanel();
-		menu9.setLayout(null);
-		menu9.setForeground(Color.WHITE);
-		menu9.setBorder(null);
-
-		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon("image\\ktfk.png"));
-		label_2.setBounds(13, 10, 60, 60);
-		menu9.add(label_2);
-		// 课堂反馈按钮
-		JButton button_3 = new JButton("\u8BFE\u5802\u53CD\u9988");
-		button_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button_3.setForeground(new Color(100, 149, 237));
-		button_3.setFont(new Font("宋体", Font.BOLD, 18));
-		button_3.setBorder(null);
-		button_3.setBackground(Color.WHITE);
-		button_3.setBounds(0, 70, 88, 16);
-		menu9.add(button_3);
-	}
-
-	/**
-	 * <p>
-	 * Title: setReleasejob
-	 * </p>
-	 * <p>
-	 * Description: 设置资源分享菜单面板，有标记图和按钮
-	 * </p>
-	 */
-	public void setResourcesharing() {
-		// 资源共享菜单
-		menu10 = new MyJPanel();
-		menu10.setLayout(null);
-		menu10.setForeground(Color.WHITE);
-		menu10.setBorder(null);
-
-		JLabel label_3 = new JLabel("");
-		label_3.setIcon(new ImageIcon("image\\zygx.png"));
-		label_3.setBounds(13, 10, 60, 60);
-		menu10.add(label_3);
-		// 资源共享按钮
-		JButton button_4 = new JButton("\u8D44\u6E90\u5171\u4EAB");
-		button_4.setForeground(new Color(100, 149, 237));
-		button_4.setFont(new Font("宋体", Font.BOLD, 18));
-		button_4.setBorder(null);
-		button_4.setBackground(Color.WHITE);
-		button_4.setBounds(0, 70, 88, 16);
-		menu10.add(button_4);
-	}
-
-	/**
-	 * 中间内容底部容器设置
+	 * 中间容器设置
 	 */
 	public void centerPanel() {
 		centerpl = new MyJPanel();
@@ -544,15 +316,6 @@ public class Index extends JFrame {
 		this.setVisible(true);
 	}
 
-	/**
-	 * 
-	 * <p>
-	 * Title: init
-	 * </p>
-	 * <p>
-	 * Description: 初始所有的标签、容器、内容
-	 * </p>
-	 */
 	public void init() {
 		topMenu();
 		leftMenu();
@@ -583,35 +346,171 @@ public class Index extends JFrame {
 	public void topMenu() {
 		// 添加远程控制面板
 		this.setRemotecontrol();
+		
 		// 广播菜单
 		this.setBroadcast();
 		// 添加录屏面板
 		this.setRecordScreen();
-		// 添加学生演示菜单
-		this.setStuzs();
-		// 添加随机点名菜单
-		this.setRandomcall();
-		// 添加分组教学菜单
-		this.setGroup();
-		// 添加课堂小测菜单
-		this.setClasstest();
-		// 添加发布作业菜单
-		this.setReleasejob();
-		// 添加课堂反馈菜单
-		this.setTeachback();
-		// 添加资源共享菜单
-		this.setResourcesharing();
+
+		// 学生演示菜单
+		menu4 = new MyJPanel();
+		menu4.setLayout(null);
+		menu4.setForeground(Color.WHITE);
+		menu4.setBorder(null);
+
+		JLabel label_6 = new JLabel("");
+		label_6.setIcon(new ImageIcon("image\\xsys.png"));
+		label_6.setBounds(13, 10, 60, 60);
+		menu4.add(label_6);
+		// 学生演示按钮
+		JButton button = new JButton("\u5B66\u751F\u6F14\u793A");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				jumpSelectstu();
+			}
+		});
+		button.setForeground(new Color(100, 149, 237));
+		button.setFont(new Font("宋体", Font.BOLD, 18));
+		button.setBorder(null);
+		button.setBackground(Color.WHITE);
+		button.setBounds(0, 70, 88, 16);
+		menu4.add(button);
+		// 随机点名菜单
+		menu5 = new MyJPanel();
+		menu5.setLayout(null);
+		menu5.setForeground(Color.WHITE);
+		menu5.setBorder(null);
+
+		JLabel label_7 = new JLabel("");
+		label_7.setIcon(new ImageIcon("image\\sjdm.png"));
+		label_7.setBounds(13, 10, 60, 60);
+		menu5.add(label_7);
+		// 随机点名按钮
+		JButton button_9 = new JButton("\u968F\u673A\u70B9\u540D");
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button_9.setForeground(new Color(100, 149, 237));
+		button_9.setFont(new Font("宋体", Font.BOLD, 18));
+		button_9.setBorder(null);
+		button_9.setBackground(Color.WHITE);
+		button_9.setBounds(0, 70, 88, 16);
+		menu5.add(button_9);
+		// 分组教学菜单
+		menu6 = new MyJPanel();
+		menu6.setLayout(null);
+		menu6.setForeground(Color.WHITE);
+		menu6.setBorder(null);
+
+		JLabel label_8 = new JLabel("");
+		label_8.setIcon(new ImageIcon("image\\fzjx.png"));
+		label_8.setBounds(13, 10, 60, 60);
+		menu6.add(label_8);
+		// 分组教学按钮
+		JButton button_10 = new JButton("\u5206\u7EC4\u6559\u5B66");
+		button_10.setForeground(new Color(100, 149, 237));
+		button_10.setFont(new Font("宋体", Font.BOLD, 18));
+		button_10.setBorder(null);
+		button_10.setBackground(Color.WHITE);
+		button_10.setBounds(0, 70, 88, 16);
+		menu6.add(button_10);
+		// 课堂小测菜单
+		menu7 = new MyJPanel();
+		menu7.setLayout(null);
+		menu7.setForeground(Color.WHITE);
+		menu7.setBorder(null);
+
+		JLabel label_9 = new JLabel("");
+		label_9.setIcon(new ImageIcon("image\\ktxc.png"));
+		label_9.setBounds(13, 10, 60, 60);
+		menu7.add(label_9);
+		// 课堂小测按钮
+		JButton button_11 = new JButton("\u8BFE\u5802\u5C0F\u6D4B");
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button_11.setForeground(new Color(100, 149, 237));
+		button_11.setFont(new Font("宋体", Font.BOLD, 18));
+		button_11.setBorder(null);
+		button_11.setBackground(Color.WHITE);
+		button_11.setBounds(0, 70, 88, 16);
+		menu7.add(button_11);
+		// 发布作业菜单
+		menu8 = new MyJPanel();
+		menu8.setLayout(null);
+		menu8.setForeground(Color.WHITE);
+		menu8.setBorder(null);
+
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon("image\\fbzy.png"));
+		label_1.setBounds(13, 10, 60, 60);
+		menu8.add(label_1);
+		// 发布作业按钮
+		JButton button_2 = new JButton("\u53D1\u5E03\u4F5C\u4E1A");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button_2.setForeground(new Color(100, 149, 237));
+		button_2.setFont(new Font("宋体", Font.BOLD, 18));
+		button_2.setBorder(null);
+		button_2.setBackground(Color.WHITE);
+		button_2.setBounds(0, 70, 88, 16);
+		menu8.add(button_2);
+		// 课堂反馈菜单
+		menu9 = new MyJPanel();
+		menu9.setLayout(null);
+		menu9.setForeground(Color.WHITE);
+		menu9.setBorder(null);
+
+		JLabel label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon("image\\ktfk.png"));
+		label_2.setBounds(13, 10, 60, 60);
+		menu9.add(label_2);
+		// 课堂反馈按钮
+		JButton button_3 = new JButton("\u8BFE\u5802\u53CD\u9988");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button_3.setForeground(new Color(100, 149, 237));
+		button_3.setFont(new Font("宋体", Font.BOLD, 18));
+		button_3.setBorder(null);
+		button_3.setBackground(Color.WHITE);
+		button_3.setBounds(0, 70, 88, 16);
+		menu9.add(button_3);
+		// 资源共享菜单
+		menu10 = new MyJPanel();
+		menu10.setLayout(null);
+		menu10.setForeground(Color.WHITE);
+		menu10.setBorder(null);
+
+		JLabel label_3 = new JLabel("");
+		label_3.setIcon(new ImageIcon("image\\zygx.png"));
+		label_3.setBounds(13, 10, 60, 60);
+		menu10.add(label_3);
+		// 资源共享按钮
+		JButton button_4 = new JButton("\u8D44\u6E90\u5171\u4EAB");
+		button_4.setForeground(new Color(100, 149, 237));
+		button_4.setFont(new Font("宋体", Font.BOLD, 18));
+		button_4.setBorder(null);
+		button_4.setBackground(Color.WHITE);
+		button_4.setBounds(0, 70, 88, 16);
+		menu10.add(button_4);
 	}
 
 	/**
+	 * 
 	 * <p>
-	 * Title: setStusign
+	 * Title: leftMenu
 	 * </p>
 	 * <p>
-	 * Description: 设置学生签到菜单面板，有标记图和按钮
+	 * Description:左侧菜单栏函数（学生签到、小测成绩、学生作业、备忘录）
 	 * </p>
 	 */
-	public void setStusign() {
+	public void leftMenu() {
 		// 学生签到信息
 		lmenu1 = new MyJPanel();
 		lmenu1.setBackground(new Color(176, 196, 222));
@@ -633,41 +532,14 @@ public class Index extends JFrame {
 		label_11.setBounds(28, 0, 62, 55);
 		lmenu1.add(label_11);
 		lmenu1.setLayout(null);
-	}
-
-	/**
-	 * <p>
-	 * Title: setClassbonus
-	 * </p>
-	 * <p>
-	 * Description: 设置课堂加分菜单面板，有标记图和按钮
-	 * </p>
-	 */
-	public void setClassbonus() {
 		// 课堂加分
-				lmenu2 = new MyJPanel();
-				lmenu2.setLayout(null);
-				// 按钮
-				JButton button_12 = new JButton("\u8BFE\u5802\u52A0\u5206");
-				button_12.setBorder(null);
-				button_12.setBounds(0, 57, 90, 23);
-				lmenu2.add(button_12);
-
-				JLabel label_10 = new JLabel("");
-				label_10.setIcon(new ImageIcon("image\\left.png"));
-				label_10.setBounds(28, 0, 62, 55);
-				lmenu2.add(label_10);
-	}
-
-	/**
-	 * <p>
-	 * Title: setTestscore
-	 * </p>
-	 * <p>
-	 * Description: 设置小测成绩菜单面板，有标记图和按钮
-	 * </p>
-	 */
-	public void setTestscore() {
+		lmenu2 = new MyJPanel();
+		lmenu2.setLayout(null);
+		// 按钮
+		JButton button_12 = new JButton("\u8BFE\u5802\u52A0\u5206");
+		button_12.setBorder(null);
+		button_12.setBounds(0, 57, 90, 23);
+		lmenu2.add(button_12);
 		// 小测成绩
 		lmenu3 = new MyJPanel();
 		lmenu3.setLayout(null);
@@ -677,23 +549,15 @@ public class Index extends JFrame {
 		button_13.setBounds(0, 57, 90, 23);
 		lmenu3.add(button_13);
 
-		
+		JLabel label_10 = new JLabel("");
+		label_10.setIcon(new ImageIcon("image\\left.png"));
+		label_10.setBounds(28, 0, 62, 55);
+		lmenu2.add(label_10);
 
 		JLabel label_12 = new JLabel("");
 		label_12.setIcon(new ImageIcon("image\\left.png"));
 		label_12.setBounds(28, 0, 62, 55);
 		lmenu3.add(label_12);
-	}
-
-	/**
-	 * <p>
-	 * Title: setStujob
-	 * </p>
-	 * <p>
-	 * Description: 设置学生作业菜单面板，有标记图和按钮
-	 * </p>
-	 */
-	public void setStujob() {
 		// 学生作业
 		lmenu4 = new MyJPanel();
 		lmenu4.setLayout(null);
@@ -711,17 +575,6 @@ public class Index extends JFrame {
 		label_13.setIcon(new ImageIcon("image\\left.png"));
 		label_13.setBounds(28, 0, 62, 55);
 		lmenu4.add(label_13);
-	}
-
-	/**
-	 * <p>
-	 * Title: setMemorandum
-	 * </p>
-	 * <p>
-	 * Description: 设置备忘录菜单面板，有标记图和按钮
-	 * </p>
-	 */
-	public void setMemorandum() {
 		// 备忘录
 		lmenu5 = new MyJPanel();
 		lmenu5.setLayout(null);
@@ -739,29 +592,6 @@ public class Index extends JFrame {
 		label_14.setIcon(new ImageIcon("image\\left.png"));
 		label_14.setBounds(28, 0, 62, 55);
 		lmenu5.add(label_14);
-	}
-
-	/**
-	 * 
-	 * <p>
-	 * Title: leftMenu
-	 * </p>
-	 * <p>
-	 * Description:左侧菜单栏函数（学生签到、小测成绩、学生作业、备忘录）
-	 * </p>
-	 */
-	public void leftMenu() {
-		// 添加学生签到菜单
-		this.setStusign();
-		// 添加课堂加分菜单
-		this.setClassbonus();
-		//添加小测成绩菜单
-		this.setTestscore();
-		// 添加学生作业菜单
-		this.setStujob();
-		// 添加备忘录菜单
-		this.setMemorandum();
-		
 	}
 
 	/**
@@ -917,9 +747,7 @@ public class Index extends JFrame {
 	 * </p>
 	 */
 	public void jumpIndex() {
-		//顶部菜单栏
 		topMenu();
-		//左侧菜单栏
 		leftMenu();
 		// 设置背景图
 		setBackground();
@@ -938,16 +766,10 @@ public class Index extends JFrame {
 	}
 
 	/**
-	 * 
-	 * <p>
-	 * Title: selectstuContent
-	 * </p>
-	 * <p>
-	 * Description:学生演示内容页（学生按钮）
-	 * </p>
+	 * 跳转学生演示界面
 	 */
+	// 学生演示内容页
 	public void selectstuContent() {
-		//学生按钮（小电脑图片和学生姓名）
 		JButton button = new JButton("\u59D3\u540D");
 		button.setHorizontalAlignment(SwingConstants.LEFT);
 		button.addActionListener(new ActionListener() {
@@ -1021,19 +843,9 @@ public class Index extends JFrame {
 		this.setVisible(true);
 
 	}
-	/**
-	 * 
-	 * <p>
-	 * Title: jumpSelectstu
-	 * </p>
-	 * <p>
-	 * Description:跳转到学生演示界面
-	 * </p>
-	 */
+
 	public void jumpSelectstu() {
-		//顶部菜单栏
 		topMenu();
-		//左侧菜单栏
 		leftMenu();
 		// 设置背景图
 		setBackground();
@@ -1052,14 +864,9 @@ public class Index extends JFrame {
 	}
 
 	/**
-	 * 
-	 * <p>
-	 * Title: stuPreContent
-	 * </p>
-	 * <p>
-	 * Description:	选中某个学生桌面的内容页
-	 * </p>
+	 * 跳转选中学生桌面
 	 */
+	// 选中学生桌面内容页
 	public void stuPreContent() {
 		JButton button = new JButton("\u9000\u51FA");
 		button.addActionListener(new ActionListener() {
@@ -1087,19 +894,9 @@ public class Index extends JFrame {
 		// 窗体可见
 		this.setVisible(true);
 	}
-	/**
-	 * 
-	 * <p>
-	 * Title: jumpStuPre
-	 * </p>
-	 * <p>
-	 * Description:跳转到选中学生桌面的内容页
-	 * </p>
-	 */
+
 	public void jumpStuPre() {
-		//顶部菜单栏
 		topMenu();
-		//左侧菜单栏
 		leftMenu();
 		// 设置背景图
 		setBackground();

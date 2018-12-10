@@ -76,7 +76,7 @@ public class FileShare {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("xiabiao: " + index);
 		fileContents.put(index, fileContent);
 		if (index == 0) {
 			FileContent f = fileContents.get(9);
@@ -86,7 +86,11 @@ public class FileShare {
 			}
 		} else {
 			int pre = index - 1;
+			System.out.println("index" + index);
 			FileContent f = fileContents.get(pre);
+			if (f == null) {
+				System.out.println("内容为空");
+			}
 			f.setState(1);
 			fileContents.put(pre, f);
 		}

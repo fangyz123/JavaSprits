@@ -4,11 +4,6 @@ import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
-import team.javaSpirit.teachingAssistantPlatform.entity.FileContent;
-import team.javaSpirit.teachingAssistantPlatform.entity.FileShare;
-import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.SendMessageThread;
-import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.SetMessageThread;
-
 /**
  * <p>
  * Title: SCommunicaIoHandle
@@ -21,10 +16,8 @@ import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.SetMes
  * @date 2018年11月28日
  */
 public class TCommunicaIoHandle extends IoHandlerAdapter {
-	private FileShare fileShare;
-	private SetMessageThread setMessage = null;
-	/*连接数量*/
-	public static int num=0;
+	/* 连接数量 */
+	public static int num = 0;
 
 	/**
 	 * 监听学生端写过来的信息，将其接收并对其内容进行相对应的回复。
@@ -33,15 +26,6 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		System.out.println("messageReceived");
 
-		// 对接收过来的对象，进行强制类型转换
-		FileContent fc = (FileContent) message;
-		SendMessageThread sendMessage = new SendMessageThread(session, fileShare);
-		// 如果接收的命令是1，就对其回应
-		if (1 == fc.getCommand()) {
-			System.out.println("fasong");
-			sendMessage.start();
-
-		}
 	}
 
 	/**
@@ -52,8 +36,7 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 	}
 
 	public TCommunicaIoHandle() {
-		// new一个写信息的线程
-		this.fileShare = new FileShare();
+
 	}
 
 	@Override
@@ -86,11 +69,10 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 	public void sessionOpened(IoSession session) throws Exception {
 		System.out.println("sessionOpened");
 		num++;
-		if (this.setMessage == null) {
-			System.out.println("xinjian");
-			this.setMessage = new SetMessageThread(fileShare);
-			this.setMessage.start();
-		}
+		/*
+		 * if (this.setMessage == null) { System.out.println("xinjian"); this.setMessage
+		 * = new SetMessageThread(fileShare); this.setMessage.start(); }
+		 */
 	}
 
 }

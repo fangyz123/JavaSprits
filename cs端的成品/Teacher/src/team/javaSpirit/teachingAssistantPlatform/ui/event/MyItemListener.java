@@ -63,6 +63,12 @@ public class MyItemListener implements ItemListener {
 			} else if (comboBox.getSelectedItem() == "关闭") {
 				// 关闭服务
 				service.closeServise();
+			} else if (comboBox.getSelectedItem() == "开启共享") {
+				// 开启屏幕共享
+				service.openScreenShare();
+			} else {
+				// 关闭屏幕共享
+				service.closeScreenShare();
 			}
 
 		}

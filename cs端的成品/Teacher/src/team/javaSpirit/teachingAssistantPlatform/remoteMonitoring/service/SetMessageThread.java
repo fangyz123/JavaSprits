@@ -1,7 +1,6 @@
 package team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service;
 
 import team.javaSpirit.teachingAssistantPlatform.entity.FileShare;
-import team.javaSpirit.teachingAssistantPlatform.mina.TCommunicaIoHandle;
 
 /**
  * <p>
@@ -19,17 +18,15 @@ public class SetMessageThread extends Thread {
 	private FileShare fileShare;
 	/* 表面意义上HashMap的下标 */
 	public static int index = 0;
+	/* 是否继续执行的条件 */
+	private boolean isRun = true;
 
 	/**
 	 * 每隔100毫秒给客户端写一张图片。
 	 */
 	@Override
 	public void run() {
-		while (true) {
-			if (TCommunicaIoHandle.num == 0) {
-				break;
-			}
-//			System.out.println("线程设置");
+		while (isRun) {
 			try {
 				// 设置传输对象
 				fileShare.setFileContent(index);
@@ -47,6 +44,14 @@ public class SetMessageThread extends Thread {
 
 	public SetMessageThread(FileShare fileShare) {
 		this.fileShare = fileShare;
+	}
+
+	public boolean isRun() {
+		return isRun;
+	}
+
+	public void setRun(boolean isRun) {
+		this.isRun = isRun;
 	}
 
 }
