@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/12/10 8:39:32                           */
+/* Created on:     2018/12/10 9:58:23                           */
 /*==============================================================*/
 
 
@@ -130,7 +130,7 @@ create table record
    sid                  varchar(15),
    state                int,
    date                 timestamp,
-   course_id            int,
+   class_id             int,
    primary key (id)
 );
 
