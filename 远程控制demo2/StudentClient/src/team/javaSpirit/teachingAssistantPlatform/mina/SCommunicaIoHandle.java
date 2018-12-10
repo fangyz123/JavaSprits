@@ -52,13 +52,11 @@ public class SCommunicaIoHandle extends IoHandlerAdapter {
 	 * 监听会话空闲。当会话进入空闲时，有可能是网络的原因导致的。
 	 * 将当前的会话进行关闭处理，方便后面监听断网的重连机制
 	 */
-	@SuppressWarnings("deprecation")
 	@Override
 	public void sessionIdle(IoSession session, IdleStatus status) throws Exception {
 		System.out.println("sessionIdle");
 		if (session != null) {
-//			session.getService().dispose(false);
-			session.close(false);
+			session.getCloseFuture();
 		}
 	}
 

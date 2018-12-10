@@ -40,7 +40,7 @@ public class ShowScreen {
 		// 设置控制台可见
 		jf.setVisible(true);
 		// 控制台置顶
-		jf.setAlwaysOnTop(true);
+		jf.setAlwaysOnTop(false);
 		// 控制台退出模式
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
