@@ -25,7 +25,7 @@ import javax.persistence.Table;
 public class LoadStudent {
 	private int id;//序列号
 	private Date login_time;//登录时间
-	private Students sid;//学号
+	private Students student;//学号
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getId() {
@@ -42,10 +42,10 @@ public class LoadStudent {
 	}
 	@ManyToOne
 	@JoinColumn(name="sid")
-	public Students getSid() {
-		return sid;
+	public Students getStudent() {
+		return student;
 	}
-	public void setSid(Students sid) {
-		this.sid = sid;
+	public void setStudent(Students student) {
+		this.student = student;
 	}
 }

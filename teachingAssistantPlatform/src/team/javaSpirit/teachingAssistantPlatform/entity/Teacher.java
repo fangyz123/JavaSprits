@@ -67,7 +67,7 @@ public class Teacher {
 		this.ip = ip;
 	}
 	@OneToMany(
-			mappedBy="tid",
+			mappedBy="teacher",
 			cascade= {CascadeType.ALL}
 			)
 	public Set<ClassCourse> getClassCourses() {
@@ -77,7 +77,7 @@ public class Teacher {
 		this.classCourses = classCourses;
 	}
 	@OneToMany(
-			mappedBy="tid",
+			mappedBy="teacher",
 			cascade= {CascadeType.ALL}
 			)
 	public Set<LoadTeacher> getTeachers() {

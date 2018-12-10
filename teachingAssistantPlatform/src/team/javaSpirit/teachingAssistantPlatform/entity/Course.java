@@ -41,7 +41,7 @@ public class Course {
 		this.cname = cname;
 	}
 	@OneToMany(
-			mappedBy="course_id",
+			mappedBy="course",
 			cascade= {CascadeType.ALL}
 			)
 	public Set<ClassCourse> getClassCourses() {

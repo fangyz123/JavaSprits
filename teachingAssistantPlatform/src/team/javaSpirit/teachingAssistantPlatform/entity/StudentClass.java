@@ -17,8 +17,8 @@ import javax.persistence.Table;
 @Table(name="studentClass")
 public class StudentClass {
 	private int id;//id
-	private ClassCourse class_id;//上课班级
-	private Students sid;//学号
+	private ClassCourse classin;//上课班级
+	private Students student;//学号
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,18 +30,18 @@ public class StudentClass {
 	}
 	@ManyToOne
 	@JoinColumn(name="class_id")
-	public ClassCourse getClass_id() {
-		return class_id;
+	public ClassCourse getClassin() {
+		return classin;
 	}
-	public void setClass_id(ClassCourse class_id) {
-		this.class_id = class_id;
+	public void setClassin(ClassCourse classin) {
+		this.classin = classin;
 	}
 	@ManyToOne
 	@JoinColumn(name="sid")
-	public Students getSid() {
-		return sid;
+	public Students getStudent() {
+		return student;
 	}
-	public void setSid(Students sid) {
-		this.sid = sid;
+	public void setStudent(Students student) {
+		this.student = student;
 	}
 }

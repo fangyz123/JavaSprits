@@ -23,7 +23,7 @@ public class Times {
 	private String c_week;//上课周数
 	private String c_date;//上课日期
 	private int node_id;//上课节数
-	private ClassCourse class_id;//课程班级号
+	private ClassCourse classin;//课程班级
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -53,11 +53,11 @@ public class Times {
 	}
 	@ManyToOne
 	@JoinColumn(name="class_id")
-	public ClassCourse getClass_id() {
-		return class_id;
+	public ClassCourse getClassin() {
+		return classin;
 	}
-	public void setClass_id(ClassCourse class_id) {
-		this.class_id = class_id;
+	public void setClassin(ClassCourse classin) {
+		this.classin = classin;
 	}
 	
 }

@@ -23,7 +23,7 @@ import javax.persistence.Table;
 public class LoadTeacher {
 	private int id;//流水号
 	private Date login_time;//登录时间
-	private Teacher tid;//教师工号
+	private Teacher teacher;//教师
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -41,10 +41,10 @@ public class LoadTeacher {
 	}
 	@ManyToOne
 	@JoinColumn(name="tid")
-	public Teacher getTid() {
-		return tid;
+	public Teacher getTeacher() {
+		return teacher;
 	}
-	public void setTid(Teacher tid) {
-		this.tid = tid;
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 }

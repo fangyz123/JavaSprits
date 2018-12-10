@@ -22,10 +22,10 @@ import javax.persistence.Table;
 @Table(name="record")
 public class Record {
 	private int id;
-	private Students sid;//学生学号
+	private Students student;//学生学号
 	private int state;//签到状态
 	private Date record_date;//签到时间
-	private ClassCourse class_id;//上课班级号
+	private ClassCourse classin;//上课班级
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -37,11 +37,11 @@ public class Record {
 	}
 	@ManyToOne
 	@JoinColumn(name="sid")
-	public Students getSid() {
-		return sid;
+	public Students getStudent() {
+		return student;
 	}
-	public void setSid(Students sid) {
-		this.sid = sid;
+	public void setStudent(Students student) {
+		this.student = student;
 	}
 	public int getState() {
 		return state;
@@ -57,10 +57,10 @@ public class Record {
 	}
 	@ManyToOne
 	@JoinColumn(name="class_id")
-	public ClassCourse getClass_id() {
-		return class_id;
+	public ClassCourse getClassin() {
+		return classin;
 	}
-	public void setClass_id(ClassCourse class_id) {
-		this.class_id = class_id;
+	public void setClassin(ClassCourse classin) {
+		this.classin = classin;
 	}
 }

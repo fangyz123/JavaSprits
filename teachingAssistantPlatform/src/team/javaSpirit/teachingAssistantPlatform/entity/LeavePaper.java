@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Table(name="leavePaper")
 public class LeavePaper {
 	private int id;
-	private Students sid;//学号
+	private Students student;//学号
 	private Date apply_time;//上传时间
 	private String img_src;//图片路径
 	private int status;//是否审核
@@ -37,11 +37,11 @@ public class LeavePaper {
 	}
 	@ManyToOne
 	@JoinColumn(name="sid")
-	public Students getSid() {
-		return sid;
+	public Students getStudent() {
+		return student;
 	}
-	public void setSid(Students sid) {
-		this.sid = sid;
+	public void setStudent(Students student) {
+		this.student = student;
 	}
 	public Date getApply_time() {
 		return apply_time;

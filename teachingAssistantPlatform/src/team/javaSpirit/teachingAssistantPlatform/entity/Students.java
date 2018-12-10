@@ -31,7 +31,7 @@ public class Students {
 	private String password;//密码
 	private int state;//是否可用
 	private String name;//学生姓名
-	private  ClassAdministration c_a_id;//行政班级号
+	private  ClassAdministration classAdministrantion;//行政班级
 	private String ip;//学生ip
 	private Set<LeavePaper> leavePapers = new HashSet<LeavePaper>();
 	private Set<LoadStudent> loadStudents = new HashSet<LoadStudent>();
@@ -66,11 +66,11 @@ public class Students {
 	}
 	@ManyToOne
 	@JoinColumn(name="c_a_id")
-	public ClassAdministration getC_a_id() {
-		return c_a_id;
+	public ClassAdministration getClassAdministrantion() {
+		return classAdministrantion;
 	}
-	public void setC_a_id(ClassAdministration c_a_id) {
-		this.c_a_id = c_a_id;
+	public void setClassAdministrantion(ClassAdministration classAdministrantion) {
+		this.classAdministrantion = classAdministrantion;
 	}
 	public String getIp() {
 		return ip;
@@ -79,7 +79,7 @@ public class Students {
 		this.ip = ip;
 	}
 	@OneToMany(
-			mappedBy="sid",
+			mappedBy="student",
 			cascade= {CascadeType.ALL}
 			)
 	public Set<LeavePaper> getLeavePapers() {
@@ -89,7 +89,7 @@ public class Students {
 		this.leavePapers = leavePapers;
 	}
 	@OneToMany(
-			mappedBy="sid",
+			mappedBy="student",
 			cascade= {CascadeType.ALL}
 			)
 	public Set<LoadStudent> getLoadStudents() {
@@ -99,7 +99,7 @@ public class Students {
 		this.loadStudents = loadStudents;
 	}
 	@OneToMany(
-			mappedBy="sid",
+			mappedBy="student",
 			cascade= {CascadeType.ALL}
 			)
 	public Set<StudentClass> getStudentClasses() {
@@ -109,7 +109,7 @@ public class Students {
 		this.studentClasses = studentClasses;
 	}
 	@OneToMany(
-			mappedBy="sid",
+			mappedBy="student",
 			cascade= {CascadeType.ALL}
 			)
 	public Set<Record> getRecords() {

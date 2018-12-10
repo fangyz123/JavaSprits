@@ -26,8 +26,8 @@ import javax.persistence.Table;
 public class ClassCourse {
 	private int class_id;//上课班级号
 	private String class_name;//班级名字
-	private Teacher tid;//任课老师
-	private Course course_id;//课程号
+	private Teacher teacher;//任课老师
+	private Course course;//课程
 	private Set<StudentClass> studentClasses = new HashSet<StudentClass>(0);
 	private Set<Record> records  = new HashSet<Record> (0);
 	private Set<Times> times = new HashSet<Times> (0);
@@ -47,23 +47,23 @@ public class ClassCourse {
 	}
 	@ManyToOne
 	@JoinColumn(name="tid")
-	public Teacher getTid() {
-		return tid;
+	public Teacher getTeacher() {
+		return teacher;
 	}
-	public void setTid(Teacher tid) {
-		this.tid = tid;
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 	@ManyToOne
 	@JoinColumn(name="course_id")
-	public Course getCourse_id() {
-		return course_id;
+	public Course getCourse() {
+		return course;
 	}
-	public void setCourse_id(Course course_id) {
-		this.course_id = course_id;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 	
 	@OneToMany(
-			mappedBy="class_id",
+			mappedBy="classin",
 			cascade= {CascadeType.ALL}
 			)
 	public Set<StudentClass> getStudentClasses() {
@@ -73,7 +73,7 @@ public class ClassCourse {
 		this.studentClasses = studentClasses;
 	}
 	@OneToMany(
-			mappedBy="class_id",
+			mappedBy="classin",
 			cascade= {CascadeType.ALL}
 			)
 	public Set<Record> getRecords() {
@@ -83,7 +83,7 @@ public class ClassCourse {
 		this.records = records;
 	}
 	@OneToMany(
-			mappedBy="class_id",
+			mappedBy="classin",
 			cascade= {CascadeType.ALL}
 			)
 	public Set<Times> getTimes() {
