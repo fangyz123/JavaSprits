@@ -525,7 +525,8 @@ public class Index extends JFrame {
 		remortbt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//JOptionPane.showMessageDialog(null, "请在规定的时间内开启远程监控","警告",JOptionPane.ERROR_MESSAGE);
-				new ConnectRemind();
+				ConnectRemind cr=new ConnectRemind();
+				cr.init();
 			}
 		});
 		contentpl.add(remortbt);
