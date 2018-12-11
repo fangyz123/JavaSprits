@@ -1,4 +1,4 @@
-package team.javaSpirit.teachingAssistantPlatform.FaceCheck;
+package team.javaSpirit.teachingAssistantPlatform.facecheck;
 
 import java.io.IOException;
 

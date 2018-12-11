@@ -1,4 +1,4 @@
-package team.javaSpirit.teachingAssistantPlatform.FaceCheck;
+package team.javaSpirit.teachingAssistantPlatform.facecheck;
 
 import java.io.IOException;
 
@@ -50,7 +50,6 @@ public class JcvTest {
 		while (true) {
 			if (!canvas.isDisplayable()) {
 				grabber.stop();// 停止抓取
-				System.exit(2);// 退出
 			}
 			Frame frame = grabber.grab();
 			ToIplImage ti = new ToIplImage();
@@ -59,10 +58,16 @@ public class JcvTest {
 			FaceDetection.faceDetection(src,bool);
 			canvas.showImage(frame);// 获取摄像头图像并放到窗口上显示，frame是一帧视频图像
 			
-//			if (FaceDetection.faceDetection(src,bool)!=-1&&c) {
-//				c=false;
+			if (FaceDetection.faceDetection(src,bool)!=-1&&c) {
+				c=false;
 				recordCamera.recordCamera(grabber,canvas);
-			//}
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				canvas.dispose();
+			}
 			canvas.setAlwaysOnTop(true);
 			Thread.sleep(50);// 50毫秒刷新一次图像
 		}

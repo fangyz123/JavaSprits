@@ -7,6 +7,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+
+import team.javaSpirit.teachingAssistantPlatform.facecheck.JcvTest;
+import team.javaSpirit.teachingAssistantPlatform.firstcheck.FirstInvoke;
 
 /**
  * 
@@ -178,7 +182,19 @@ public class Index extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// JOptionPane.showMessageDialog(null,
 				// "请在规定的时间内签到","警告",JOptionPane.ERROR_MESSAGE);
-				jumpSign();
+				//jumpSign();
+				try {
+					FirstInvoke.firstInvoke();
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		bt1.setBorder(null);

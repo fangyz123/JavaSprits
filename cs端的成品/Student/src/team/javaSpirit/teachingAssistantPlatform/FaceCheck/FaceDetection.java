@@ -1,4 +1,4 @@
-package team.javaSpirit.teachingAssistantPlatform.FaceCheck;
+package team.javaSpirit.teachingAssistantPlatform.facecheck;
 
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_core.Rect;

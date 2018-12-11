@@ -1,4 +1,4 @@
-package team.javaSpirit.teachingAssistantPlatform.FaceCheck;
+package team.javaSpirit.teachingAssistantPlatform.facecheck;
 
 import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacpp.opencv_imgcodecs;
@@ -43,7 +43,7 @@ public class recordCamera {
 		Mat mat = converter.convertToMat(grabber.grabFrame());
 		// FrameRecorder recorder = FrameRecorder.createDefault(outputFile,
 		// width,height);
-		opencv_imgcodecs.imwrite("cameraImage\\1-hello.jpg", mat);
+		opencv_imgcodecs.imwrite("faceimg\\1-hello.jpg", mat);
 		System.out.println("照片保存成功");
 		System.exit(0);
 		// recorder.start();//开启录制器
