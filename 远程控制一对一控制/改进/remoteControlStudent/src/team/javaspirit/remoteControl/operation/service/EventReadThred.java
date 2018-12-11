@@ -23,28 +23,28 @@ import team.javaspirit.remoteControl.entity.Events;
  * Title: EventReadThred
  * </p>
  * <p>
- * Description:±»¿ØÖÆ¶Ë£¨Ñ§Éú¶Ë£©½ÓÊÜÊÂ¼şºó »Ø·ÅÊÂ¼şÕ¹ÏÖ½ÌÊ¦¶Ë¶Ô×Ô¼ºµçÄÔµÄ²Ù×÷
+ * Description:è¢«æ§åˆ¶ç«¯ï¼ˆå­¦ç”Ÿç«¯ï¼‰æ¥å—äº‹ä»¶å å›æ”¾äº‹ä»¶å±•ç°æ•™å¸ˆç«¯å¯¹è‡ªå·±ç”µè„‘çš„æ“ä½œ
  * </p>
  * 
- * @author ºÎ»ÛÏ¼
- * @date 2018Äê11ÔÂ24ÈÕ
+ * @author ä½•æ…§éœ
+ * @date 2018å¹´11æœˆ24æ—¥
  */
 public class EventReadThred extends Thread {
-	private ObjectInputStream objins;// ÊäÈëÁ÷£¬ÓÃÓÚ¶ÁÈ¡µã»÷ÊÂ¼ş
-	private Socket socket;// ·şÎñÆ÷¶Ë¿ªÆôµÄ·şÎñ
-	private double imgWidth;// ´«ÊäÍ¼Æ¬µÄ¿í
-	private double imgHeight;// ´«ÊäÍ¼Æ¬µÄ¸ß
-	private double jlableWidth;// Õ¹Ê¾Í¼Æ¬µÄjlabelµÄ¸ß
-	private double jlableHeight;// Õ¹Ê¾Í¼Æ¬µÄjlabelµÄ¿í
-	private double locationX;// jlabelÔÚÆÁÄ»ÉÏµÄXÎ»ÖÃ
-	private double locationYLast;// jlabelÔÚÆÁÄ»ÉÏµÄYÎ»ÖÃ
+	private ObjectInputStream objins;// è¾“å…¥æµï¼Œç”¨äºè¯»å–ç‚¹å‡»äº‹ä»¶
+	private Socket socket;// æœåŠ¡å™¨ç«¯å¼€å¯çš„æœåŠ¡
+	private double imgWidth;// ä¼ è¾“å›¾ç‰‡çš„å®½
+	private double imgHeight;// ä¼ è¾“å›¾ç‰‡çš„é«˜
+	private double jlableWidth;// å±•ç¤ºå›¾ç‰‡çš„jlabelçš„é«˜
+	private double jlableHeight;// å±•ç¤ºå›¾ç‰‡çš„jlabelçš„å®½
+	private double locationX;// jlabelåœ¨å±å¹•ä¸Šçš„Xä½ç½®
+	private double locationYLast;// jlabelåœ¨å±å¹•ä¸Šçš„Yä½ç½®
 
 	public EventReadThred(ObjectInputStream objins, Socket socket) {
 		this.objins = objins;
 		this.socket = socket;
 	}
 
-	// »Ø·ÅÊÂ¼şµÄ·½·¨
+	// å›æ”¾äº‹ä»¶çš„æ–¹æ³•
 	private void actionEvent(InputEvent e) {
 		Robot robot = null;
 		try {
@@ -52,23 +52,23 @@ public class EventReadThred extends Thread {
 		} catch (AWTException e1) {
 			e1.printStackTrace();
 		}
-		// ÊÇÊ²Ã´¾ßÌåÊÂ¼ş
-		if (e instanceof KeyEvent) {// ¼üÅÌ
+		// æ˜¯ä»€ä¹ˆå…·ä½“äº‹ä»¶
+		if (e instanceof KeyEvent) {// é”®ç›˜
 			KeyEvent ke = (KeyEvent) e;
-			if (e.getID() == KeyEvent.KEY_PRESSED) {// °´ÏÂ
+			if (e.getID() == KeyEvent.KEY_PRESSED) {// æŒ‰ä¸‹
 				robot.keyPress(ke.getKeyCode());
 			}
-			if (e.getID() == KeyEvent.KEY_RELEASED) {// ÊÍ·Å
+			if (e.getID() == KeyEvent.KEY_RELEASED) {// é‡Šæ”¾
 				robot.keyRelease(ke.getKeyCode());
 			}
 		}
-		if (e instanceof MouseEvent) {// Êó±ê
+		if (e instanceof MouseEvent) {// é¼ æ ‡
 			MouseEvent me = (MouseEvent) e;
 			int type = me.getID();
-			if (type == MouseEvent.MOUSE_PRESSED) { // °´ÏÂ
+			if (type == MouseEvent.MOUSE_PRESSED) { // æŒ‰ä¸‹
 				robot.mousePress(getMouseClick(me.getButton()));
 			}
-			if (type == MouseEvent.MOUSE_RELEASED) { // ·Å¿ª
+			if (type == MouseEvent.MOUSE_RELEASED) { // æ”¾å¼€
 				robot.mouseRelease(getMouseClick(me.getButton()));
 			}
 			if (type == MouseEvent.MOUSE_MOVED) {
@@ -76,7 +76,7 @@ public class EventReadThred extends Thread {
 				imgWidth = (double) screenSize.getWidth();
 				imgHeight = (double) screenSize.getHeight();
 				if (jlableWidth == 0 || jlableHeight == 0) {
-					System.err.println("jlabel is 0");
+					
 					robot.mouseMove(me.getX(), me.getY());
 				} else {
 					double m = (double) imgWidth;
@@ -84,23 +84,22 @@ public class EventReadThred extends Thread {
 							.format((me.getX() - locationX) * (imgWidth / jlableWidth)));
 					int y = Integer.parseInt(new java.text.DecimalFormat("0")
 							.format((me.getY() - locationYLast) * (imgHeight / jlableHeight)));
-					System.out.println("x:" + x);
-					System.out.println("y:" + y);
+					
 					robot.mouseMove(x, y);// 45-11=34
 				}
 
 			}
-			if (type == MouseEvent.MOUSE_DRAGGED) { // ÍÏ¶¯
+			if (type == MouseEvent.MOUSE_DRAGGED) { // æ‹–åŠ¨
 				robot.mouseMove(me.getX(), me.getY());
 			}
-			if (type == MouseEvent.MOUSE_WHEEL) { // »¬ÂÖ¹ö¶¯
+			if (type == MouseEvent.MOUSE_WHEEL) { // æ»‘è½®æ»šåŠ¨
 				robot.mouseWheel(getMouseClick(me.getButton()));
 			}
 		}
 
 	}
 
-	// ¸ù¾İ·¢ËÍÊÂµÄMouseÊÂ¼ş¶ÔÏó£¬×ª±äÎªÍ¨ÓÃµÄMouse°´¼ü´úÂë
+	// æ ¹æ®å‘é€äº‹çš„Mouseäº‹ä»¶å¯¹è±¡ï¼Œè½¬å˜ä¸ºé€šç”¨çš„MouseæŒ‰é”®ä»£ç 
 	private int getMouseClick(int button) {
 		if (button == MouseEvent.BUTTON1) {
 			return InputEvent.BUTTON1_MASK;
@@ -115,12 +114,12 @@ public class EventReadThred extends Thread {
 	}
 
 	/**
-	 * ½øĞĞÊÂ¼ş»Ø·Å¡£ÔÚÁ¬½ÓÎ´¹Ø±ÕµÄÊ±ºòÒ»Ö±¶ÁÈ¡ÊÂ¼şÁ÷¡£»ñµÃevents¶ÔÏó£¬È»ºó´ÓÖĞ»ñÈ¡µã»÷ÊÂ¼ş
-	 * È·¶¨µã»÷ÊÂ¼şµÄÀàĞÍ£¬½øĞĞ×¼È·µØ»Ø·Å¡£
+	 * è¿›è¡Œäº‹ä»¶å›æ”¾ã€‚åœ¨è¿æ¥æœªå…³é—­çš„æ—¶å€™ä¸€ç›´è¯»å–äº‹ä»¶æµã€‚è·å¾—eventså¯¹è±¡ï¼Œç„¶åä»ä¸­è·å–ç‚¹å‡»äº‹ä»¶
+	 * ç¡®å®šç‚¹å‡»äº‹ä»¶çš„ç±»å‹ï¼Œè¿›è¡Œå‡†ç¡®åœ°å›æ”¾ã€‚
 	 */
 	@Override
 	public void run() {
-		System.out.println("ÊÂ¼ş»Ø·ÅÏß³ÌÁ¬½Ó³É¹¦£¡");
+		System.out.println("äº‹ä»¶å›æ”¾çº¿ç¨‹è¿æ¥æˆåŠŸï¼");
 
 		while (!socket.isClosed()) {
 
@@ -130,7 +129,7 @@ public class EventReadThred extends Thread {
 					Events events = (Events) eventobj;
 					InputEvent e = events.getEvent();
 					Map map = events.getMap();
-					System.out.println(map);
+					
 					if (map.isEmpty()) {
 						System.out.println("map is null");
 					} else {
@@ -144,12 +143,12 @@ public class EventReadThred extends Thread {
 
 							int w = (int) map.get("jlableWidth");
 							jlableWidth = (double) w;
-							System.out.println(jlableWidth);
+							
 						}
 						if (map.get("jlableHeight") != null) {
 							int h = (int) map.get("jlableHeight");
 							jlableHeight = (double) h;
-							System.out.println(jlableHeight);
+							
 						}
 						if (map.get("locationX") != null) {
 							locationX = (double) map.get("locationX");
@@ -158,21 +157,15 @@ public class EventReadThred extends Thread {
 							locationYLast = (double) map.get("locationYLast");
 						}
 
-						System.out.println(jlableWidth);
-						System.out.println(jlableHeight);
-						System.out.println(locationX);
-						System.out.println(locationYLast);
+						
 					}
-					System.out.println("over");
-					actionEvent(e);// »Ø·ÅÊÂ¼ş
+					
+					actionEvent(e);// å›æ”¾äº‹ä»¶
 				}
 			} catch (IOException | ClassNotFoundException e1) {
-				System.out.println("¶ÁÈ¡²»µ½ÊÂ¼şobject");
+				System.out.println("è¯»å–ä¸åˆ°äº‹ä»¶object");
 
-				/*
-				 * try { objins.close(); socket.close(); } catch (IOException e) { // TODO
-				 * Auto-generated catch block e.printStackTrace(); }
-				 */
+				
 			}
 
 		}

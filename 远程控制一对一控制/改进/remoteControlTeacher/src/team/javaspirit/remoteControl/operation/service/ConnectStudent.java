@@ -11,62 +11,42 @@ import team.javaspirit.remoteControl.ui.MyJframe;
 /**
  * 
 * <p>Title: ConnectStudent</p>
-* <p>Description:½ÌÊ¦¶ËµÄÂß¼­¹ı³Ì¡£µÈ´ıÑ§Éú¶Ë£¨¿Í»§¶Ë£©£¬Õ¹Ê¾Í¼Æ¬£¬´«ËÍµã»÷ÊÂ¼ş </p>
-* @author ºÎ»ÛÏ¼
-* @date 2018Äê12ÔÂ4ÈÕ
+* <p>Description:æ•™å¸ˆç«¯çš„é€»è¾‘è¿‡ç¨‹ã€‚ç­‰å¾…å­¦ç”Ÿç«¯ï¼ˆå®¢æˆ·ç«¯ï¼‰ï¼Œå±•ç¤ºå›¾ç‰‡ï¼Œä¼ é€ç‚¹å‡»äº‹ä»¶ </p>
+* @author ä½•æ…§éœ
+* @date 2018å¹´12æœˆ4æ—¥
  */
 public class ConnectStudent {
-	private ObjectOutputStream ous;// Êä³öÁ÷£¬´«ËÍµã»÷ÊÂ¼ş
-	private DataInputStream ins;// ÊäÈëÁ÷£¬Õ¹Ê¾Í¼Æ¬
-	private MyJframe jf = new MyJframe(ous);// ÓÃÓÚÕ¹Ê¾¶ÔÏóÆÁÄ»
-	//private Socket scoket;// Óë·şÎñÆ÷¶ËµÄÁ¬½Ó
+	private ObjectOutputStream ous;// è¾“å‡ºæµï¼Œä¼ é€ç‚¹å‡»äº‹ä»¶
+	private DataInputStream ins;// è¾“å…¥æµï¼Œå±•ç¤ºå›¾ç‰‡
+	private MyJframe jf = new MyJframe(ous);// ç”¨äºå±•ç¤ºå¯¹è±¡å±å¹•
+	//private Socket scoket;// ä¸æœåŠ¡å™¨ç«¯çš„è¿æ¥
 
 	
-	public void setupServer(int port) throws Exception {//½ÌÊ¦¶Ë¿ªÆô¶Ë¿Ú
-		// ¿ØÖÆ¶Ë×÷Îª·şÎñÆ÷¶Ë£¬¿ªÆô´«Êä
+	public void setupServer(int port) throws Exception {//æ•™å¸ˆç«¯å¼€å¯ç«¯å£
+		// æ§åˆ¶ç«¯ä½œä¸ºæœåŠ¡å™¨ç«¯ï¼Œå¼€å¯ä¼ è¾“
 		ServerSocket serverSocket = new ServerSocket(port);
 
 		while (!serverSocket.isClosed()) {
 			Socket socket = serverSocket.accept();
-			// ²úÉú¡°×èÈû¡±£¬Ö±ÖÁ¿Í»§¶ËÓĞÈË´«Êä
+			// äº§ç”Ÿâ€œé˜»å¡â€ï¼Œç›´è‡³å®¢æˆ·ç«¯æœ‰äººä¼ è¾“
 			
-			// µÃµ½ÊäÈëÁ÷£¬¶ÁÈ¡Í¼Æ¬Êı¾İ
+			// å¾—åˆ°è¾“å…¥æµï¼Œè¯»å–å›¾ç‰‡æ•°æ®
 			ins = new DataInputStream(socket.getInputStream());
-			// µÃµ½Êä³öÁ÷£¬·¢ËÍÊÂ¼ş¶ÔÏó
+			// å¾—åˆ°è¾“å‡ºæµï¼Œå‘é€äº‹ä»¶å¯¹è±¡
 			ous = new ObjectOutputStream(socket.getOutputStream());
 			
 
-			// Õ¹Ê¾Ñ§Éú¶ËÍ¼Æ¬
+			// å±•ç¤ºå­¦ç”Ÿç«¯å›¾ç‰‡
 			ShowImageThread si = new ShowImageThread(ins, serverSocket, jf);
-			si.start();// Ö´ĞĞÕâ¸öÏß³Ì
-			// ¸øÀÏÊ¦¶Ë´«ËÍÊó±êÏà¹ØµÄ²ÎÊı
+			si.start();// æ‰§è¡Œè¿™ä¸ªçº¿ç¨‹
+			// ç»™è€å¸ˆç«¯ä¼ é€é¼ æ ‡ç›¸å…³çš„å‚æ•°
 			VarSend vs = new VarSend(ous, jf);
 			vs.sentMouseSet();
-			// ¸øjframeÔö¼Ó¼àÌıÊÂ¼ş
+			// ç»™jframeå¢åŠ ç›‘å¬äº‹ä»¶
 			ListenerThread lt = new ListenerThread(ous, jf);
 			lt.start();
 
 		}
 	}
-	//Ô­À´
-	/*public void conn2Server( int port) throws Exception {
-
-		// Á¬½ÓÑ§Éú¶Ë
-		scoket = new Socket(ip, port);
-		// µÃµ½ÊäÈëÁ÷£¬¶ÁÈ¡Í¼Æ¬Êı¾İ
-		ins = new DataInputStream(scoket.getInputStream());
-		// µÃµ½Êä³öÁ÷£¬·¢ËÍÊÂ¼ş¶ÔÏó
-		ous = new ObjectOutputStream(scoket.getOutputStream());
-		
-
-		// Õ¹Ê¾Ñ§Éú¶ËÍ¼Æ¬
-		ShowImageThread si = new ShowImageThread(ins, scoket, jf);
-		si.start();// Ö´ĞĞÕâ¸öÏß³Ì
-		// ¸øÀÏÊ¦¶Ë´«ËÍÊó±êÏà¹ØµÄ²ÎÊı
-		VarSend vs = new VarSend(ous, jf);
-		vs.sentMouseSet();
-		// ¸øjframeÔö¼Ó¼àÌıÊÂ¼ş
-		ListenerThread lt = new ListenerThread(ous, jf);
-		lt.start();
-	}*/
+	
 }

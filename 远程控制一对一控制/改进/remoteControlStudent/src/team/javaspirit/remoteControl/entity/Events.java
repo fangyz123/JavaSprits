@@ -7,20 +7,20 @@ import java.util.Map;
 /**
  * 
 * <p>Title: Events</p>
-* <p>Description:eventsÊÇÒ»¸ö¿ÉÒÔ±»ĞòÁĞ»¯µÄÊµÌåÀà£¬ÓÃÓÚÔÚobjectoutputstreamÖ®¼ä´«Êä ¡£ĞòÁĞ»¯
-* ÏÈ°ÑÒ»¸ö¶ÔÏó±ä³É×Ö½ÚÊı×é£¬È»ºó°Ñ×Ô¼ºÊı×é×îºó´«Êäºó±ä³É¶ÔÏó¡£</p>
-* @author ºÎ»ÛÏ¼
-* @date 2018Äê12ÔÂ1ÈÕ
+* <p>Description:eventsæ˜¯ä¸€ä¸ªå¯ä»¥è¢«åºåˆ—åŒ–çš„å®ä½“ç±»ï¼Œç”¨äºåœ¨objectoutputstreamä¹‹é—´ä¼ è¾“ ã€‚åºåˆ—åŒ–
+* å…ˆæŠŠä¸€ä¸ªå¯¹è±¡å˜æˆå­—èŠ‚æ•°ç»„ï¼Œç„¶åæŠŠè‡ªå·±æ•°ç»„æœ€åä¼ è¾“åå˜æˆå¯¹è±¡ã€‚</p>
+* @author ä½•æ…§éœ
+* @date 2018å¹´12æœˆ1æ—¥
  */
 @SuppressWarnings("serial")
 public class Events implements Serializable {
-	private Map map=new HashMap<String,Object>();//´æ·ÅÊó±ê±ÈÀıËõ·ÅµÄÊı¾İ
-	private InputEvent event;//´æ·Åµã»÷ÊÂ¼ş
+	private Map<String,Object> map=new HashMap<String,Object>();//å­˜æ”¾é¼ æ ‡æ¯”ä¾‹ç¼©æ”¾çš„æ•°æ®
+	private InputEvent event;//å­˜æ”¾ç‚¹å‡»äº‹ä»¶
 	
-	public Map getMap() {
+	public Map<String,Object> getMap() {
 		return map;
 	}
-	public void setMap(Map map) {
+	public void setMap(Map<String,Object> map) {
 		this.map = map;
 	}
 	public InputEvent getEvent() {

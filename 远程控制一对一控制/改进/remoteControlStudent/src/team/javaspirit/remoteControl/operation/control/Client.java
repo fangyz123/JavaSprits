@@ -4,18 +4,14 @@ import team.javaspirit.remoteControl.operation.service.OpenConnection;
 /**
  * 
 * <p>Title: Client</p>
-* <p>Description:Ñ§Éú¶Ë£¬±»¿ØÖÆ¶Ë£¬¿Í»§¶Ë¡£½ÌÊ¦¶Ë¿ªÆô¶Ë¿Úºó£¬Ñ§Éú¶ËÁ¬½Ó¡£ </p>
-* @author ºÎ»ÛÏ¼
-* @date 2018Äê12ÔÂ11ÈÕ
+* <p>Description:å­¦ç”Ÿç«¯ï¼Œè¢«æ§åˆ¶ç«¯ï¼Œå®¢æˆ·ç«¯ã€‚æ•™å¸ˆç«¯å¼€å¯ç«¯å£åï¼Œå­¦ç”Ÿç«¯è¿æ¥ã€‚ </p>
+* @author ä½•æ…§éœ
+* @date 2018å¹´12æœˆ11æ—¥
  */
 public class Client {
-
-	public Client() {
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	public static void main(String[] args) {
-		// ¿ªÆô·şÎñ
+		// å¼€å¯æœåŠ¡
 		try {
 			new OpenConnection().conn2Server("localhost", 9090);
 		} catch (Exception e) {

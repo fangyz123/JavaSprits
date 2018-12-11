@@ -17,15 +17,15 @@ import team.javaspirit.remoteControl.ui.MyJframe;
  * Title: ShowImageThread
  * </p>
  * <p>
- * Description:Õ¹Ê¾Ñ§Éú¶Ë´«ËÍ¹ıÀ´µÄ½ØÍ¼µÄÏß³Ì£¬²¢Õ¹ÏÖÔÚjframeÉÏ¡£
+ * Description:å±•ç¤ºå­¦ç”Ÿç«¯ä¼ é€è¿‡æ¥çš„æˆªå›¾çš„çº¿ç¨‹ï¼Œå¹¶å±•ç°åœ¨jframeä¸Šã€‚
  * </p>
  * 
- * @author ºÎ»ÛÏ¼
- * @date 2018Äê12ÔÂ4ÈÕ
+ * @author ä½•æ…§éœ
+ * @date 2018å¹´12æœˆ4æ—¥
  */
 public class ShowImageThread extends Thread {
 
-	private DataInputStream ins;// ÊäÈëÁ÷
+	private DataInputStream ins;// è¾“å…¥æµ
 	private ServerSocket serverSocket;
 	private MyJframe jf;
 
@@ -42,16 +42,16 @@ public class ShowImageThread extends Thread {
 			try {
 				len = ins.readInt();
 
-				byte[] data = new byte[len];// ´´½¨Ò»¸ö¿ÕµÄ×Ö½ÚÊı×é
-				ins.readFully(data);// °Ñ¶ÁÈ¡µÄÊı¾İ´æ´¢ÔÚdataÊı×éÖĞ
-				// ½«¶Áµ½µÄÊı¾İÉú³ÉÎªÒ»¸öÍ¼±ê¶ÔÏó
+				byte[] data = new byte[len];// åˆ›å»ºä¸€ä¸ªç©ºçš„å­—èŠ‚æ•°ç»„
+				ins.readFully(data);// æŠŠè¯»å–çš„æ•°æ®å­˜å‚¨åœ¨dataæ•°ç»„ä¸­
+				// å°†è¯»åˆ°çš„æ•°æ®ç”Ÿæˆä¸ºä¸€ä¸ªå›¾æ ‡å¯¹è±¡
 				// ImageIcon ic=new ImageIcon(data);
 				ByteArrayInputStream in = new ByteArrayInputStream(data);
 				BufferedImage image = ImageIO.read(in);
-				// ·Åµ½½çÃæÉÏ.¼Óµ½±êÇ©ÉÏ
+				// æ”¾åˆ°ç•Œé¢ä¸Š.åŠ åˆ°æ ‡ç­¾ä¸Š
 				jf.setImgLabel(image);
 			} catch (IOException e) {
-				System.out.println("Ñ§Éú¶Ë¶Ï¿ªÁ¬½Ó");
+				System.out.println("å­¦ç”Ÿç«¯æ–­å¼€è¿æ¥");
 				try {
 					ins.close();
 					serverSocket.close();
@@ -60,7 +60,7 @@ public class ShowImageThread extends Thread {
 					e1.printStackTrace();
 				}
 				e.printStackTrace();
-			} // Í¼Æ¬³¤¶È
+			} // å›¾ç‰‡é•¿åº¦
 		}
 	}
 

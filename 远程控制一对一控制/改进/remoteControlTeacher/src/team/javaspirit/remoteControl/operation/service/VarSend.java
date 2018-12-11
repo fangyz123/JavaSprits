@@ -14,14 +14,14 @@ import team.javaspirit.remoteControl.ui.MyJframe;
  * Title: VarSend
  * </p>
  * <p>
- * Description:°ÑÊó±ê±ä»»±ÈÀıËùÓÃµ½µÄ²ÎÊıÀûÓÃÊÂ¼ş´«Êä¹ıÈ¥
+ * Description:æŠŠé¼ æ ‡å˜æ¢æ¯”ä¾‹æ‰€ç”¨åˆ°çš„å‚æ•°åˆ©ç”¨äº‹ä»¶ä¼ è¾“è¿‡å»
  * </p>
  * 
- * @author ºÎ»ÛÏ¼
- * @date 2018Äê12ÔÂ4ÈÕ
+ * @author ä½•æ…§éœ
+ * @date 2018å¹´12æœˆ4æ—¥
  */
 public class VarSend {
-	private ObjectOutputStream ous;// Êä³öÁ÷
+	private ObjectOutputStream ous;// è¾“å‡ºæµ
 	private MyJframe jf;
 
 	public VarSend(ObjectOutputStream ous, MyJframe jf) {
@@ -32,16 +32,9 @@ public class VarSend {
 	public void sentMouseSet() throws IOException {
 
 		int jlableWidth = jf.getjLabel().getWidth();
-		int jlableHeight = jf.getContentPane().getHeight();// jlabelµÄ¸ß
+		int jlableHeight = jf.getContentPane().getHeight();// jlabelçš„é«˜
 		double locationX = jf.getjLabel().getLocationOnScreen().getX();
 		double locationY = jf.getjLabel().getLocationOnScreen().getY();
-		// double locationYLast=locationY-((jf.getHeight()-jlableHeight)-locationY);
-
-		System.out.println("jlableWidth" + jlableWidth);
-		System.out.println("jlableHeight" + jlableHeight);
-		System.out.println("locationX" + locationX);
-		System.out.println("locationY" + locationY);
-		System.out.println("locationYLast" + locationY);
 
 		Events events = new Events();
 		Map map = new HashMap<String, Object>();
