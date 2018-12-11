@@ -4,15 +4,13 @@ import team.javaspirit.remoteControl.operation.service.ConnectStudent;
 /**
  * 
 * <p>Title: Service</p>
-* <p>Description:ÕâÊÇ½ÌÊ¦¶Ë£¬Í¬Ê±ÊÇ·şÎñÆ÷¶Ë£¬ÏÈ¿ªÆôÕâ¸ö¡£ </p>
-* @author ºÎ»ÛÏ¼
-* @date 2018Äê12ÔÂ11ÈÕ
+* <p>Description:è¿™æ˜¯æ•™å¸ˆç«¯ï¼ŒåŒæ—¶æ˜¯æœåŠ¡å™¨ç«¯ï¼Œå…ˆå¼€å¯è¿™ä¸ªã€‚ </p>
+* @author ä½•æ…§éœ
+* @date 2018å¹´12æœˆ11æ—¥
  */
 public class Service {
 
-	public Service() {
-		// TODO Auto-generated constructor stub
-	}
+	
 	public static void main(String[] args) throws Exception {
 		ConnectStudent cn = new ConnectStudent();
 

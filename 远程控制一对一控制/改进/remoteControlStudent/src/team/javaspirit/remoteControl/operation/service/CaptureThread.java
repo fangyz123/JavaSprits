@@ -17,9 +17,9 @@ import javax.imageio.ImageIO;
 /**
  * 
 * <p>Title: CaptureThread</p>
-* <p>Description:½ØÍ¼¡¢·¢ËÍÍ¼Æ¬µÄÏß³Ì </p>
-* @author ºÎ»ÛÏ¼
-* @date 2018Äê11ÔÂ24ÈÕ
+* <p>Description:æˆªå›¾ã€å‘é€å›¾ç‰‡çš„çº¿ç¨‹ </p>
+* @author ä½•æ…§éœ
+* @date 2018å¹´11æœˆ24æ—¥
  */
 public class CaptureThread extends Thread {
 	private DataOutputStream dataOutputStream;
@@ -33,29 +33,29 @@ public class CaptureThread extends Thread {
 		this.socket=socket;
 		tk = Toolkit.getDefaultToolkit();
 		dm = tk.getScreenSize();
-		//¸ù¾İÆÁÄ»Éè¶¨Í¼Æ¬µÄ´óĞ¡
+		//æ ¹æ®å±å¹•è®¾å®šå›¾ç‰‡çš„å¤§å°
 		rec = new Rectangle(0, 0, (int)dm.getWidth(), (int)dm.getHeight());
-		robot  = new Robot();//ÔÚÕâÀï½øĞĞÁË³õÊ¼»¯¡£ËùÒÔÕâÀïnewÁË¡£Ç°Ãæµ°¸â¿ÉÒÔ²»Ö±½Ónew£¬
-		//ÔÚ¹¹Ôìº¯ÊıÖĞnew  µ«ÊÇ¹¹Ôìº¯Êı£¬Ã»ÓĞnew
+		robot  = new Robot();//åœ¨è¿™é‡Œè¿›è¡Œäº†åˆå§‹åŒ–ã€‚æ‰€ä»¥è¿™é‡Œnewäº†ã€‚å‰é¢è›‹ç³•å¯ä»¥ä¸ç›´æ¥newï¼Œ
+		//åœ¨æ„é€ å‡½æ•°ä¸­new  ä½†æ˜¯æ„é€ å‡½æ•°ï¼Œæ²¡æœ‰new
 	}
 	
 	/**
 	 * 
 	 * <p>Title: createCature</p>
-	 * <p>Description:Ö÷ÒªÓÃÓÚ½ØÍ¼¡£½ØÈ¡µ±Ç°ÆÁÄ»µÄÍ¼¡£Ö÷ÒªÊ¹ÓÃÁËrobotÕâ¸öÀà¡£°Ñ½ØÈ¡µÄÍ¼Æ¬
-	 * ×ª»»³É×Ö½ÚÊı×éÊä³öÁ÷¡£·½±ãºóÃæ°Ñ×Ö½ÚÊı×éĞ´ÈëÊä³öÁ÷ÖĞ´«Êäµ½½ÌÊ¦¶Ë£¬Õ¹Ê¾Ñ§Éú¶ËµÄÆÁÄ» </p>
+	 * <p>Description:ä¸»è¦ç”¨äºæˆªå›¾ã€‚æˆªå–å½“å‰å±å¹•çš„å›¾ã€‚ä¸»è¦ä½¿ç”¨äº†robotè¿™ä¸ªç±»ã€‚æŠŠæˆªå–çš„å›¾ç‰‡
+	 * è½¬æ¢æˆå­—èŠ‚æ•°ç»„è¾“å‡ºæµã€‚æ–¹ä¾¿åé¢æŠŠå­—èŠ‚æ•°ç»„å†™å…¥è¾“å‡ºæµä¸­ä¼ è¾“åˆ°æ•™å¸ˆç«¯ï¼Œå±•ç¤ºå­¦ç”Ÿç«¯çš„å±å¹• </p>
 	 * @return
 	 */
 	private byte[] createCature() {
-		//»ñµÃÒ»¸öÆÁÄ»µÄ½ØÍ¼
+		//è·å¾—ä¸€ä¸ªå±å¹•çš„æˆªå›¾
 		BufferedImage bimage = robot.createScreenCapture(rec);
-		////´´½¨Ò»¶ÎÄÚ´æÁ÷
+		////åˆ›å»ºä¸€æ®µå†…å­˜æµ
 		ByteArrayOutputStream byout = new ByteArrayOutputStream();
 		try {
-			//½«Í¼Æ¬Êı¾İĞ´ÈëÄÚ´æÁ÷ÖĞ
+			//å°†å›¾ç‰‡æ•°æ®å†™å…¥å†…å­˜æµä¸­
 			ImageIO.write(bimage, "png", byout);
 		} catch (IOException e) {
-			System.out.println("½ØÆÁÍ¼Æ¬Ğ´ÈëÄÚ´æÁ÷ÖĞ³öÏÖÒì³£");
+			System.out.println("æˆªå±å›¾ç‰‡å†™å…¥å†…å­˜æµä¸­å‡ºç°å¼‚å¸¸");
 			try {
 				dataOutputStream.close();
 				socket.close();
@@ -69,13 +69,13 @@ public class CaptureThread extends Thread {
 	}
 	
 	/**
-	 * ÕâÊÇÏß³ÌµÄÖØ×éº¯Êı¡£ÔÚÁ¬½ÓÃ»ÓĞ¹Ø±ÕµÄÊ±ºò£¬Ã¿¸ô100ºÁÃë½øĞĞ½ØÍ¼¡£È»ºó°ÑÍ¼Ğ´Èëµ½Êı¾İÊä³ö
-	 * Á÷ÖĞ¡£ÕâÀï¿ÉÄÜ»áÓĞÒì³£¡£ÎªÁË·şÎñÆ÷ºÍ¿Í»§¶ËÒ»¶ËÏÈ¹Ø±ÕÁ¬½ÓÒ»Ö±±¨´í£¬ÔÚcatchÖĞ¹Ø±ÕÁ¬½Ó¡£
+	 * è¿™æ˜¯çº¿ç¨‹çš„é‡ç»„å‡½æ•°ã€‚åœ¨è¿æ¥æ²¡æœ‰å…³é—­çš„æ—¶å€™ï¼Œæ¯éš”100æ¯«ç§’è¿›è¡Œæˆªå›¾ã€‚ç„¶åæŠŠå›¾å†™å…¥åˆ°æ•°æ®è¾“å‡º
+	 * æµä¸­ã€‚è¿™é‡Œå¯èƒ½ä¼šæœ‰å¼‚å¸¸ã€‚ä¸ºäº†æœåŠ¡å™¨å’Œå®¢æˆ·ç«¯ä¸€ç«¯å…ˆå…³é—­è¿æ¥ä¸€ç›´æŠ¥é”™ï¼Œåœ¨catchä¸­å…³é—­è¿æ¥ã€‚
 	 */
 	@Override
 	public void run() {
 		while(!socket.isClosed()){
-			//»ñµÃ½ØÍ¼µÄ×Ö½ÚÊı×é
+			//è·å¾—æˆªå›¾çš„å­—èŠ‚æ•°ç»„
 			byte[] data = createCature();
 			try {
 				dataOutputStream.writeInt(data.length);
@@ -99,7 +99,7 @@ public class CaptureThread extends Thread {
 					e1.printStackTrace();
 				}
 				e.printStackTrace();
-				System.out.println("ÍøÂçÓĞÎÊÌâ,½ØÆÁÊ§°Ü");
+				System.out.println("ç½‘ç»œæœ‰é—®é¢˜,æˆªå±å¤±è´¥");
 			}
 			
 		}

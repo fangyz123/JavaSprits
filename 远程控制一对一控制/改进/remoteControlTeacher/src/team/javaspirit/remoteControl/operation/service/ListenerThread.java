@@ -19,13 +19,13 @@ import team.javaspirit.remoteControl.ui.MyJframe;
 /**
  * 
 * <p>Title: ListenerThread</p>
-* <p>Description: ¸øjframeÌí¼Ó¼àÌıÆ÷£¬¼àÌı½ÌÊ¦¶ËÔÚjframeÉÏµÄ²Ù×÷£¬°ÑÏà¹ØÊÂ¼ş´«Êäµ½Ñ§Éú¶Ë</p>
-* @author ºÎ»ÛÏ¼
-* @date 2018Äê12ÔÂ3ÈÕ
+* <p>Description: ç»™jframeæ·»åŠ ç›‘å¬å™¨ï¼Œç›‘å¬æ•™å¸ˆç«¯åœ¨jframeä¸Šçš„æ“ä½œï¼ŒæŠŠç›¸å…³äº‹ä»¶ä¼ è¾“åˆ°å­¦ç”Ÿç«¯</p>
+* @author ä½•æ…§éœ
+* @date 2018å¹´12æœˆ3æ—¥
  */
 public class ListenerThread extends Thread {
 	private MyJframe jf;
-	private ObjectOutputStream ous;// Êä³öÁ÷
+	private ObjectOutputStream ous;// è¾“å‡ºæµ
 	ListenerThread(ObjectOutputStream ous,MyJframe jf) {
 		this.ous=ous;
 		this.jf=jf;
@@ -34,7 +34,7 @@ public class ListenerThread extends Thread {
 	
 	@Override
 	public void run() {
-		// Ôö¼ÓÊó±ê¼àÌıÆ÷£¨ÄäÃûº¯Êı£©
+		// å¢åŠ é¼ æ ‡ç›‘å¬å™¨ï¼ˆåŒ¿åå‡½æ•°ï¼‰
 				jf.addMouseListener(new MouseListener() {
 
 					@Override
@@ -61,25 +61,23 @@ public class ListenerThread extends Thread {
 					}
 				});
 
-				// Êó±êÒÆ¶¯ÊÂ¼ş
+				// é¼ æ ‡ç§»åŠ¨äº‹ä»¶
 				jf.addMouseMotionListener(new MouseMotionListener() {
 					@Override
 					public void mouseMoved(MouseEvent arg0) {
-//						arg0.getXOnScreen()
-						Point point=jf.getMousePosition();
-						System.out.println("jf"+point.getX()+","+point.getY());
+
 						sentEvent(arg0);
 
 					}
 
 					@Override
-					public void mouseDragged(MouseEvent arg0) {//Êó±êÍÏ×§
+					public void mouseDragged(MouseEvent arg0) {//é¼ æ ‡æ‹–æ‹½
 						
 						sentEvent(arg0);
 					}
 
 				});
-				// Êó±ê»¬ÂÖ»¬¶¯ÊÂ¼ş
+				// é¼ æ ‡æ»‘è½®æ»‘åŠ¨äº‹ä»¶
 				jf.addMouseWheelListener(new MouseWheelListener() {
 
 					@Override
@@ -89,7 +87,7 @@ public class ListenerThread extends Thread {
 					}
 				});
 
-				// ¼üÅÌÊÂ¼ş
+				// é”®ç›˜äº‹ä»¶
 				jf.addKeyListener(new KeyListener() {
 
 					@Override
@@ -116,16 +114,16 @@ public class ListenerThread extends Thread {
 	/**
 	 * 
 	 * <p>Title: sentEvent</p>
-	 * <p>Description:ÔÚÃ¿¸ö¼àÌıÆ÷ÖĞ¼àÌıµ½µÄÊÂ¼ş»áÀûÓÃ´Ëº¯ÊıĞ´Èëµ½Êä³öÁ÷£¬È»ºó´«Êä¹ıÈ¥ </p>
+	 * <p>Description:åœ¨æ¯ä¸ªç›‘å¬å™¨ä¸­ç›‘å¬åˆ°çš„äº‹ä»¶ä¼šåˆ©ç”¨æ­¤å‡½æ•°å†™å…¥åˆ°è¾“å‡ºæµï¼Œç„¶åä¼ è¾“è¿‡å» </p>
 	 * @param e
 	 */
 	public void sentEvent(InputEvent e) {
 		try {
 			Events events=new Events();
 			events.setEvent(e);
-			ous.writeObject(events);//¡¾¡¿ÓĞ¿ÉÄÜÔÚÕâÀïĞ´²»½øÈ¥¡£ËùÒÔÊÇ²»ÊÇµÃÏÈ°Ñous¸ø³õÊ¼»¯ÁË
+			ous.writeObject(events);//ã€ã€‘æœ‰å¯èƒ½åœ¨è¿™é‡Œå†™ä¸è¿›å»ã€‚æ‰€ä»¥æ˜¯ä¸æ˜¯å¾—å…ˆæŠŠousç»™åˆå§‹åŒ–äº†
 		} catch (IOException e1) {
-			System.out.println("·¢ËÍÊÂ¼ş¶ÔÏó³öÏÖÒì³£");
+			System.out.println("å‘é€äº‹ä»¶å¯¹è±¡å‡ºç°å¼‚å¸¸");
 			e1.printStackTrace();
 		}
 	}

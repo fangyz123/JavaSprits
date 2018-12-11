@@ -1,12 +1,9 @@
 package team.javaspirit.remoteControl.operation.service;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
@@ -15,34 +12,34 @@ import java.net.Socket;
  * Title: OpenConnection
  * </p>
  * <p>
- * Description: Õâ¸öÀàÖ÷ÒªÊÇ½ÌÊ¦¶Ë¿ªÆô·şÎñÖ®ºó£¬µÈ´ıÑ§Éú¶Ë£¨¿Í»§¶Ë£©µÄÁ¬½Ó¡£Á¬½ÓºóµÄÖ÷Òª
- * Âß¼­¹ı³Ì¡£ÏÈ»ñµÃÁ¬½ÓµÄÊäÈëÁ÷ºÍÊä³öÁ÷¡£È»ºó·Ö±ğ°ÑÊäÈëÁ÷±ä³ÉobjectInputStreamÁ÷£¬ÎªÁËÄÜ¹»ÔÚ
- * ¿Í»§¶ËºÍ·şÎñÆ÷¶ËÖ®¼ä¸üºÃµØ´«ÊäÊÂ¼ş¡£´ÓÁ÷ÖĞ½ÓÊÜobject£¬ÄÜ¹»¸üºÃµØ°Ñµã»÷ÊÂ¼ş½øĞĞ»Ø·Å¡£
- * °ÑÊä³öÁ÷×ª»»³ÉdataOutputStream£¬·½±ã°ÑÍ¼Æ¬×ª»»³É×Ö½Ú
+ * Description: è¿™ä¸ªç±»ä¸»è¦æ˜¯æ•™å¸ˆç«¯å¼€å¯æœåŠ¡ä¹‹åï¼Œç­‰å¾…å­¦ç”Ÿç«¯ï¼ˆå®¢æˆ·ç«¯ï¼‰çš„è¿æ¥ã€‚è¿æ¥åçš„ä¸»è¦
+ * é€»è¾‘è¿‡ç¨‹ã€‚å…ˆè·å¾—è¿æ¥çš„è¾“å…¥æµå’Œè¾“å‡ºæµã€‚ç„¶ååˆ†åˆ«æŠŠè¾“å…¥æµå˜æˆobjectInputStreamæµï¼Œä¸ºäº†èƒ½å¤Ÿåœ¨
+ * å®¢æˆ·ç«¯å’ŒæœåŠ¡å™¨ç«¯ä¹‹é—´æ›´å¥½åœ°ä¼ è¾“äº‹ä»¶ã€‚ä»æµä¸­æ¥å—objectï¼Œèƒ½å¤Ÿæ›´å¥½åœ°æŠŠç‚¹å‡»äº‹ä»¶è¿›è¡Œå›æ”¾ã€‚
+ * æŠŠè¾“å‡ºæµè½¬æ¢æˆdataOutputStreamï¼Œæ–¹ä¾¿æŠŠå›¾ç‰‡è½¬æ¢æˆå­—èŠ‚
  * </p>
  * 
- * @author ºÎ»ÛÏ¼
- * @date 2018Äê12ÔÂ3ÈÕ
+ * @author ä½•æ…§éœ
+ * @date 2018å¹´12æœˆ3æ—¥
  */
 public class OpenConnection {
-	private ObjectInputStream objectInputStream;//»ñÈ¡½ÌÊ¦¶ËµÄµã»÷ÊÂ¼ş
-	private OutputStream ous;//·¢ËÍÍ¼Æ¬
+	private ObjectInputStream objectInputStream;//è·å–æ•™å¸ˆç«¯çš„ç‚¹å‡»äº‹ä»¶
+	private OutputStream ous;//å‘é€å›¾ç‰‡
 	private Socket socket;
-	//ÕâÊÇÑ§Éú¶Ë£¬µ«ÊÇÕâĞŞ¸ÄÎª¿Í»§¶Ë£¬Á¬½Ó½ÌÊ¦¶Ë
+	//è¿™æ˜¯å­¦ç”Ÿç«¯ï¼Œä½†æ˜¯è¿™ä¿®æ”¹ä¸ºå®¢æˆ·ç«¯ï¼Œè¿æ¥æ•™å¸ˆç«¯
 	public void conn2Server( String ip,int port) throws Exception {
 
-		// Á¬½Ó½ÌÊ¦¶Ë
+		// è¿æ¥æ•™å¸ˆç«¯
 		socket = new Socket(ip, port);
 		InputStream ins = socket.getInputStream();
-		// ¶ÔÏóÊäÈëÁ÷ ¶ÁÈ¡ÊÂ¼ş¶ÔÏó
+		// å¯¹è±¡è¾“å…¥æµ è¯»å–äº‹ä»¶å¯¹è±¡
 		objectInputStream = new ObjectInputStream(ins);
 		ous = socket.getOutputStream();
-		// Êı¾İÊä³öÁ÷£¬ÓÃÒÔ·¢ËÍÍ¼Æ¬Êı¾İ 1¸öintÍ¼Æ¬Êı¾İ³¤¶È Í¼Æ¬µÄ×Ö½Ú
+		// æ•°æ®è¾“å‡ºæµï¼Œç”¨ä»¥å‘é€å›¾ç‰‡æ•°æ® 1ä¸ªintå›¾ç‰‡æ•°æ®é•¿åº¦ å›¾ç‰‡çš„å­—èŠ‚
 		DataOutputStream dous = new DataOutputStream(ous);
-		// ¿ªÆô½ØÍ¼Ïß³Ì
+		// å¼€å¯æˆªå›¾çº¿ç¨‹
 		CaptureThread captureThread = new CaptureThread(dous, socket);
 		captureThread.start();
-		// ¿ªÆô»Ø·ÅÊÂ¼şÏß³Ì
+		// å¼€å¯å›æ”¾äº‹ä»¶çº¿ç¨‹
 		EventReadThred eventReadThread = new EventReadThred(objectInputStream, socket);
 		eventReadThread.start();
 	}

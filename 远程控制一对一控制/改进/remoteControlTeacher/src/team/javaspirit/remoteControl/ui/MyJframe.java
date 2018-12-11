@@ -20,42 +20,42 @@ import javax.swing.UIManager;
  * Title: MyJframe
  * </p>
  * <p>
- * Description:Õ¹Ê¾Ñ§Éú½ØÍ¼
+ * Description:å±•ç¤ºå­¦ç”Ÿæˆªå›¾
  * </p>
  * 
- * @author ºÎ»ÛÏ¼
- * @date 2018Äê11ÔÂ26ÈÕ
+ * @author ä½•æ…§éœ
+ * @date 2018å¹´11æœˆ26æ—¥
  */
 public class MyJframe extends JFrame {
 
-	private static final long serialVersionUID = 1L;//java¶ÔÏóĞòÁĞ»¯
-	private static JLabel jLabel = new JLabel();// ´´½¨Ò»¸öÏÔÊ¾¿ò
+	private static final long serialVersionUID = 1L;//javaå¯¹è±¡åºåˆ—åŒ–
+	private static JLabel jLabel = new JLabel();// åˆ›å»ºä¸€ä¸ªæ˜¾ç¤ºæ¡†
 	public static JLabel getjLabel() {
 		return jLabel;
 	}
 
 	public MyJframe(ObjectOutputStream o) {
-		super("¿ØÖÆÌ¨");
+		super("æ§åˆ¶å°");
 		
-		// »ñÈ¡ÆÁÄ»µÄ±ß½ç
+		// è·å–å±å¹•çš„è¾¹ç•Œ
 		Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
-		// »ñÈ¡µ×²¿ÈÎÎñÀ¸¸ß¶È
+		// è·å–åº•éƒ¨ä»»åŠ¡æ é«˜åº¦
 		int taskBarHeight = screenInsets.bottom;
-		// »ñÈ¡ÆÁÄ»µÄ´óĞ¡
+		// è·å–å±å¹•çš„å¤§å°
 		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
-		System.out.println((int) screenDimension.getWidth() + "lll" + (int) screenDimension.getHeight());
+		
 		double ratio = screenDimension.getWidth() / screenDimension.getHeight();
-		setSize((int)(screenDimension.getWidth()-taskBarHeight*ratio),(int)(screenDimension.getHeight()-taskBarHeight)); //ÉèÖÃ´ò¿ª´°¿ÚÎªÆÁÄ»´óĞ¡
-		//System.out.println("hhhhhhhh"+(int)(screenDimension.getHeight()-taskBarHeight));
+		setSize((int)(screenDimension.getWidth()-taskBarHeight*ratio),(int)(screenDimension.getHeight()-taskBarHeight)); //è®¾ç½®æ‰“å¼€çª—å£ä¸ºå±å¹•å¤§å°
+		
 		
 		setLocation(0, 0);
 		//setSize((int) screenDimension.getWidth(), (int) screenDimension.getHeight());
-		setVisible(true); // ¿É¼û
+		setVisible(true); // å¯è§
 		setAlwaysOnTop(true);
-		setResizable(false);//²»¿É¸Ä±äjframeµÄ´óĞ¡
-		setDefaultCloseOperation(3); // ¹Ø±Õ·½Ê½
+		setResizable(false);//ä¸å¯æ”¹å˜jframeçš„å¤§å°
+		setDefaultCloseOperation(3); // å…³é—­æ–¹å¼
 		add(jLabel);
-		try { // ÏÔÊ¾·½Ê½
+		try { // æ˜¾ç¤ºæ–¹å¼
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 			//
@@ -65,9 +65,7 @@ public class MyJframe extends JFrame {
 	}
 
 	
-	/*
-	 * type 1 Ô­Í¼ÏÔÊ¾ 2 °´ÕÕ±ÈÀıËõ·Å 3 ¹ö¶¯ÏÔÊ¾
-	 */
+	
 
 	/**
 	 * 
@@ -75,31 +73,24 @@ public class MyJframe extends JFrame {
 	 * Title: setImgLabel
 	 * </p>
 	 * <p>
-	 * Description:µÈ±ÈÀıËõ·Å
+	 * Description:ç­‰æ¯”ä¾‹ç¼©æ”¾
 	 * </p>
 	 * 
 	 * @param icon
 	 * @throws IOException
 	 */
 	public void setImgLabel(BufferedImage icon) throws IOException {
-		
-		System.out.println("screen:"+jLabel.getLocationOnScreen().getX()+","+jLabel.getLocationOnScreen().getY());
-		System.out.println(icon.getWidth() + "tupian" + icon.getHeight());
-
 		int width = jLabel.getWidth();  
 		int height = jLabel.getHeight();
-		
-		
-		System.out.println(width + "jlabel" + height);
 		BufferedImage Image = resize(icon, width, height);
 		ImageIcon newImage=  new ImageIcon(Image);
-		jLabel.setIcon(newImage);//°ÑÍ¼Æ¬Ìí¼Óµ½jlabelÉÏ
-		//jLabel.setIcon(new javax.swing.ImageIcon(newImage));
+		jLabel.setIcon(newImage);//æŠŠå›¾ç‰‡æ·»åŠ åˆ°jlabelä¸Š
+		
 	}
 	/**
 	 * 
 	 * <p>Title: resize</p>
-	 * <p>Description:ÖØÖÃÍ¼Æ¬µÄ´óĞ¡ </p>
+	 * <p>Description:é‡ç½®å›¾ç‰‡çš„å¤§å° </p>
 	 * @param img
 	 * @param newW
 	 * @param newH
@@ -110,12 +101,12 @@ public class MyJframe extends JFrame {
 		
 		BufferedImage dimg = new BufferedImage(newW, newH, img.getType());
 		Graphics2D g = dimg.createGraphics();
-		// ¿ªÆôÎÄ×Ö¿¹¾â³İ
+		// å¼€å¯æ–‡å­—æŠ—é”¯é½¿
 		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		// »æÖÆµ±Ç°¿ÉÓÃµÄÖ¸¶¨Í¼ÏñµÄÖ¸¶¨ÇøÓò£¬¶¯Ì¬µØËõ·ÅÍ¼ÏñÊ¹Æä·ûºÏÄ¿±ê»æÖÆ±íÃæµÄÖ¸¶¨ÇøÓò¡£
-		// Í¸Ã÷ÏñËØ²»Ó°Ïì¸Ã´¦ÒÑ´æÔÚµÄÏñËØ
+		// ç»˜åˆ¶å½“å‰å¯ç”¨çš„æŒ‡å®šå›¾åƒçš„æŒ‡å®šåŒºåŸŸï¼ŒåŠ¨æ€åœ°ç¼©æ”¾å›¾åƒä½¿å…¶ç¬¦åˆç›®æ ‡ç»˜åˆ¶è¡¨é¢çš„æŒ‡å®šåŒºåŸŸã€‚
+		// é€æ˜åƒç´ ä¸å½±å“è¯¥å¤„å·²å­˜åœ¨çš„åƒç´ 
 		g.drawImage(img, 0, 0, newW, newH, null);
-		// Ïú»Ù³ÌĞòÖĞÖ¸¶¨µÄÍ¼ĞÎ½çÃæ×ÊÔ´
+		// é”€æ¯ç¨‹åºä¸­æŒ‡å®šçš„å›¾å½¢ç•Œé¢èµ„æº
 		g.dispose();  
 		return dimg;
 	}
