@@ -1,0 +1,190 @@
+=CONCATENATE("insert into students (sid,name) values ('",A1,"','",B1,"');")
+insert into students (sid,name) values ('Ñ§ºÅ','ĞÕÃû');
+insert into students (sid,name) values ('2016011720','ÈÎ¼Ò»ª');
+insert into students (sid,name) values ('2016011719','º«ÔóºÀ');
+insert into students (sid,name) values ('2016011707','Ñ¦ÔÆÇç');
+insert into students (sid,name) values ('2016011705','Úùè÷äË');
+insert into students (sid,name) values ('2016011697','´ŞÉº');
+insert into students (sid,name) values ('2016011695','ÍõÕÑ');
+insert into students (sid,name) values ('2016011683','»ÆæÂæÂ');
+insert into students (sid,name) values ('2016011681','ÁõÏşÙ»');
+insert into students (sid,name) values ('2016011679','Íõº£·å');
+insert into students (sid,name) values ('2016011678','ÕÅ´º»Ô');
+insert into students (sid,name) values ('2016011676','¶ÅÂü');
+insert into students (sid,name) values ('2016011674','ÁõÌï»á');
+insert into students (sid,name) values ('2016011668','±«ÕÅ¾ü');
+insert into students (sid,name) values ('2016011654','ÁõèÌ±õ');
+insert into students (sid,name) values ('2016011651','ºúÓî');
+insert into students (sid,name) values ('2016011641','¶­ÊÀĞù');
+insert into students (sid,name) values ('2016011640','ÎºÇ«Ç¿');
+insert into students (sid,name) values ('2016011638','¶ÎÖÇĞË');
+insert into students (sid,name) values ('2016011636','ËïÃ÷Î°');
+insert into students (sid,name) values ('2016011635','µË•D');
+insert into students (sid,name) values ('2016011627','ÍõÖ¾Õé');
+insert into students (sid,name) values ('2016011622','ÕÅË¼¼Î');
+insert into students (sid,name) values ('2016011621','ÁºÑÅÈã');
+insert into students (sid,name) values ('2016011620','±«²ÊÙ»');
+insert into students (sid,name) values ('2016011619','Ò×½£È¨');
+insert into students (sid,name) values ('2016011608','¹ùÇïÏ¼');
+insert into students (sid,name) values ('2016011603','ÕÔÓñÁú');
+insert into students (sid,name) values ('2016011602','ÁõÉºÉº');
+insert into students (sid,name) values ('2016011594','ĞÁ¼Ñï¿');
+insert into students (sid,name) values ('2016011591','ÕÅìÏÎõ');
+insert into students (sid,name) values ('2016011589','Áº·¼·¼');
+insert into students (sid,name) values ('2016011587','ÌïÔÃÁØ');
+insert into students (sid,name) values ('2016011584','öÄæÃæÃ');
+insert into students (sid,name) values ('2016011574','ĞìÈó¿­');
+insert into students (sid,name) values ('2016011562','¸ßÌìÓí');
+insert into students (sid,name) values ('2016011561','Àî´ºÁ¼');
+insert into students (sid,name) values ('2016011556','ÆëÑ©æÃ');
+insert into students (sid,name) values ('2016011541','ËïÇçÇç');
+insert into students (sid,name) values ('2016011529','ãÉÙ²');
+insert into students (sid,name) values ('2016011527','³ÂÅôÓî');
+insert into students (sid,name) values ('2016011524','ÄßÔóÜÛ');
+insert into students (sid,name) values ('2016011514','»§×Ó³¬');
+insert into students (sid,name) values ('2016011513','ÕÔĞñ');
+insert into students (sid,name) values ('2016011506','½ùÈôç÷');
+insert into students (sid,name) values ('2016011497','Ğì²ıÂ¡');
+insert into students (sid,name) values ('2016011493','Áõ½ğŞb');
+insert into students (sid,name) values ('2016011484','ËïÒàè¯');
+insert into students (sid,name) values ('2016011480','×¿±Ø³Ï');
+insert into students (sid,name) values ('2016011463','ãÆÕıÎ°');
+insert into students (sid,name) values ('2016011462','ÍõÔÆµÜ');
+insert into students (sid,name) values ('2016011456','Íõ±ÌÔÆ');
+insert into students (sid,name) values ('2016011455','Íõ»Û');
+insert into students (sid,name) values ('2016011453','ÕÅÕıÑï');
+insert into students (sid,name) values ('2016011448','ÌÆÏª');
+insert into students (sid,name) values ('2016011442','Ëï³Ì³Ì');
+insert into students (sid,name) values ('2016011439','Àîá·ºã');
+insert into students (sid,name) values ('2016011428','¶¡ÔóÈÊ');
+insert into students (sid,name) values ('2016011427','°×³¿ğ©');
+insert into students (sid,name) values ('2016011418','ÀîÔÆÑó');
+insert into students (sid,name) values ('2016011416','»ÆÎÄĞñ');
+insert into students (sid,name) values ('2016011414','ÈÎÉÙË§');
+insert into students (sid,name) values ('2016011413','»Æ¾üÑô');
+insert into students (sid,name) values ('2016011410','ÑîÁÖÍú');
+insert into students (sid,name) values ('2016011408','ÍôÊÀÕÑ');
+insert into students (sid,name) values ('2016011404','Ô¬ÔÆÅô');
+insert into students (sid,name) values ('2016011402','Ğì¿¡ÃÀ');
+insert into students (sid,name) values ('2016011401','ÍõÓñÁá');
+insert into students (sid,name) values ('2016011399','¹ù½ğ¿µ');
+insert into students (sid,name) values ('2016011395','ºÎ»ÛÏ¼');
+insert into students (sid,name) values ('2016011394','ÂÀÄı»Û');
+insert into students (sid,name) values ('2016011393','ºîÖÒì÷');
+insert into students (sid,name) values ('2016011387','Íõ×Óè¯');
+insert into students (sid,name) values ('2016011384','ÈÎÓñæÂ');
+insert into students (sid,name) values ('2016011380','³ÉÇí');
+insert into students (sid,name) values ('2016011379','ÍõÃÎÕæ');
+insert into students (sid,name) values ('2016011377','ÕÔ¼ÒÑş');
+insert into students (sid,name) values ('2016011374','ÕÅ¶¦');
+insert into students (sid,name) values ('2016011372','ÁõÑÇË«');
+insert into students (sid,name) values ('2016011360','ÍõĞ¦Óï');
+insert into students (sid,name) values ('2016011357','¹ù³ÌæÂ');
+insert into students (sid,name) values ('2016011352','èïÏş«h');
+insert into students (sid,name) values ('2016011349','ÓÚĞÀÑó');
+insert into students (sid,name) values ('2016011344','²ÜÔó³½');
+insert into students (sid,name) values ('2016011338','¶­Ó¨');
+insert into students (sid,name) values ('2016011335','ÆîºçÀÙ');
+insert into students (sid,name) values ('2016011329','·½ÓñÕä');
+insert into students (sid,name) values ('2015015407','ÌïÊµ');
+insert into students (sid,name) values ('2015015176','ÍõÄş');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
