@@ -1,4 +1,9 @@
-
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +21,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		function hideURLbar() {
 			window.scrollTo(0, 1);
+
 		}
+
+		function addrow(){
+  			var c=document.getElementById('mytable');//获得表格的信息
+  			
+			
+			var z=c.rows[0].cells;//如果不是空表，首先获得表格有多少列，先获取再插入新行
+			var x=c.insertRow(0);
+			for(var i=0;i<1;i++){//依次向新行插入表格列数的单元格
+    		var y=x.insertCell(i);
+			y = function showRow()
+{
+document.getElementById('first').rows[0].innerHTML;
+};
+				 			}
+				}
+							 
+					
+
+
 	</script>
 	<!--//tags -->
 	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
@@ -41,7 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 								</button>
-						<h1><a class="navbar-brand" href="index.html"> Surf Inn</a></h1>
+						<h1><a class="navbar-brand" href="index.html"> TEACH TOOL</a></h1>
 					</div>
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="header_left">
@@ -154,7 +179,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="login-form">
 								<form action="#" method="post">
 									<input type="text" name="name" placeholder="Username" required="">
-									<input type="email" name="email" placeholder="Email" required="">
+									<input type="text" name="week" placeholder="week" required="">
 									<input type="password" name="password" placeholder="Password" required="">
 									<input type="password" name="password" placeholder="Confirm Password" required="">
 									<input type="submit" value="Sign Up">
@@ -180,14 +205,106 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<form action="#" method="post">
 									<div class="col-md-6 col-sm-6 contact_left_grid">
 										<input type="text" name="Name" placeholder="班级名称" required="">
-										<input type="email" name="Email" placeholder="开课周数" required="">
+										<input type="text" name="Name" placeholder="课程名称" required="">
+										<div class="select">
+										开课周数：<select name="top">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+													<option value="13">13</option>
+													<option value="14">14</option>
+													<option value="15">15</option>
+													<option value="16">16</option>
+													<option value="17">17</option>
+													<option value="18">18</option>
+												  </select>&nbsp; - &nbsp;
+												 <select name="button">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+													<option value="13">13</option>
+													<option value="14">14</option>
+													<option value="15">15</option>
+													<option value="16">16</option>
+													<option value="17">17</option>
+													<option value="18">18</option>
+												 </select>
+										</div>									
 									</div>
 									<div class="col-md-6 col-sm-6 contact_left_grid">
 										
 									</div>
 									<div class="clearfix"> </div>
-									<textarea name="Message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">教学计划...</textarea>
-									<input type="submit" value="提交">
+									<!-- <textarea name="Message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">教学计划...</textarea> -->
+									<div class="add">
+									<input type="button" value="增加行" onclick="addrow()" >
+									</div>
+									<table frame="border" rules="all" id="mytable">
+									<tr>
+										<td class="first">
+											开课周数：<select name="top">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+													<option value="13">13</option>
+													<option value="14">14</option>
+													<option value="15">15</option>
+													<option value="16">16</option>
+													<option value="17">17</option>
+													<option value="18">18</option>
+												  </select>&nbsp; - &nbsp;
+												 <select name="button">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+													<option value="13">13</option>
+													<option value="14">14</option>
+													<option value="15">15</option>
+													<option value="16">16</option>
+													<option value="17">17</option>
+													<option value="18">18</option>
+												 </select>
+										</td>
+									</tr>
+									</table>
+
+									<input type="submit" value="创建班级">
 									
 								</form>
 							</div>
@@ -198,7 +315,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="visit">
 									
 									<div class="col-md-10 col-sm-10 col-xs-10 contact-text">
+									<form>
+
 										<input type="file" name="上传文件"><br/>
+										<input type="submit" value="导入数据">
+
+									</form>
 
 										
 
