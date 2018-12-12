@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/12/10 9:58:23                           */
+/* Created on:     2018/12/12 17:21:28                          */
 /*==============================================================*/
 
 
@@ -24,9 +24,13 @@ drop table if exists record;
 
 drop table if exists studentClass;
 
+drop table if exists studentStatus;
+
 drop table if exists students;
 
 drop table if exists teacher;
+
+drop table if exists teacherStatus;
 
 drop table if exists term;
 
@@ -130,7 +134,7 @@ create table record
    sid                  varchar(15),
    state                int,
    date                 timestamp,
-   class_id             int,
+   course_id            int,
    primary key (id)
 );
 
@@ -143,6 +147,16 @@ create table studentClass
    class_id             int,
    sid                  varchar(15),
    primary key (id)
+);
+
+/*==============================================================*/
+/* Table: studentStatus                                         */
+/*==============================================================*/
+create table studentStatus
+(
+   sid                  varchar(15) not null,
+   record_status        int,
+   primary key (sid)
 );
 
 /*==============================================================*/
@@ -173,13 +187,23 @@ create table teacher
 );
 
 /*==============================================================*/
+/* Table: teacherStatus                                         */
+/*==============================================================*/
+create table teacherStatus
+(
+   tid                  varchar(15) not null,
+   status               int,
+   primary key (tid)
+);
+
+/*==============================================================*/
 /* Table: term                                                  */
 /*==============================================================*/
 create table term
 (
    term_id              int not null,
-   time_begin           timestamp,
-   time_end             timestamp,
+   time_begin           date,
+   time_end             date,
    status               int,
    primary key (term_id)
 );
