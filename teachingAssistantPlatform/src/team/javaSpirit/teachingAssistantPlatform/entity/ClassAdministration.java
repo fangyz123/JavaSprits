@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="classAdministration")
+@Table(name="classadministration")
 public class ClassAdministration {
 	private int c_a_id;//流水号
 	private String name;//班名
@@ -41,7 +41,7 @@ public class ClassAdministration {
 		this.name = name;
 	}
 	@OneToMany(
-			mappedBy="c_a_id",
+			mappedBy="classAdministrantion",
 			cascade= {CascadeType.ALL}
 			)
 	public Set<Students> getStudents() {

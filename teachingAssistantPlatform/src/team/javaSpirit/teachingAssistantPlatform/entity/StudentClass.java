@@ -14,7 +14,7 @@ import javax.persistence.Table;
  *@date 2018年12月10日
  */
 @Entity
-@Table(name="studentClass")
+@Table(name="studentclass")
 public class StudentClass {
 	private int id;//id
 	private ClassCourse classin;//上课班级

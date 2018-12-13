@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * 学上登录表
  */
 @Entity
-@Table(name="loadStudent")
+@Table(name="loadstudent")
 public class LoadStudent {
 	private int id;//序列号
 	private Date login_time;//登录时间
