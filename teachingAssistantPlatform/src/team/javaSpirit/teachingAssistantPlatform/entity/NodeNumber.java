@@ -1,6 +1,9 @@
 package team.javaSpirit.teachingAssistantPlatform.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 /**
  * <p>Title:上课节数</p>
@@ -12,13 +15,15 @@ import javax.persistence.Table;
  * 节数类
  */
 @Entity
-@Table(name="nodeNumber")
+@Table(name="nodenumber")
 public class NodeNumber {
 	int node_id;//序列号
 	String node;//节数
 	String node_time;//节数具体时间
 	int sign_range;//签到时间差值
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getNode_id() {
 		return node_id;
 	}

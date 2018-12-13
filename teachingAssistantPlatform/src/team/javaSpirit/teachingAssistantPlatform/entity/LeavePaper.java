@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * 请假类
  */
 @Entity
-@Table(name="leavePaper")
+@Table(name="leavepaper")
 public class LeavePaper {
 	private int id;
 	private Students student;//学号
