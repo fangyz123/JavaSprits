@@ -21,11 +21,11 @@ import team.javaSpirit.teachingAssistantPlatform.util.IpUtil;
  */
 public class LoadStudentServiceImpl {
 
-	/*跟数据库交互的对象*/
+	/* 跟数据库交互的对象 */
 	private LoadStudentDaoImpl loadStudentDaoImpl;
 
 	public LoadStudentServiceImpl() {
-		loadStudentDaoImpl=new LoadStudentDaoImpl();
+		loadStudentDaoImpl = new LoadStudentDaoImpl();
 	}
 
 	/**
@@ -75,17 +75,19 @@ public class LoadStudentServiceImpl {
 	 * @param sid
 	 * @param pwd
 	 * @param conpwd
-	 * @return 用户不存在返回1，密码不匹配返回2，信息无误返回3
+	 * @return 用户不存在返回1，用户旧密码不匹配返回2，密码不匹配返回3，信息无误返回4
 	 */
-	public int checkModifyStudent(String sid, String pwd, String conpwd) {
+	public int checkModifyStudent(String sid, String oldpwd, String pwd, String conpwd) {
 		Students s = this.loadStudentDaoImpl.getStudentById(sid);
 		if (s == null)
 			return 1;
-		else if (!pwd.equals(conpwd))
+		else if (!oldpwd.equals(s.getPassword()))
 			return 2;
+		else if (!pwd.equals(conpwd))
+			return 3;
 		else {
 			this.loadStudentDaoImpl.updateStudentPassword(s, pwd);
-			return 3;
+			return 4;
 		}
 	}
 

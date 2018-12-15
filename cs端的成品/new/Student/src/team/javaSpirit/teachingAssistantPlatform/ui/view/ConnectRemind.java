@@ -31,6 +31,8 @@ import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.Client
  */
 public class ConnectRemind extends JFrame {
 
+	/** serialVersionUID*/
+	private static final long serialVersionUID = 1L;
 	private JPanel bgContentPane;
 
 	/**

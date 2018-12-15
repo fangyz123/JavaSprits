@@ -4,16 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -21,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import team.javaSpirit.teachingAssistantPlatform.ui.event.LoginActionListener;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.LoginMouseActionListener;
 import team.javaSpirit.teachingAssistantPlatform.util.DlPropertiesUtil;
 
 /**
@@ -72,7 +69,7 @@ public class Login extends JFrame {
 		bgContentPane = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon ii = new ImageIcon("img/img1.png");
+                ImageIcon ii = new ImageIcon("image/img1.png");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
             }
         };
@@ -90,7 +87,7 @@ public class Login extends JFrame {
 	public void setLogo() {
 		/**logo图片*/
 		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon("img/logo1.png"));
+		logo.setIcon(new ImageIcon("image/logo1.png"));
 		logo.setBounds(102, 0, 110, 110);
 		bgContentPane.add(logo);		
 		/**
@@ -158,7 +155,7 @@ public class Login extends JFrame {
 		loginButton.setBounds(102, 300, 130, 43);
 		bgContentPane.add(loginButton);
 		 // 给登录按钮添加事件
-		LoginActionListener ls=new LoginActionListener(getLogin());
+		LoginActionListener ls=new LoginActionListener(this);
 		loginButton.addActionListener(ls);
 	}
 	/**
@@ -200,7 +197,7 @@ public class Login extends JFrame {
 		this.bgContentPane = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon ii = new ImageIcon("img/bg1.jpg");
+                ImageIcon ii = new ImageIcon("image/bg1.jpg");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
             }
         };
@@ -219,6 +216,11 @@ public class Login extends JFrame {
 		bgContentPane.repaint();
 		
 	}
+	/**
+	 * 
+	 * <p>Title: init</p>
+	 * <p>Description:登录窗体Login的初始化方法 </p>
+	 */
 	public void init() {
 		path=this.getClass().getResource("/dl.properties").getPath();
 		this.setBackground();

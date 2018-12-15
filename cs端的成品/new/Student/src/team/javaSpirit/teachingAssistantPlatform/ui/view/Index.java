@@ -48,7 +48,7 @@ public class Index extends JFrame {
 		bgContentPane = new JPanel() {
             public void paintComponent(Graphics g) {
             	super.paintComponent(g);
-		        ImageIcon ii = new ImageIcon("img/img1.png");
+		        ImageIcon ii = new ImageIcon("image/img1.png");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
               }
 	  };
@@ -65,7 +65,7 @@ public class Index extends JFrame {
 		centerpl = new JPanel() {
             public void paintComponent(Graphics g) {
             	super.paintComponent(g);
-		        ImageIcon ii = new ImageIcon("img/img1.png");
+		        ImageIcon ii = new ImageIcon("image/img1.png");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
               }
 	  };
@@ -84,7 +84,7 @@ public class Index extends JFrame {
 		contentpl =  new JPanel() {
             public void paintComponent(Graphics g) {
             	super.paintComponent(g);
-		        ImageIcon ii = new ImageIcon("img/img1.png");
+		        ImageIcon ii = new ImageIcon("image/img1.png");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
               }
 	  };
@@ -118,7 +118,7 @@ public class Index extends JFrame {
 		JPanel menu1 = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon ii = new ImageIcon("img/menubg.jpg");
+                ImageIcon ii = new ImageIcon("image/menubg.jpg");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
             }
         };
@@ -132,7 +132,7 @@ public class Index extends JFrame {
 		menu1.add(lb1);
 		lb1.setHorizontalAlignment(SwingConstants.CENTER);
 		lb1.setVerticalAlignment(SwingConstants.TOP);
-		lb1.setIcon(new ImageIcon("img/menu1.jpg"));
+		lb1.setIcon(new ImageIcon("image/menu1.jpg"));
 		//签到按钮
 		JButton bt1 = new JButton("签到");
 		bt1.setBounds(28, 70, 31, 17);
@@ -160,7 +160,7 @@ public class Index extends JFrame {
 		JPanel menu7 = new JPanel() {
 			public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon ii = new ImageIcon("img/menubg.jpg");
+                ImageIcon ii = new ImageIcon("image/menubg.jpg");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
             }
 		};
@@ -172,7 +172,7 @@ public class Index extends JFrame {
 		JLabel lb7 = new JLabel("");
 		lb7.setBounds(13, 10, 60, 60);
 		menu7.add(lb7);
-		lb7.setIcon(new ImageIcon("img/menu7.jpg"));
+		lb7.setIcon(new ImageIcon("image/menu7.jpg"));
 		//资源共享菜单按钮
 		JButton bt7 = new JButton("资源共享");
 		bt7.setBounds(13, 70, 61, 17);
@@ -195,7 +195,7 @@ public class Index extends JFrame {
 		JPanel menu3 =new JPanel() {
 			public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon ii = new ImageIcon("img/menubg.jpg");
+                ImageIcon ii = new ImageIcon("image/menubg.jpg");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
             }
 		};
@@ -207,7 +207,7 @@ public class Index extends JFrame {
 		JLabel lb3 = new JLabel("");
 		lb3.setBounds(13, 10, 60, 60);
 		menu3.add(lb3);
-		lb3.setIcon(new ImageIcon("img/menu3.jpg"));
+		lb3.setIcon(new ImageIcon("image/menu3.jpg"));
 		//录屏菜单按钮
 		JButton bt3 = new JButton("录屏");
 		bt3.setBounds(28, 70, 31, 17);
@@ -231,7 +231,7 @@ public class Index extends JFrame {
 		JPanel menu5 = new JPanel() {
 			public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon ii = new ImageIcon("img/menubg.jpg");
+                ImageIcon ii = new ImageIcon("image/menubg.jpg");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
             }
 		};
@@ -243,7 +243,7 @@ public class Index extends JFrame {
 		JLabel lb5 = new JLabel("");
 		lb5.setBounds(13, 10, 60, 60);
 		menu5.add(lb5);
-		lb5.setIcon(new ImageIcon("img/menu5.jpg"));
+		lb5.setIcon(new ImageIcon("image/menu5.jpg"));
 		//作业菜单按钮
 		JButton bt5 = new JButton("作业");
 		bt5.setBounds(28, 69, 31, 17);
@@ -265,7 +265,7 @@ public class Index extends JFrame {
 		JPanel menu6 = new JPanel() {
 			public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon ii = new ImageIcon("img/menubg.jpg");
+                ImageIcon ii = new ImageIcon("image/menubg.jpg");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
             }
 		};
@@ -277,7 +277,7 @@ public class Index extends JFrame {
 		JLabel lb6 = new JLabel("");
 		lb6.setBounds(13, 10, 60, 60);
 		menu6.add(lb6);
-		lb6.setIcon(new ImageIcon("img/menu6.jpg"));
+		lb6.setIcon(new ImageIcon("image/menu6.jpg"));
 		//课堂小测菜单按钮
 		JButton bt6 = new JButton("课堂小测");
 		bt6.setBounds(13, 70, 61, 17);
@@ -300,7 +300,7 @@ public class Index extends JFrame {
 		JPanel menu4 = new JPanel() {
 			public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon ii = new ImageIcon("img/menubg.jpg");
+                ImageIcon ii = new ImageIcon("image/menubg.jpg");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
             }
 		};
@@ -312,7 +312,7 @@ public class Index extends JFrame {
 		JLabel lb4 = new JLabel("");
 		lb4.setBounds(13, 10, 60, 60);
 		menu4.add(lb4);
-		lb4.setIcon(new ImageIcon("img/menu4.jpg"));
+		lb4.setIcon(new ImageIcon("image/menu4.jpg"));
 		//广播菜单按钮
 		JButton button = new JButton("广播");
 		button.setBounds(28, 70, 31, 17);
@@ -334,7 +334,7 @@ public class Index extends JFrame {
 		JPanel menu2 = new JPanel() {
 			public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon ii = new ImageIcon("img/menubg.jpg");
+                ImageIcon ii = new ImageIcon("image/menubg.jpg");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
             }
 		};
@@ -346,7 +346,7 @@ public class Index extends JFrame {
 		JLabel lb2 = new JLabel("");
 		lb2.setBounds(13, 10, 60, 60);
 		menu2.add(lb2);
-		lb2.setIcon(new ImageIcon("img/menu2.jpg"));
+		lb2.setIcon(new ImageIcon("image/menu2.jpg"));
 		//远程监控按钮
 		JButton bt2 = new JButton("远程监控");
 		bt2.setBounds(13, 70, 61, 17);
@@ -372,7 +372,7 @@ public class Index extends JFrame {
 				JPanel menu8 =new JPanel() {
 		            public void paintComponent(Graphics g) {
 		            	super.paintComponent(g);
-				        ImageIcon ii = new ImageIcon("img/menu8.jpg");
+				        ImageIcon ii = new ImageIcon("image/menu8.jpg");
 		                g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
 		              }
 			  };
@@ -394,7 +394,7 @@ public class Index extends JFrame {
 				JPanel menu9 =new JPanel() {
 		            public void paintComponent(Graphics g) {
 		            	super.paintComponent(g);
-				        ImageIcon ii = new ImageIcon("img/menu9.jpg");
+				        ImageIcon ii = new ImageIcon("image/menu9.jpg");
 		                g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
 		              }
 			  };
@@ -411,7 +411,7 @@ public class Index extends JFrame {
 				JPanel menu10 = new JPanel() {
 		            public void paintComponent(Graphics g) {
 		            	super.paintComponent(g);
-				        ImageIcon ii = new ImageIcon("img/menu10.jpg");
+				        ImageIcon ii = new ImageIcon("image/menu10.jpg");
 		                g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
 		              }
 			  };
@@ -458,7 +458,7 @@ public class Index extends JFrame {
 		JPanel closepl = new JPanel() {
             public void paintComponent(Graphics g) {
             	super.paintComponent(g);
-		        ImageIcon ii = new ImageIcon("img/btbackground.jpg");
+		        ImageIcon ii = new ImageIcon("image/btbackground.jpg");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
               }
 	  };
@@ -492,7 +492,7 @@ public class Index extends JFrame {
 		JPanel closepl = new JPanel() {
             public void paintComponent(Graphics g) {
             	super.paintComponent(g);
-		        ImageIcon ii = new ImageIcon("img/btbackground.jpg");
+		        ImageIcon ii = new ImageIcon("image/btbackground.jpg");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
               }
 	  };

@@ -1,4 +1,4 @@
-package com.ryy.ui.view;
+package team.javaSpirit.teachingAssistantPlatform.ui.view;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -15,9 +15,15 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.ryy.common.Constant;
-import com.ryy.ui.controller.LoginActionListener;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.LoginActionListener;
 
+/**
+ * 
+* <p>Title: LoginIng</p>
+* <p>Description:登录中窗体LoginIng </p>
+* @author renyuyuan
+* @date 2018年12月13日
+ */
 public class LoginIng extends JFrame {
 
 	private JPanel bgContentPane;
@@ -28,7 +34,11 @@ public class LoginIng extends JFrame {
 	public LoginIng getLoginIng() {
 		return this;
 	}
-	
+	/**
+	 * 
+	 * <p>Title: setBackground</p>
+	 * <p>Description: 背景设置bgContentPane</p>
+	 */
 	public void setBackground() {
 		/**
 		 * 窗体设置
@@ -36,7 +46,7 @@ public class LoginIng extends JFrame {
 		bgContentPane = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon ii = new ImageIcon("img/bg1.jpg");
+                ImageIcon ii = new ImageIcon("image/bg1.jpg");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
             }
         };
@@ -46,14 +56,24 @@ public class LoginIng extends JFrame {
         //设置布局方式为绝对定位  
         this.getContentPane().setLayout(null);
 	}
-
+	/**
+	 * 
+	 * <p>Title: setCancel</p>
+	 * <p>Description:取消按钮设置 </p>
+	 */
 	public void setCancel() {
 		JButton cancel = new JButton("取消");
 		cancel.setBounds(99, 280, 130, 37);
 		bgContentPane.add(cancel);
 		LoginActionListener la=new LoginActionListener();
+		//为cancel按钮添加监听事件
 		cancel.addActionListener(la);
 	}
+	/**
+	 * 
+	 * <p>Title: init</p>
+	 * <p>Description:登录中界面的初始化方法 </p>
+	 */
 	public void init() {
 		this.setBackground();
 		this.setCancel();
@@ -61,6 +81,7 @@ public class LoginIng extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * 窗体的无参构造方法
 	 */
 	public LoginIng() {
 		//设置窗体大小

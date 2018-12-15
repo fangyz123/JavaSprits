@@ -1,25 +1,22 @@
-package com.ryy.ui.view;
+package team.javaSpirit.teachingAssistantPlatform.ui.view;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.ryy.ui.controller.ModifyActionListener;
-import com.ryy.ui.student.service.StudentsServiceImpl;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.ModifyActionListener;
+
 /**
  * 
 * <p>Title: Modify</p>
@@ -32,16 +29,22 @@ public class Modify extends JFrame {
 	private JPanel bgContentPane;
 	/**用户名*/
 	private JTextField username;
-	/**密码框*/
+	/**旧密码框*/
+	private JPasswordField oldPassword;
+	/**新密码框*/
 	private JPasswordField password;
 	/**确认密码框*/
 	private JPasswordField conpassword;
+	
 	
 	public JPanel getBgContentPane() {
 		return bgContentPane;
 	}
 	public JTextField getUsername() {
 		return username;
+	}
+	public JPasswordField getOldPassword() {
+		return oldPassword;
 	}
 	public JPasswordField getPassword() {
 		return password;
@@ -114,17 +117,32 @@ public class Modify extends JFrame {
 	}
 	/**
 	 * 
-	 * <p>Title: setPassword</p>
-	 * <p>Description: 设置密码</p>
+	 * <p>Title: setOldPassword</p>
+	 * <p>Description:设置旧密码框 </p>
 	 */
-	public void setPassword() {
-		JLabel lblNewLabel_1 = new JLabel("密    码");
+	public void setOldPassword() {
+		JLabel lblNewLabel_1 = new JLabel("旧 密 码");
 		lblNewLabel_1.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel_1.setFont(new Font("宋体", Font.BOLD, 14));
 		lblNewLabel_1.setBounds(48, 205, 65, 20);
 		bgContentPane.add(lblNewLabel_1);
+		oldPassword = new JPasswordField();
+		oldPassword.setBounds(137, 205, 121, 21);
+		bgContentPane.add(oldPassword);
+	}
+	/**
+	 * 
+	 * <p>Title: setPassword</p>
+	 * <p>Description: 设置密码</p>
+	 */
+	public void setPassword() {
+		JLabel label_1 = new JLabel("新 密 码");
+		label_1.setForeground(Color.LIGHT_GRAY);
+		label_1.setFont(new Font("宋体", Font.BOLD, 14));
+		label_1.setBounds(48, 247, 65, 20);
+		bgContentPane.add(label_1);
 		password = new JPasswordField();
-		password.setBounds(137, 205, 121, 21);
+		password.setBounds(137, 247, 121, 21);
 		bgContentPane.add(password);
 	}
 	/***
@@ -136,11 +154,10 @@ public class Modify extends JFrame {
 		JLabel label = new JLabel("确认密码");
 		label.setForeground(Color.LIGHT_GRAY);
 		label.setFont(new Font("宋体", Font.BOLD, 14));
-		label.setBounds(48, 247, 65, 20);
+		label.setBounds(48, 290, 65, 20);
 		bgContentPane.add(label);
-
 		conpassword = new JPasswordField();
-		conpassword.setBounds(137, 247, 121, 21);
+		conpassword.setBounds(137, 290, 121, 21);
 		bgContentPane.add(conpassword);
 	}
 	/**
@@ -150,10 +167,9 @@ public class Modify extends JFrame {
 	 */
 	public void setConfirm() {
 		JButton confirm = new JButton("确  认");
-		ModifyActionListener mf=new ModifyActionListener(getModify());
-		confirm.addActionListener(mf);
 		confirm.setForeground(SystemColor.textInactiveText);
-		confirm.setBounds(102, 296, 93, 23);
+		confirm.setBounds(102, 320, 93, 23);
+		confirm.addActionListener(new ModifyActionListener(getModify()));
 		bgContentPane.add(confirm);
 	}
 	/***
@@ -164,6 +180,7 @@ public class Modify extends JFrame {
 	public void init() {
 		this.setBackground();
 		this.setLogo();
+		this.setOldPassword();
 		this.setUsername();
 		this.setPassword();
 		this.setConPassword();
