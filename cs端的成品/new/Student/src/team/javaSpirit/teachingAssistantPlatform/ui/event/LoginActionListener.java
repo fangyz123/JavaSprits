@@ -67,9 +67,11 @@ public class LoginActionListener implements ActionListener {
 	public void setRemberPassword(JRadioButton s) {
 		String path=this.login.getPath();
 		if(true==s.isSelected()) {
-			DlPropertiesUtil.setRemberword(path, true);//一旦“记住密码”被选中就把dl.properties文件中“remberpassword"标志改为true
+			//一旦“记住密码”被选中就把dl.properties文件中“remberpassword"标志改为true
+			DlPropertiesUtil.setRemberword(path, true);
 		}else {
-			DlPropertiesUtil.setDlProperties(false, "", "",path);//“记住密码”没被选中时"remberpassword"标志设为false，"username"和"password"设为“”
+			//“记住密码”没被选中时"remberpassword"标志设为false，"username"和"password"设为“”
+			DlPropertiesUtil.setDlProperties(false, "", "",path);
 		}
 	}
 	/**

@@ -11,6 +11,8 @@ package team.javaSpirit.teachingAssistantPlatform.mina;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
+import javax.swing.JOptionPane;
+
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
@@ -99,12 +101,17 @@ public class Configure {
 	 * @param port 开启服务的端口号
 	 * @throws IOException
 	 */
-	public void connect(String ip, int port) throws IOException {
+	public void connect(String ip, int port){
 		// 设置默认访问地址localhost
 		connector.setDefaultRemoteAddress(new InetSocketAddress(ip, port));
 		connectFuture = connector.connect();
 		connectFuture.awaitUninterruptibly();
-		session = connectFuture.getSession();
+		try {
+			session = connectFuture.getSession();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "没开网络或没网络");
+		}
+		
 	}
 
 	/**

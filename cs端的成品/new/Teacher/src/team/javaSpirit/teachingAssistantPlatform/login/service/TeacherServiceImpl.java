@@ -2,6 +2,7 @@ package team.javaSpirit.teachingAssistantPlatform.login.service;
 
 import java.util.Date;
 
+import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.entity.LoadTeacher;
 import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
 import team.javaSpirit.teachingAssistantPlatform.login.dao.LoadTeacherDaoImpl;
@@ -49,6 +50,7 @@ public class TeacherServiceImpl {
 			} else if (s.getPassword().equals(password)) {
 				String ip = IpUtil.getRealIP();
 				Teacher t = this.loadTeacherDaoImpl.updateTeacherIp(s, ip);
+				Constant.myTeacher=t;
 				// 向登录表中插入信息
 				LoadTeacher lt = new LoadTeacher();
 				lt.setLogin_time(new Date());

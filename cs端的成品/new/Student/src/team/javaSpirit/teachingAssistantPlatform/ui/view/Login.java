@@ -28,6 +28,8 @@ import team.javaSpirit.teachingAssistantPlatform.util.DlPropertiesUtil;
 * @date 2018年12月4日
  */
 public class Login extends JFrame {
+	/** serialVersionUID*/
+	private static final long serialVersionUID = 1L;
 	/**背景容器*/
 	private JPanel bgContentPane;
 	/**用户名*/

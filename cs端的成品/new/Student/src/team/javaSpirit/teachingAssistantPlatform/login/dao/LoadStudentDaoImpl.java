@@ -19,6 +19,12 @@ import team.javaSpirit.teachingAssistantPlatform.util.HibernateUtil;
  * @date 2018年12月10日
  */
 public class LoadStudentDaoImpl {
+
+	/**
+	 * <p>Title: saveLoadStudent</p>
+	 * <p>Description: 王登录表里插入一条数据。</p>
+	 * @param ls 登录表的对象
+	 */
 	public void saveLoadStudent(LoadStudent ls) {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();

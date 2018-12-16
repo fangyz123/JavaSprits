@@ -7,7 +7,7 @@ import team.javaSpirit.teachingAssistantPlatform.ui.view.Login;
 /**
  * 
 * <p>Title: Test</p>
-* <p>Description: 进入登陆界面</p>
+* <p>Description: 老师端进入登陆界面</p>
 * @author Luan Xiaoyue
 * @date 2018年12月5日
  */

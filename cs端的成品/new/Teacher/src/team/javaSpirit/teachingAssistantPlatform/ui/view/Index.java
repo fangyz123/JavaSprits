@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -22,10 +23,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
 
 import team.javaSpirit.teachingAssistantPlatform.ui.event.MyItemListener;
 
@@ -116,21 +117,17 @@ public class Index extends JFrame {
 	 * </p>
 	 */
 	public void setBackground() {
-		ImageIcon imageIcon = new ImageIcon("image/background.png");
-		bgContentPane = new JPanel() {
-
-			/** serialVersionUID*/
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				g.drawImage(imageIcon.getImage(), 0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight(), imageIcon.getImageObserver());
-			}
-		};
-		bgContentPane.setBackground(Color.WHITE);
-		bgContentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.setContentPane(bgContentPane);
+		
+			bgContentPane = new JPanel() {
+	            public void paintComponent(Graphics g) {
+	            	super.paintComponent(g);
+			        ImageIcon ii = new ImageIcon("image/background.png");
+	                g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
+	              }
+		  };
+		  bgContentPane.setBounds(0, 0, 100, 1000);
+		  bgContentPane.setBorder(null);
+		  this.setContentPane(bgContentPane);
 	}
 
 	/**
@@ -147,6 +144,7 @@ public class Index extends JFrame {
 		menu1.setLayout(null);
 		menu1.setForeground(Color.WHITE);
 		menu1.setBorder(null);
+		menu1.setOpaque(false);
 		JLabel label = new JLabel();
 		label.setIcon(new ImageIcon("image\\yckz.png"));
 		label.setBounds(13, 10, 60, 60);
@@ -196,7 +194,7 @@ public class Index extends JFrame {
 		menu2.setLayout(null);
 		menu2.setForeground(Color.WHITE);
 		menu2.setBorder(null);
-
+		menu2.setOpaque(false);
 		JLabel label_4 = new JLabel("");
 		label_4.setIcon(new ImageIcon("image\\lp.png"));
 		label_4.setBounds(14, 13, 61, 58);
@@ -237,7 +235,7 @@ public class Index extends JFrame {
 		menu3.setLayout(null);
 		menu3.setForeground(Color.WHITE);
 		menu3.setBorder(null);
-
+		menu3.setOpaque(false);
 		JLabel label_5 = new JLabel("");
 		label_5.setIcon(new ImageIcon("image\\gb.png"));
 		label_5.setBounds(14, 0, 60, 67);
@@ -275,7 +273,7 @@ public class Index extends JFrame {
 		menu4.setLayout(null);
 		menu4.setForeground(Color.WHITE);
 		menu4.setBorder(null);
-
+		menu4.setOpaque(false);
 		JLabel label_6 = new JLabel("");
 		label_6.setIcon(new ImageIcon("image\\xsys.png"));
 		label_6.setBounds(13, 10, 60, 60);
@@ -309,7 +307,7 @@ public class Index extends JFrame {
 		menu5.setLayout(null);
 		menu5.setForeground(Color.WHITE);
 		menu5.setBorder(null);
-
+		menu5.setOpaque(false);
 		JLabel label_7 = new JLabel("");
 		label_7.setIcon(new ImageIcon("image\\sjdm.png"));
 		label_7.setBounds(13, 10, 60, 60);
@@ -342,7 +340,7 @@ public class Index extends JFrame {
 		menu6.setLayout(null);
 		menu6.setForeground(Color.WHITE);
 		menu6.setBorder(null);
-
+		menu6.setOpaque(false);
 		JLabel label_8 = new JLabel("");
 		label_8.setIcon(new ImageIcon("image\\fzjx.png"));
 		label_8.setBounds(13, 10, 60, 60);
@@ -371,7 +369,7 @@ public class Index extends JFrame {
 		menu7.setLayout(null);
 		menu7.setForeground(Color.WHITE);
 		menu7.setBorder(null);
-
+		menu7.setOpaque(false);
 		JLabel label_9 = new JLabel("");
 		label_9.setIcon(new ImageIcon("image\\ktxc.png"));
 		label_9.setBounds(13, 10, 60, 60);
@@ -404,7 +402,7 @@ public class Index extends JFrame {
 		menu8.setLayout(null);
 		menu8.setForeground(Color.WHITE);
 		menu8.setBorder(null);
-
+		menu8.setOpaque(false);
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon("image\\fbzy.png"));
 		label_1.setBounds(13, 10, 60, 60);
@@ -437,7 +435,7 @@ public class Index extends JFrame {
 		menu9.setLayout(null);
 		menu9.setForeground(Color.WHITE);
 		menu9.setBorder(null);
-
+		menu9.setOpaque(false);
 		JLabel label_2 = new JLabel("");
 		label_2.setIcon(new ImageIcon("image\\ktfk.png"));
 		label_2.setBounds(13, 10, 60, 60);
@@ -470,7 +468,7 @@ public class Index extends JFrame {
 		menu10.setLayout(null);
 		menu10.setForeground(Color.WHITE);
 		menu10.setBorder(null);
-
+		menu10.setOpaque(false);
 		JLabel label_3 = new JLabel("");
 		label_3.setIcon(new ImageIcon("image\\zygx.png"));
 		label_3.setBounds(13, 10, 60, 60);
@@ -544,7 +542,7 @@ public class Index extends JFrame {
 		scrollPane_1.setViewportView(table_2);
 		bgContentPane.setLayout(gl_bgContentPane);
 		// 设置窗体大小
-		this.setBounds(0, 0, 1282, 771);
+		this.setBounds(0, 0, 1282, 700);
 		// 窗体大小不能改变
 		this.setResizable(false);
 		// 居中显示
@@ -627,9 +625,11 @@ public class Index extends JFrame {
 		lmenu1 = new JPanel();
 		lmenu1.setBackground(new Color(176, 196, 222));
 		lmenu1.setLayout(null);
+		lmenu1.setOpaque(false);
 		// 按钮
 		JButton bt8 = new JButton("\u7B7E\u5230\u4FE1\u606F");
-		bt8.setBackground(null);
+		
+		//bt8.setBackground(null);
 		bt8.setBounds(0, 57, 90, 23);
 		lmenu1.add(bt8);
 		bt8.addActionListener(new ActionListener() {
@@ -658,6 +658,7 @@ public class Index extends JFrame {
 		// 课堂加分
 		lmenu2 = new JPanel();
 		lmenu2.setLayout(null);
+		lmenu2.setOpaque(false);
 		// 按钮
 		JButton button_12 = new JButton("\u8BFE\u5802\u52A0\u5206");
 		button_12.setBorder(null);
@@ -682,6 +683,7 @@ public class Index extends JFrame {
 		// 小测成绩
 		lmenu3 = new JPanel();
 		lmenu3.setLayout(null);
+		lmenu3.setOpaque(false);
 		// 按钮
 		JButton button_13 = new JButton("\u5C0F\u6D4B\u6210\u7EE9");
 		button_13.setBorder(null);
@@ -706,6 +708,7 @@ public class Index extends JFrame {
 		// 学生作业
 		lmenu4 = new JPanel();
 		lmenu4.setLayout(null);
+		lmenu4.setOpaque(false);
 		// 按钮
 		JButton button_5 = new JButton("\u5B66\u751F\u4F5C\u4E1A");
 		button_5.addActionListener(new ActionListener() {
@@ -734,6 +737,7 @@ public class Index extends JFrame {
 		// 备忘录
 		lmenu5 = new JPanel();
 		lmenu5.setLayout(null);
+		lmenu5.setOpaque(false);
 		// 按钮
 		JButton button_6 = new JButton("\u5907\u5FD8\u5F55");
 		button_6.addActionListener(new ActionListener() {
@@ -956,66 +960,36 @@ public class Index extends JFrame {
 	 * </p>
 	 */
 	public void selectstuContent() {
-		// 学生按钮（小电脑图片和学生姓名）
-		JButton button = new JButton("\u59D3\u540D");
-		button.setHorizontalAlignment(SwingConstants.LEFT);
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jumpStuPre();
-
-			}
-		});
-		button.setIcon(new ImageIcon("image\\stu.png"));
-		button.setForeground(new Color(100, 149, 237));
-		button.setFont(new Font("宋体", Font.BOLD, 18));
-		button.setBorder(UIManager.getBorder("Button.border"));
-		button.setBackground(Color.WHITE);
-		button.setBounds(14, 13, 151, 75);
-		centerpl.add(button);
-
-		JButton button_1 = new JButton("\u59D3\u540D");
-		button_1.setIcon(new ImageIcon("image\\stu.png"));
-		button_1.setHorizontalAlignment(SwingConstants.LEADING);
-		button_1.setForeground(new Color(100, 149, 237));
-		button_1.setFont(new Font("宋体", Font.BOLD, 18));
-		button_1.setBorder(UIManager.getBorder("Button.border"));
-		button_1.setBackground(Color.WHITE);
-		button_1.setBounds(179, 13, 151, 75);
-		centerpl.add(button_1);
-
-		JButton button_2 = new JButton("\u59D3\u540D");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button_2.setIcon(new ImageIcon("image\\stu.png"));
-		button_2.setHorizontalAlignment(SwingConstants.LEFT);
-		button_2.setForeground(new Color(100, 149, 237));
-		button_2.setFont(new Font("宋体", Font.BOLD, 18));
-		button_2.setBorder(UIManager.getBorder("Button.border"));
-		button_2.setBackground(Color.WHITE);
-		button_2.setBounds(344, 13, 159, 75);
-		centerpl.add(button_2);
-
-		JButton button_3 = new JButton("\u59D3\u540D");
-		button_3.setIcon(new ImageIcon("image\\stu.png"));
-		button_3.setHorizontalAlignment(SwingConstants.LEFT);
-		button_3.setForeground(new Color(100, 149, 237));
-		button_3.setFont(new Font("宋体", Font.BOLD, 18));
-		button_3.setBorder(UIManager.getBorder("Button.border"));
-		button_3.setBackground(Color.WHITE);
-		button_3.setBounds(517, 13, 159, 75);
-		centerpl.add(button_3);
-
-		JButton button_4 = new JButton("\u59D3\u540D");
-		button_4.setIcon(new ImageIcon("image\\stu.png"));
-		button_4.setHorizontalAlignment(SwingConstants.LEFT);
-		button_4.setForeground(new Color(100, 149, 237));
-		button_4.setFont(new Font("宋体", Font.BOLD, 18));
-		button_4.setBorder(UIManager.getBorder("Button.border"));
-		button_4.setBackground(Color.WHITE);
-		button_4.setBounds(690, 13, 159, 75);
-		centerpl.add(button_4);
+		
+		centerpl.setLayout(null);
+		JScrollPane scrollPane_1 = new JScrollPane((Component) null);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_1.setBounds(0, 0, 906, 572);
+		centerpl.add(scrollPane_1);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(230, 230, 250));
+		scrollPane_1.setViewportView(panel);
+		panel.setLayout(new GridLayout(20, 5, 2, 2));
+		
+		
+		for( int b = 0 ; b <5; b++) {
+			JButton j=new JButton("名字");
+			j.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					//事件
+					jumpStuPre();
+				}
+			});
+			j.setIcon(new ImageIcon("image\\stu.png"));
+			j.setHorizontalAlignment(SwingConstants.LEFT);
+			j.setForeground(new Color(100, 149, 237));
+			j.setFont(new Font("宋体", Font.BOLD, 18));				
+			j.setBorder(UIManager.getBorder("Button.border"));
+			j.setBackground(Color.WHITE);
+			panel.add(j);
+		}
+		
 
 		bgContentPane.setLayout(gl_bgContentPane);
 		// 设置窗体大小

@@ -2,6 +2,8 @@ package team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service;
 
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
 import team.javaSpirit.teachingAssistantPlatform.mina.Configure;
@@ -25,13 +27,8 @@ public class Client {
 		Configure configure = new Configure();
 		// 对连接的对象的基本信息进行初始化
 		configure.init();
-		try {
-			// 连接
-			// 10.7.84.42 10.7.89.163 10.7.81.54
-			configure.connect(ip, port);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// 连接
+		configure.connect(ip, port);
 		// 获得连接对象
 		NioSocketConnector connector = configure.getConnector();
 		// 监听连接对象的会话session的状态，以进行重连
