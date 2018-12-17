@@ -188,22 +188,20 @@ public class Index extends JFrame {
 //				jumpSign();
 				StudentCourseService scs = new StudentCourseService();
 				try {
-					if (scs.findCurrentCourse(Constant.myStudent.getSid())) {
-						FirstInvoke first = new FirstInvoke();
+					//找到当前课程
+					if(scs.findCurrentCourse(Constant.myStudent.getSid())) {
 						try {
-							first.firstInvoke();
+							//人脸识别
+							scs.face();
+							//修改数据库
 							scs.changeState(Constant.myStudent.getSid());
-						} catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							scs.insertRecort(Constant.myStudent.getSid());
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-					} else {
+					}
+					else {
 						JOptionPane.showMessageDialog(null, "当前没有可以签到的课程");
 					}
 				} catch (ParseException e1) {
@@ -212,6 +210,7 @@ public class Index extends JFrame {
 				}
 			}
 		});
+
 		bt1.setBorder(null);
 		bt1.setBackground(Color.WHITE);
 		bgContentPane.add(menu1);
@@ -738,7 +737,7 @@ public class Index extends JFrame {
 		// 居中显示
 		this.setLocationRelativeTo(null);
 		// 设置图标
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("F:\\课程项目\\img\\logo2.jpg"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("image\\logo1.png"));
 		// 设置关闭状态
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// 窗体可见

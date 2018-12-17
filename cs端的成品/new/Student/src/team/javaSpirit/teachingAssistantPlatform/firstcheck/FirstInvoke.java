@@ -11,13 +11,8 @@ import org.bytedeco.javacv.OpenCVFrameGrabber;
 import org.bytedeco.javacv.OpenCVFrameConverter.ToIplImage;
 
 public class FirstInvoke {
-	public static void firstInvoke() throws Exception, InterruptedException, IOException {
+	public static String firstInvoke() throws Exception, InterruptedException, IOException {
 		OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
-		if(grabber != null) {
-			System.out.println(0);
-		}else {
-			System.out.println(1);
-		}
 		grabber.setImageHeight(720);
 		grabber.setImageWidth(720);
 		grabber.start();
@@ -27,6 +22,7 @@ public class FirstInvoke {
 		canvas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		System.out.println("获取摄像头成功");
 		System.out.println("检测人脸");
+		String imagesrc = null;
 		while (true) {
 			Frame frame = grabber.grab();
 			ToIplImage ti = new ToIplImage();
@@ -35,7 +31,7 @@ public class FirstInvoke {
 			canvas.showImage(frame);
 			if((FirstDetection.faceDetection(src)==0)&&c) {
 				c=false;
-				FirstRecord.recordCamera(grabber,canvas);
+				imagesrc = FirstRecord.recordCamera(grabber,canvas);
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -50,5 +46,6 @@ public class FirstInvoke {
 			canvas.setAlwaysOnTop(true);
 			Thread.sleep(50);// 50毫秒刷新一次图像
 		}
+		return imagesrc;
 	}
 }

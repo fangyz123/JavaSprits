@@ -16,8 +16,7 @@ import org.bytedeco.javacv.OpenCVFrameConverter;
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 
 public class FirstRecord {
-	public static boolean recordCamera(FrameGrabber grabber, CanvasFrame canvas)
-			throws Exception, InterruptedException {
+	public static String recordCamera(FrameGrabber grabber, CanvasFrame canvas) throws Exception, InterruptedException {
 		Loader.load(opencv_objdetect.class);
 		boolean bool = false;
 		OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();// 转换器
@@ -31,9 +30,10 @@ public class FirstRecord {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String d = dateFormat.format(date);
-		opencv_imgcodecs.imwrite("faceimg\\" + d + sid + ".jpg", mat);
+		String src = "faceimg\\" + dateFormat + "-" + sid + ".jpg";
+		opencv_imgcodecs.imwrite(src, mat);
 		bool = true;
 		System.out.println("照片保存成功");
-		return bool;
+		return src;
 	}
 }

@@ -34,7 +34,7 @@ public class Record {
 	/* 签到状态 */
 	private int state;
 	/* 签到时间 */
-	private Date record_date;
+	private Date date;
 	/* 上课班级 */
 	private ClassCourse classin;
 	/* 人脸签到的图片路径 */
@@ -68,12 +68,12 @@ public class Record {
 		this.state = state;
 	}
 
-	public Date getRecord_date() {
-		return record_date;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setRecord_date(Date record_date) {
-		this.record_date = record_date;
+	public void setDate(Date record_date) {
+		this.date = record_date;
 	}
 
 	@ManyToOne

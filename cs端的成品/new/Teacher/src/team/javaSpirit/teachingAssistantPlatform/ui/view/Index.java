@@ -2,7 +2,9 @@ package team.javaSpirit.teachingAssistantPlatform.ui.view;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -10,6 +12,7 @@ import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -28,6 +31,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
+import team.javaSpirit.teachingAssistantPlatform.entity.Students;
+import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.StudentSignServiceImpl;
+import team.javaSpirit.teachingAssistantPlatform.signIn.service.StudentSignInServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.MyItemListener;
 
 /**
@@ -117,17 +123,17 @@ public class Index extends JFrame {
 	 * </p>
 	 */
 	public void setBackground() {
-		
-			bgContentPane = new JPanel() {
-	            public void paintComponent(Graphics g) {
-	            	super.paintComponent(g);
-			        ImageIcon ii = new ImageIcon("image/background.png");
-	                g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
-	              }
-		  };
-		  bgContentPane.setBounds(0, 0, 100, 1000);
-		  bgContentPane.setBorder(null);
-		  this.setContentPane(bgContentPane);
+
+		bgContentPane = new JPanel() {
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				ImageIcon ii = new ImageIcon("image/background.png");
+				g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
+			}
+		};
+		bgContentPane.setBounds(0, 0, 100, 1000);
+		bgContentPane.setBorder(null);
+		this.setContentPane(bgContentPane);
 	}
 
 	/**
@@ -503,12 +509,26 @@ public class Index extends JFrame {
 	 * </p>
 	 */
 	public void centerContent() {
-		final Object[] columnNames = { "姓名", "学号", "签到", "迟到", "旷课", "请假" };
-		Object[][] rowData = { { "ddd", "男", "江苏南京", "1378313210", "03/24/1985", "" },
-				{ "eee", "女", "江苏南京", "13645181705", "xx/xx/1985", "家教" },
-				{ "fff", "男", "江苏南京", "13585331486", "12/08/1985", "汽车推销员" },
-				{ "ggg", "女", "江苏南京", "81513779", "xx/xx/1986", "宾馆服务员" },
-				{ "hhh", "男", "江苏南京", "13651545936", "xx/xx/1985", "学生", "流放中" } };
+		// 签到情况的服务
+		StudentSignInServiceImpl ss = new StudentSignInServiceImpl();
+		// 正常签到
+		List<Students> normalStu = ss.SignInStudent();
+		// 迟到签到
+		List<Students> LateStu = ss.LateStudent();
+		final Object[] columnNames = { "签到", "迟到", "旷课", "请假" };
+		int row = normalStu.size() + LateStu.size();
+		Object[][] rowData = new Object[row][6];
+		// 正常签到的
+		int i;
+		for (i = 0; i < normalStu.size(); i++) {
+			Students s = normalStu.get(i);
+			rowData[i][0] = s.getSid() + "-" + s.getName();
+		}
+		// 迟到的
+		for (int j = 0; j < LateStu.size(); j++) {
+			Students s = LateStu.get(j);
+			rowData[j][1] = s.getSid() + "-" + s.getName();
+		}
 		table_1 = new JTable(rowData, columnNames);
 		table_1.setBounds(1, 32, 907, 150);
 		table_1.setFont(new Font("宋体", Font.PLAIN, 16));
@@ -628,8 +648,8 @@ public class Index extends JFrame {
 		lmenu1.setOpaque(false);
 		// 按钮
 		JButton bt8 = new JButton("\u7B7E\u5230\u4FE1\u606F");
-		
-		//bt8.setBackground(null);
+
+		// bt8.setBackground(null);
 		bt8.setBounds(0, 57, 90, 23);
 		lmenu1.add(bt8);
 		bt8.addActionListener(new ActionListener() {
@@ -960,36 +980,39 @@ public class Index extends JFrame {
 	 * </p>
 	 */
 	public void selectstuContent() {
-		
+
 		centerpl.setLayout(null);
 		JScrollPane scrollPane_1 = new JScrollPane((Component) null);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane_1.setBounds(0, 0, 906, 572);
 		centerpl.add(scrollPane_1);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(230, 230, 250));
 		scrollPane_1.setViewportView(panel);
-		panel.setLayout(new GridLayout(20, 5, 2, 2));
-		
-		
-		for( int b = 0 ; b <5; b++) {
-			JButton j=new JButton("名字");
+		panel.setPreferredSize(new Dimension(906, 2500));
+		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+
+		// 所有签到的学生
+		StudentSignServiceImpl ss = new StudentSignServiceImpl();
+		List<Students> listStu = ss.allSignStudent();
+		for (Students s : listStu) {
+			JButton j = new JButton(s.getName());
 			j.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					//事件
-					jumpStuPre();
+					// 事件
+					
 				}
 			});
+			j.setPreferredSize(new Dimension(170,100));
 			j.setIcon(new ImageIcon("image\\stu.png"));
 			j.setHorizontalAlignment(SwingConstants.LEFT);
 			j.setForeground(new Color(100, 149, 237));
-			j.setFont(new Font("宋体", Font.BOLD, 18));				
+			j.setFont(new Font("宋体", Font.BOLD, 18));
 			j.setBorder(UIManager.getBorder("Button.border"));
 			j.setBackground(Color.WHITE);
 			panel.add(j);
 		}
-		
 
 		bgContentPane.setLayout(gl_bgContentPane);
 		// 设置窗体大小

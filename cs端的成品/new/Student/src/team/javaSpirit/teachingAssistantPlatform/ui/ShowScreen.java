@@ -42,7 +42,7 @@ public class ShowScreen {
 		// 控制台置顶
 		jf.setAlwaysOnTop(false);
 		// 控制台退出模式
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
 	/**

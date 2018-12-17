@@ -1,5 +1,6 @@
 package team.javaSpirit.teachingAssistantPlatform.signIn.service;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -7,8 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
+import team.javaSpirit.teachingAssistantPlatform.entity.ClassCourse;
 import team.javaSpirit.teachingAssistantPlatform.entity.NodeNumber;
+import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.entity.Times;
+import team.javaSpirit.teachingAssistantPlatform.firstcheck.FirstInvoke;
 import team.javaSpirit.teachingAssistantPlatform.signIn.dao.StudentCourseDao;
 
 public class StudentCourseService {
@@ -150,7 +154,20 @@ public class StudentCourseService {
 		}
 		return false;
 	}
-	
+
+	public String face() throws InterruptedException, IOException, Exception {
+		Constant.imgsrc = null;
+		Constant.imgsrc = FirstInvoke.firstInvoke();
+		return Constant.imgsrc;
+	}
+
+	public void insertRecort(String studentnumber) throws InterruptedException, IOException, Exception {
+		StudentCourseDao s = new StudentCourseDao();
+		Students sid = s.getStudentById(studentnumber);
+		ClassCourse classcourse = s.getClassCourseBycid(Constant.cid);
+		s.insertRecort(sid, classcourse, Constant.imgsrc);
+	}
+
 	public void changeState(String id) {
 		studentCourse.changeStudentStatus(id);
 	}

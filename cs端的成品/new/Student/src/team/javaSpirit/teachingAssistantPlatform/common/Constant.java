@@ -19,4 +19,5 @@ public class Constant {
 	public static Students myStudent;
 	/* 上课班级 */
 	public static int cid;
+	public static String imgsrc;
 }

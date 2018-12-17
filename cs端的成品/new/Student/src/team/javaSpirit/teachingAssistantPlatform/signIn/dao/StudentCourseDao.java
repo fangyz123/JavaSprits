@@ -1,12 +1,13 @@
 package team.javaSpirit.teachingAssistantPlatform.signIn.dao;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import team.javaSpirit.teachingAssistantPlatform.entity.ClassCourse;
 import team.javaSpirit.teachingAssistantPlatform.entity.Record;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.entity.Studentstatus;
@@ -14,7 +15,15 @@ import team.javaSpirit.teachingAssistantPlatform.entity.Times;
 import team.javaSpirit.teachingAssistantPlatform.util.HibernateUtil;
 
 public class StudentCourseDao {
-
+	public Students getStudentById(String sid) {
+		Session session = HibernateUtil.getSession();
+		return session.get(Students.class, sid);
+	}
+	
+	public ClassCourse getClassCourseBycid(int cid) {
+		Session session = HibernateUtil.getSession();
+		return session.get(ClassCourse.class, cid);
+	}
 	/**
 	 * <p>
 	 * Title: allCourse
@@ -95,12 +104,19 @@ public class StudentCourseDao {
 	 * 
 	 * @param r 签到表的对象
 	 */
-	public void insertRecord(Record r) {
+	public void insertRecort(Students sid,ClassCourse cid,String image) {
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
-		session.save(r);
-		session.getTransaction().commit();
+		Record record = new Record();
+		Transaction tx = session.beginTransaction();
+		record.setStudent(sid);
+		record.setState(1);
+		record.setDate(new Date());
+		record.setClassin(cid);
+		record.setImage(image);
+		session.save(record);
+		tx.commit();
 	}
+
 
 	/**
 	 * <p>Title: changeStudentStatus</p>
