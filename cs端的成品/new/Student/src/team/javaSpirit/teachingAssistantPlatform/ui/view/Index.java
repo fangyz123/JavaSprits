@@ -7,7 +7,6 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.text.ParseException;
 
 import javax.swing.ImageIcon;
@@ -21,8 +20,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
-import team.javaSpirit.teachingAssistantPlatform.firstcheck.FirstInvoke;
-import team.javaSpirit.teachingAssistantPlatform.signIn.dao.StudentCourseDao;
+import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
+import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.TeacherClassServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.signIn.service.StudentCourseService;
 
 /**
@@ -188,20 +187,19 @@ public class Index extends JFrame {
 //				jumpSign();
 				StudentCourseService scs = new StudentCourseService();
 				try {
-					//找到当前课程
-					if(scs.findCurrentCourse(Constant.myStudent.getSid())) {
+					// 找到当前课程
+					if (scs.findCurrentCourse(Constant.myStudent.getSid())) {
 						try {
-							//人脸识别
+							// 人脸识别
 							scs.face();
-							//修改数据库
+							// 修改数据库
 							scs.changeState(Constant.myStudent.getSid());
 							scs.insertRecort(Constant.myStudent.getSid());
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-					}
-					else {
+					} else {
 						JOptionPane.showMessageDialog(null, "当前没有可以签到的课程");
 					}
 				} catch (ParseException e1) {
@@ -440,6 +438,7 @@ public class Index extends JFrame {
 		// 远程监控按钮
 		JButton bt2 = new JButton("远程监控");
 		bt2.setBounds(13, 70, 61, 17);
+		// 点击事件
 		bt2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jumpRemote();
@@ -638,23 +637,17 @@ public class Index extends JFrame {
 		remortbt.setBounds(66, 130, 129, 31);
 		remortbt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// JOptionPane.showMessageDialog(null,
-				// "请在规定的时间内开启远程监控","警告",JOptionPane.ERROR_MESSAGE);
-				ConnectRemind cr = new ConnectRemind();
-				cr.init();
+				TeacherClassServiceImpl tcs = new TeacherClassServiceImpl();
+				Teacher t = tcs.findTeacher(Constant.cid);
+				if (t == null) {
+					JOptionPane.showMessageDialog(null, "目前没有相应的老师开服务", "警告", JOptionPane.ERROR_MESSAGE);
+				} else {
+					ConnectRemind cr = new ConnectRemind();
+					cr.init();
+				}
 			}
 		});
 		contentpl.add(remortbt);
-
-//		JButton sharebt = new JButton("共享屏幕");
-//		sharebt.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//			}
-//		});
-//		sharebt.setForeground(SystemColor.textInactiveText);
-//		sharebt.setFont(new Font("宋体", Font.PLAIN, 14));
-//		sharebt.setBounds(66, 186, 129, 31);
-//		contentpl.add(sharebt);
 
 		JPanel chatpl = new JPanel();
 		chatpl.setBackground(SystemColor.inactiveCaption);

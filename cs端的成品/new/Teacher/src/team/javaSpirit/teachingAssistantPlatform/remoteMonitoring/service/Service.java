@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.apache.mina.core.session.IoSession;
 
 import team.javaSpirit.teachingAssistantPlatform.entity.FileContent;
@@ -30,6 +32,8 @@ public class Service {
 	private List<SendMessageThread> SendMessageThreads = new ArrayList<SendMessageThread>();
 	// new一个图片设置和获得图片的对象
 	private FileShare fileShare = null;
+	// 服务开启成功，对数据库的操作对象
+	ServiceOpenServiceImpl serviceOpen = new ServiceOpenServiceImpl();
 
 	/**
 	 * <p>
@@ -48,7 +52,12 @@ public class Service {
 		try {
 			// 开启服务，端口是8080
 			configure.service(8080);
+			// 把老师的状态改为1
+			serviceOpen.updateStatus();
+			// 服务开启成功，给出提示
+			JOptionPane.showMessageDialog(null, "开启服务成功。");
 		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "已经开启过服务了。");
 			e.printStackTrace();
 		}
 	}
@@ -63,8 +72,9 @@ public class Service {
 	 */
 	public void closeServise() {
 		configure.getAccept().dispose();
+		// 如果关闭成功，给出提示
 		if (configure.getAccept().isDisposed()) {
-			System.out.println("cheng");
+			JOptionPane.showMessageDialog(null, "服务关闭成功。", "提示", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

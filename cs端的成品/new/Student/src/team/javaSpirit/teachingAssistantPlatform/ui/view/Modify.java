@@ -71,7 +71,7 @@ public class Modify extends JFrame {
 		bgContentPane = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon ii = new ImageIcon("img/img1.png");
+                ImageIcon ii = new ImageIcon("image/img1.png");
                 g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
             }
         };
@@ -88,7 +88,7 @@ public class Modify extends JFrame {
 	public void setLogo() {
 		//logo图片
 		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon("img/logo1.png"));
+		logo.setIcon(new ImageIcon("image/logo1.png"));
 		logo.setBounds(102, 0, 110, 110);
 		bgContentPane.add(logo);
 		//logo文字

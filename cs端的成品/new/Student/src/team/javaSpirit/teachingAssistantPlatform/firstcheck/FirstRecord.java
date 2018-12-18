@@ -30,7 +30,7 @@ public class FirstRecord {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String d = dateFormat.format(date);
-		String src = "faceimg\\" + dateFormat + "-" + sid + ".jpg";
+		String src = "faceimg\\" + d + "-" + sid + ".jpg";
 		opencv_imgcodecs.imwrite(src, mat);
 		bool = true;
 		System.out.println("照片保存成功");

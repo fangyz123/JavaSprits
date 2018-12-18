@@ -15,8 +15,15 @@ import team.javaSpirit.teachingAssistantPlatform.entity.Times;
 import team.javaSpirit.teachingAssistantPlatform.firstcheck.FirstInvoke;
 import team.javaSpirit.teachingAssistantPlatform.signIn.dao.StudentCourseDao;
 
+/**
+* <p>Title: StudentCourseService</p>
+* <p>Description: 学生进行人脸签到时，通过调用Dao类，完成相关的操作。</p>
+* @author Fang Yuzhen
+* @date 2018年12月17日
+ */
 public class StudentCourseService {
 
+	/*Dao类的对象*/
 	private static StudentCourseDao studentCourse = new StudentCourseDao();
 	/* 开学日期 */
 	private static Date begin;
@@ -155,32 +162,42 @@ public class StudentCourseService {
 		return false;
 	}
 
+	/**
+	 * <p>Title: face</p>
+	 * <p>Description: 进行人脸签到。</p>
+	 * @return 图片的路径
+	 * @throws InterruptedException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	public String face() throws InterruptedException, IOException, Exception {
 		Constant.imgsrc = null;
 		Constant.imgsrc = FirstInvoke.firstInvoke();
 		return Constant.imgsrc;
 	}
 
+	/**
+	 * <p>Title: insertRecort</p>
+	 * <p>Description: 插入一条学生签到记录。</p>
+	 * @param studentnumber 学生的学号
+	 * @throws InterruptedException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	public void insertRecort(String studentnumber) throws InterruptedException, IOException, Exception {
 		StudentCourseDao s = new StudentCourseDao();
-		Students sid = s.getStudentById(studentnumber);
+		Students stu = s.getStudentById(studentnumber);
 		ClassCourse classcourse = s.getClassCourseBycid(Constant.cid);
-		s.insertRecort(sid, classcourse, Constant.imgsrc);
+		s.insertRecort(stu, classcourse, Constant.imgsrc);
 	}
 
+	/**
+	 * <p>Title: changeState</p>
+	 * <p>Description: 签到成功，修改学生的状态</p>
+	 * @param id
+	 */
 	public void changeState(String id) {
 		studentCourse.changeStudentStatus(id);
-	}
-
-	public static void main(String[] args) {
-		StudentCourseService ss = new StudentCourseService();
-		try {
-			ss.findCurrentCourse("2016011357");
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 }
