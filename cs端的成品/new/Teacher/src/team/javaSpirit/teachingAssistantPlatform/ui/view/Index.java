@@ -30,6 +30,8 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
+import team.javaSpirit.teachingAssistantPlatform.common.Constant;
+import team.javaSpirit.teachingAssistantPlatform.course.service.CourseServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.StudentSignServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.studentSignIn.service.StudentSignInServiceImpl;
@@ -836,11 +838,20 @@ public class Index extends JFrame {
 	 * Title: setTime
 	 * </p>
 	 * <p>
-	 * Description:时间标志
+	 * Description:时间标志，上课标志。
 	 * </p>
 	 */
 	public void setTime() {
-		lblNewLabel = new JLabel("第*周*****课");
+		CourseServiceImpl cs = new CourseServiceImpl();
+		long week = CourseServiceImpl.week;
+		if (cs.findCurrentCourse(Constant.myTeacher.getTid())) {
+			String cname = cs.findCname(Constant.cid);
+			lblNewLabel = new JLabel("第" + week + "周:  " + cname + "课");
+			// time = new JLabel("<html>第" + w + "周<br><br>" + cname + "课</html>");
+		} else {
+			lblNewLabel = new JLabel("第" + week + "周:  目前没课");
+			//time = new JLabel("<html>第" + w + "周<br><br>目前没课</html>");
+		}
 	}
 
 	/**
@@ -998,6 +1009,10 @@ public class Index extends JFrame {
 			j.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					// 事件
+					// 学生名字
+					String sname = j.getText();
+					// 获得IP
+
 					System.out.println(j.getText());
 				}
 			});

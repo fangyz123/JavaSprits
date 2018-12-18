@@ -88,7 +88,6 @@ public class Service {
 	 * </p>
 	 */
 	public void openScreenShare() {
-		System.out.println("屏幕共享");
 		// 获得所有的session
 		Collection<IoSession> sessions = configure.getAllSession();
 		// new一个图片设置和获得图片的对象
@@ -121,7 +120,6 @@ public class Service {
 	 * </p>
 	 */
 	public void closeScreenShare() {
-		System.out.println("屏幕关闭");
 		// 获得所有的session
 		Collection<IoSession> sessions = configure.getAllSession();
 		FileContent f = new FileContent();

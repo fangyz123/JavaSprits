@@ -27,9 +27,9 @@ public class StudentCourseDao {
 	}
 	/**
 	 * <p>Title: getClassCourseBycid</p>
-	 * <p>Description: 通过班级号，查班级课程</p>
-	 * @param cid 班级号
-	 * @return 班级课程对象
+	 * <p>Description: 通过课程班级号，查班级课程</p>
+	 * @param cid 课程班级号
+	 * @return 课程班级对象
 	 */
 	public ClassCourse getClassCourseBycid(int cid) {
 		Session session = HibernateUtil.getSession();
@@ -92,7 +92,7 @@ public class StudentCourseDao {
 	 * Title: getBeginTime
 	 * </p>
 	 * <p>
-	 * Description: 通过id,查找相对应的上课的开始时间。
+	 * Description: 通过节数id,查找相对应的上课的开始时间。
 	 * </p>
 	 * 
 	 * @param node_id id
@@ -109,10 +109,10 @@ public class StudentCourseDao {
 	 * Title: getEndTime
 	 * </p>
 	 * <p>
-	 * Description: 通过id,查找相对应的上课的结束时间。
+	 * Description: 通过节数id,查找相对应的上课的结束时间。
 	 * </p>
 	 * 
-	 * @param node_id id
+	 * @param node_id 节数id
 	 * @return 上课的结束时间
 	 */
 	public String getEndTime(int node_id) {
