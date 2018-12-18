@@ -1,5 +1,7 @@
 package team.javaSpirit.teachingAssistantPlatform.ui.view;
 
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.SystemColor;
@@ -8,14 +10,18 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import team.javaSpirit.teachingAssistantPlatform.common.Constant;
+import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.Client;
+import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.TeacherClassServiceImpl;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.ConnectRemindActionListener;
 
 /**
  * 
@@ -86,29 +92,27 @@ public class ConnectRemind extends JFrame {
 	 * </p>
 	 */
 	public void setContent() {
-		JLabel lblNewLabel = new JLabel(" 请选择您要连接的老师：");
-		lblNewLabel.setFont(new Font("宋体", Font.BOLD, 12));
+		JLabel lblNewLabel = new JLabel("您要连接的老师是：");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("宋体", Font.BOLD, 13));
 		lblNewLabel.setForeground(SystemColor.textInactiveText);
-		lblNewLabel.setBounds(10, 10, 155, 34);
+		lblNewLabel.setBounds(35, 37, 127, 34);
 		getContentPane().add(lblNewLabel);
-		// 多选框设置
-		String[] teachers = new String[] { "aaa", "nch", "ssjd" };
-		JComboBox<String> boxes = new JComboBox<String>(teachers);
-		boxes.setBounds(172, 17, 84, 21);
-		getContentPane().add(boxes);
+		
+		//连接的老师
+		TeacherClassServiceImpl tcs = new TeacherClassServiceImpl();
+		JLabel connectTeacher = new JLabel(Constant.teacher.getTname());
+		connectTeacher.setHorizontalAlignment(SwingConstants.CENTER);
+		connectTeacher.setFont(new Font("宋体", Font.BOLD, 14));				connectTeacher.setForeground(new Color(128, 128, 128));
+		connectTeacher.setBounds(154, 37, 62, 34);
+		bgContentPane.add(connectTeacher);
 		// 连接按钮
-		JButton connect = new JButton("连接");
-		connect.setBounds(284, 16, 84, 23);
-		connect.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ConnectRemind cr = getConnectRemind();
-				cr.dispose();
-				Client client = new Client();
-				client.connet("localhost", 8080);
-			}
-		});
+		JButton connect = new JButton("连   接");
+		connect.setForeground(new Color(128, 128, 128));
+		connect.setBackground(null);
+		connect.setFont(new Font("宋体", Font.BOLD, 14));
+		connect.setBounds(132, 95, 112, 34);
+		connect.addActionListener(new ConnectRemindActionListener(getConnectRemind()));
 		bgContentPane.add(connect);
 	}
 

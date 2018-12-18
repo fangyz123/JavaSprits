@@ -35,6 +35,7 @@ public class StudentSignDaoImpl {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery(
 				"select s from Students s,Studentstatus s1 where (s1.record_status=1 or s1.record_status=2) and s.sid=s1.sid");
-		return q.list();
+		List<Students> ls=q.list();
+		return ls;
 	}
 }

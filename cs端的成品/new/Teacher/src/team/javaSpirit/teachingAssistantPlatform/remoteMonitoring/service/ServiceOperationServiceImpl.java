@@ -1,6 +1,6 @@
 package team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service;
 
-import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.dao.ServiceOpenDaoImpl;
+import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.dao.ServiceOperationDaoImpl;
 
 /**
  * <p>
@@ -13,15 +13,15 @@ import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.dao.ServiceOpe
  * @author Fang Yuzhen
  * @date 2018年12月17日
  */
-public class ServiceOpenServiceImpl {
+public class ServiceOperationServiceImpl {
 
-	private ServiceOpenDaoImpl serviceOpen = new ServiceOpenDaoImpl();
+	private ServiceOperationDaoImpl serviceOpen = new ServiceOperationDaoImpl();
 
 	/**
 	 * <p>Title: updateStatus</p>
 	 * <p>Description: 把数据库的teacherStatus表的状态改为1。</p>
 	 */
-	public void updateStatus() {
-		serviceOpen.reviseStatus();
+	public void updateStatus(int status) {
+		serviceOpen.reviseStatus(status);
 	}
 }

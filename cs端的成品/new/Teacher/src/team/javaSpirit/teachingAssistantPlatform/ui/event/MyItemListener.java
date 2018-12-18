@@ -70,9 +70,7 @@ public class MyItemListener implements ItemListener {
 				// 关闭屏幕共享
 				service.closeScreenShare();
 			}
-
 		}
-
 	}
 
 }

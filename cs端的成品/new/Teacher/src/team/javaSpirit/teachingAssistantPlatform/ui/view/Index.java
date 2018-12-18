@@ -321,6 +321,7 @@ public class Index extends JFrame {
 		JButton button_9 = new JButton("\u968F\u673A\u70B9\u540D");
 		button_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				jumpRandomcall();
 			}
 		});
 		button_9.setForeground(new Color(100, 149, 237));
@@ -531,10 +532,9 @@ public class Index extends JFrame {
 		table_1 = new JTable(rowData, columnNames);
 		table_1.setBounds(1, 32, 907, 150);
 		table_1.setFont(new Font("宋体", Font.PLAIN, 16));
-		table_1.setRowHeight(30);// 设置每行的高度
+		table_1.setRowHeight(50);// 设置每行的高度
 		table_1.setRowMargin(5);// 设置相邻两行单元格的距离
 		table_1.setShowHorizontalLines(true);// 是否显示水平的网格线
-		table_1.setRowHeight(0, 50);
 		centerpl.setLayout(null);
 		centerpl.add(table_1);
 
@@ -549,7 +549,7 @@ public class Index extends JFrame {
 		centerpl.add(scrollPane_1);
 
 		final Object[] columnNames2 = { "姓名", "学号", "时间", "请假条" };
-		Object[][] rowData2 = { {"啦啦啦", "2016011352", "2018/12/17", "图片" } };
+		Object[][] rowData2 = { { "啦啦啦", "2016011352", "2018/12/17", "图片" } };
 
 		table_2 = new JTable(rowData2, columnNames2);
 		table_2.setFont(new Font("宋体", Font.PLAIN, 16));
@@ -981,7 +981,7 @@ public class Index extends JFrame {
 		centerpl.setLayout(null);
 		JScrollPane scrollPane_1 = new JScrollPane((Component) null);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_1.setBounds(1, 0,909, 546);
+		scrollPane_1.setBounds(1, 0, 909, 546);
 		centerpl.add(scrollPane_1);
 
 		JPanel panel = new JPanel();
@@ -998,10 +998,10 @@ public class Index extends JFrame {
 			j.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					// 事件
-					
+					System.out.println(j.getText());
 				}
 			});
-			j.setPreferredSize(new Dimension(170,80));
+			j.setPreferredSize(new Dimension(170, 80));
 			j.setIcon(new ImageIcon("image\\stu.png"));
 			j.setHorizontalAlignment(SwingConstants.LEFT);
 			j.setForeground(new Color(100, 149, 237));
@@ -1120,6 +1120,90 @@ public class Index extends JFrame {
 		setGroupLayout();
 		// 内容设置
 		stuPreContent();
+	}
+
+	/**
+	 * 
+	 * <p>
+	 * Title: randomCallContent
+	 * </p>
+	 * <p>
+	 * Description:随机点名内容页
+	 * </p>
+	 */
+	public void randomCallContent() {
+		centerpl.setLayout(null);
+
+		JLabel lblNewLabel_1 = new JLabel("\u5B66\u53F7  \u59D3\u540D");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+		lblNewLabel_1.setBounds(184, 102, 522, 231);
+		centerpl.add(lblNewLabel_1);
+
+		JButton btnNewButton = new JButton("\u5F00\u59CB");
+		btnNewButton.setFont(new Font("幼圆", Font.PLAIN, 18));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lblNewLabel_1.setText("");
+			}
+		});
+		btnNewButton.setBounds(313, 346, 120, 41);
+		btnNewButton.setBorder(UIManager.getBorder("Button.border"));
+		btnNewButton.setBackground(new Color(230, 230, 250));
+		centerpl.add(btnNewButton);
+
+		JButton button = new JButton("\u6682\u505C");
+		button.setBackground(new Color(230, 230, 250));
+		button.setFont(new Font("幼圆", Font.PLAIN, 18));
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		button.setBounds(470, 346, 120, 41);
+		centerpl.add(button);
+
+		bgContentPane.setLayout(gl_bgContentPane);
+		// 设置窗体大小
+		this.setBounds(0, 0, 1282, 700);
+		// 窗体大小不能改变
+		this.setResizable(false);
+		// 居中显示
+		this.setLocationRelativeTo(null);
+		// 设置图标
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("image\\logo1.png"));
+		// 窗体可见
+		this.setVisible(true);
+
+	}
+
+	/**
+	 * 
+	 * <p>
+	 * Title: jumpRandomcall
+	 * </p>
+	 * <p>
+	 * Description:跳转到随机点名界面
+	 * </p>
+	 */
+	public void jumpRandomcall() {
+		// 顶部菜单栏
+		topMenu();
+		// 左侧菜单栏
+		leftMenu();
+		// 设置背景图
+		setBackground();
+		// 设置布局方式为绝对定位
+		this.getContentPane().setLayout(null);
+		// 时间标志
+		setTime();
+		// 中间容器
+		centerPanel();
+		// 聊天窗口
+		chatView();
+		// 布局设置
+		setGroupLayout();
+		// 内容设置
+		randomCallContent();
 	}
 
 	/**

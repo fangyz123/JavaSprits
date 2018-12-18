@@ -7,7 +7,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,6 +23,7 @@ import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.TeacherClassServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.signIn.service.StudentCourseService;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.IndexActionListener;
 
 /**
  * 
@@ -37,6 +38,8 @@ import team.javaSpirit.teachingAssistantPlatform.signIn.service.StudentCourseSer
  * @date 2018年12月4日
  */
 public class Index extends JFrame {
+	/* 为学生找课程的对象 */
+	private StudentCourseService scs = new StudentCourseService();
 	/** 背景容器 */
 	private JPanel bgContentPane;
 	/** 中间模块容器 */
@@ -56,6 +59,22 @@ public class Index extends JFrame {
 	 */
 	public Index getIndex() {
 		return this;
+	}
+	
+	public StudentCourseService getScs() {
+		return scs;
+	}
+
+	public JPanel getBgContentPane() {
+		return bgContentPane;
+	}
+
+	public JPanel getCenterpl() {
+		return centerpl;
+	}
+
+	public JPanel getContentpl() {
+		return contentpl;
 	}
 
 	/**
@@ -181,34 +200,7 @@ public class Index extends JFrame {
 		menu1.add(bt1);
 		bt1.setFont(new Font("宋体", Font.BOLD, 14));
 		bt1.setForeground(new Color(100, 149, 237));
-		bt1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-//				jumpSign();
-				StudentCourseService scs = new StudentCourseService();
-				try {
-					// 找到当前课程
-					if (scs.findCurrentCourse(Constant.myStudent.getSid())) {
-						try {
-							// 人脸识别
-							scs.face();
-							// 修改数据库
-							scs.changeState(Constant.myStudent.getSid());
-							scs.insertRecort(Constant.myStudent.getSid());
-						} catch (Exception e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					} else {
-						JOptionPane.showMessageDialog(null, "当前没有可以签到的课程");
-					}
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-
+		bt1.addActionListener(new IndexActionListener(getIndex()));
 		bt1.setBorder(null);
 		bt1.setBackground(Color.WHITE);
 		bgContentPane.add(menu1);
@@ -439,11 +431,7 @@ public class Index extends JFrame {
 		JButton bt2 = new JButton("远程监控");
 		bt2.setBounds(13, 70, 61, 17);
 		// 点击事件
-		bt2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jumpRemote();
-			}
-		});
+		bt2.addActionListener(new IndexActionListener(getIndex()));
 		menu2.add(bt2);
 		bt2.setForeground(new Color(100, 149, 237));
 		bt2.setFont(new Font("宋体", Font.BOLD, 14));
@@ -529,9 +517,18 @@ public class Index extends JFrame {
 	 * </p>
 	 */
 	public void setTime() {
-		// 从数据库中查找
-		JLabel time = new JLabel("第*周*****课");
-		time.setBounds(904, 49, 72, 47);
+		long w = StudentCourseService.week;
+		JLabel time=null;
+		if (scs.findCurrentCourse(Constant.myStudent.getSid())) {
+			String cname = scs.findCname(Constant.cid);
+			time = new JLabel("<html>第" + w + "周<br><br>" + cname + "课</html>");
+		} else {;
+			time = new JLabel("<html>第" + w + "周<br><br>目前没课</html>");
+		}
+		time.setHorizontalAlignment(SwingConstants.CENTER);
+		time.setBounds(870, 49, 120, 47);
+		time.setFont(new Font("宋体",Font.BOLD,12));
+		time.setForeground(new Color(128,128,128));
 		bgContentPane.add(time);
 	}
 
@@ -622,11 +619,7 @@ public class Index extends JFrame {
 		JButton closebt = new JButton("×");
 		closebt.setBounds(80, 5, 23, 23);
 		closepl.add(closebt);
-		closebt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				init();
-			}
-		});
+		closebt.addActionListener(new IndexActionListener(getIndex()));
 		closebt.setBackground(null);
 		closebt.setBorder(null);
 		centerpl.add(closepl);
@@ -635,18 +628,7 @@ public class Index extends JFrame {
 		remortbt.setForeground(SystemColor.textInactiveText);
 		remortbt.setFont(new Font("宋体", Font.PLAIN, 14));
 		remortbt.setBounds(66, 130, 129, 31);
-		remortbt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TeacherClassServiceImpl tcs = new TeacherClassServiceImpl();
-				Teacher t = tcs.findTeacher(Constant.cid);
-				if (t == null) {
-					JOptionPane.showMessageDialog(null, "目前没有相应的老师开服务", "警告", JOptionPane.ERROR_MESSAGE);
-				} else {
-					ConnectRemind cr = new ConnectRemind();
-					cr.init();
-				}
-			}
-		});
+		remortbt.addActionListener(new IndexActionListener(getIndex()));
 		contentpl.add(remortbt);
 
 		JPanel chatpl = new JPanel();

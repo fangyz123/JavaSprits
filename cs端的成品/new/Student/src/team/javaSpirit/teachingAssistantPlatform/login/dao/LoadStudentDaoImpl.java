@@ -1,6 +1,7 @@
 package team.javaSpirit.teachingAssistantPlatform.login.dao;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import team.javaSpirit.teachingAssistantPlatform.entity.LoadStudent;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
@@ -21,15 +22,21 @@ import team.javaSpirit.teachingAssistantPlatform.util.HibernateUtil;
 public class LoadStudentDaoImpl {
 
 	/**
-	 * <p>Title: saveLoadStudent</p>
-	 * <p>Description: 王登录表里插入一条数据。</p>
+	 * <p>
+	 * Title: saveLoadStudent
+	 * </p>
+	 * <p>
+	 * Description: 王登录表里插入一条数据。
+	 * </p>
+	 * 
 	 * @param ls 登录表的对象
 	 */
 	public void saveLoadStudent(LoadStudent ls) {
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
+		Transaction tx = session.beginTransaction();
 		session.save(ls);
-		session.getTransaction().commit();
+//		session.close();
+		tx.commit();
 	}
 
 	/**
@@ -45,7 +52,9 @@ public class LoadStudentDaoImpl {
 	 */
 	public Students getStudentById(String sid) {
 		Session session = HibernateUtil.getSession();
-		return session.get(Students.class, sid);
+		Students s = session.get(Students.class, sid);
+//		session.close();
+		return s;
 	}
 
 	/**
@@ -61,20 +70,22 @@ public class LoadStudentDaoImpl {
 	 */
 	public Students updateStudentIp(Students s, String ip) {
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
+		Transaction tx = session.beginTransaction();
 		Students p = session.get(Students.class, s.getSid());
 		p.setIp(ip);
+//		session.close();
 //		session.update(p);可写可不写
-		session.getTransaction().commit();
+		tx.commit();
 		return p;
 	}
 
 	public void updateStudentPassword(Students s, String pwd) {
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
+		Transaction tx = session.beginTransaction();
 		Students p = session.get(Students.class, s.getSid());
 		p.setPassword(pwd);
+//		session.close();
 //		session.update(p);可写可不写
-		session.getTransaction().commit();
+		tx.commit();
 	}
 }

@@ -8,3 +8,6 @@ encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/event/TeacherLoginAct
 encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/event/TeacherLoginMouseActionListener.java=UTF-8
 encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/event/TeacherModifyActionListener.java=UTF-8
 encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/view/Index.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/view/Login.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/view/LoginIng.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/view/Modify.java=UTF-8

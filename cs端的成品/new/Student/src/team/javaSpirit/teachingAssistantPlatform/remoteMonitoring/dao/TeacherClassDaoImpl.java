@@ -32,12 +32,12 @@ public class TeacherClassDaoImpl {
 	 */
 	public Teacher searchTeacher(int c_id) {
 		Session session = HibernateUtil.getSession();
-		String sql = "select t from Teacher t,ClassCourse cc,Teacherstatus ts " + 
-				"where cc.course.course_id=? and ts.status=1"
-				+ "and t.tid=cc.teacher.tid and t.id=ts.tid";
+		String sql = "select t from Teacher t,ClassCourse cc,Teacherstatus ts "
+				+ "where cc.course.course_id=? and ts.status=1" + "and t.tid=cc.teacher.tid and t.id=ts.tid";
 		Query q = session.createQuery(sql);
 		q.setParameter(0, c_id);
 		Teacher t = (Teacher) q.uniqueResult();
+//		session.close();
 		return t;
 	}
 }

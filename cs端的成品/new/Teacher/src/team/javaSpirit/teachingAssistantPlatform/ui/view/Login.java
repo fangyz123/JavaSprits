@@ -20,8 +20,6 @@ import team.javaSpirit.teachingAssistantPlatform.ui.event.TeacherLoginActionList
 import team.javaSpirit.teachingAssistantPlatform.ui.event.TeacherLoginMouseActionListener;
 import team.javaSpirit.teachingAssistantPlatform.util.DlProPertiesUtil;
 
-
-
 /**
  * 
  * <p>
@@ -196,10 +194,11 @@ public class Login extends JFrame {
 		loginButton.setFont(new Font("宋体", Font.BOLD, 18));
 		loginButton.setBackground(null);
 		loginButton.setBounds(102, 300, 130, 43);
+		// 回车登录
+		getRootPane().setDefaultButton(loginButton);
 		bgContentPane.add(loginButton);
 		// 给登录按钮添加事件
 		loginButton.addActionListener(new TeacherLoginActionListener(this));
-//             
 	}
 
 	/**

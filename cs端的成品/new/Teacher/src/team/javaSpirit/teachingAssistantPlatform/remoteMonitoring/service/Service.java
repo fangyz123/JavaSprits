@@ -33,7 +33,7 @@ public class Service {
 	// new一个图片设置和获得图片的对象
 	private FileShare fileShare = null;
 	// 服务开启成功，对数据库的操作对象
-	ServiceOpenServiceImpl serviceOpen = new ServiceOpenServiceImpl();
+	ServiceOperationServiceImpl serviceOpen = new ServiceOperationServiceImpl();
 
 	/**
 	 * <p>
@@ -44,7 +44,6 @@ public class Service {
 	 * </p>
 	 */
 	public void openService() {
-		System.out.println("kaiqi");
 		// new一个mina框架配置基本信息的对象
 		configure = new Configure();
 		// 对连接的对象的基本信息进行初始化
@@ -52,8 +51,8 @@ public class Service {
 		try {
 			// 开启服务，端口是8080
 			configure.service(8080);
-			// 把老师的状态改为1
-			serviceOpen.updateStatus();
+			// 开启服务，把老师的状态改为1
+			serviceOpen.updateStatus(1);
 			// 服务开启成功，给出提示
 			JOptionPane.showMessageDialog(null, "开启服务成功。");
 		} catch (IOException e) {
@@ -74,6 +73,8 @@ public class Service {
 		configure.getAccept().dispose();
 		// 如果关闭成功，给出提示
 		if (configure.getAccept().isDisposed()) {
+			// 关闭服务，把老师的状态改为0
+			serviceOpen.updateStatus(0);
 			JOptionPane.showMessageDialog(null, "服务关闭成功。", "提示", JOptionPane.ERROR_MESSAGE);
 		}
 	}

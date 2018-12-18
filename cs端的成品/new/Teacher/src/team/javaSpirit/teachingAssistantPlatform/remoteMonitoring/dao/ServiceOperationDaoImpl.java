@@ -13,18 +13,18 @@ import team.javaSpirit.teachingAssistantPlatform.util.HibernateUtil;
 * @author Fang Yuzhen
 * @date 2018年12月17日
  */
-public class ServiceOpenDaoImpl {
+public class ServiceOperationDaoImpl {
 
 	/**
 	 * <p>Title: name</p>
-	 * <p>Description:老师开启服务时，把teacherStatus的状态改为1。 </p>
+	 * <p>Description:老师操作服务时，把teacherStatus的状态改为1。 </p>
 	 */
-	public void reviseStatus() {
+	public void reviseStatus(int status) {
 		Session session=HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		String tid=Constant.myTeacher.getTid();
 		Teacherstatus ts=session.get(Teacherstatus.class, tid);
-		ts.setStatus(1);
+		ts.setStatus(status);
 		tx.commit();
 	}
 }

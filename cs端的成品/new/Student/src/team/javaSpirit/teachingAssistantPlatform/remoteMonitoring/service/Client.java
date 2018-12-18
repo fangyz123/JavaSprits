@@ -22,7 +22,7 @@ import team.javaSpirit.teachingAssistantPlatform.mina.SessionListener;
  */
 public class Client {
 
-	public void connet(String ip, int port) {
+	public void connect(String ip, int port) {
 		// new一个mina框架配置基本信息的对象
 		Configure configure = new Configure();
 		// 对连接的对象的基本信息进行初始化

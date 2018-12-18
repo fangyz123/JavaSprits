@@ -16,24 +16,34 @@ import team.javaSpirit.teachingAssistantPlatform.firstcheck.FirstInvoke;
 import team.javaSpirit.teachingAssistantPlatform.signIn.dao.StudentCourseDao;
 
 /**
-* <p>Title: StudentCourseService</p>
-* <p>Description: 学生进行人脸签到时，通过调用Dao类，完成相关的操作。</p>
-* @author Fang Yuzhen
-* @date 2018年12月17日
+ * <p>
+ * Title: StudentCourseService
+ * </p>
+ * <p>
+ * Description: 学生进行人脸签到时，通过调用Dao类，完成相关的操作。
+ * </p>
+ * 
+ * @author Fang Yuzhen
+ * @date 2018年12月17日
  */
 public class StudentCourseService {
 
-	/*Dao类的对象*/
+	/* Dao类的对象 */
 	private static StudentCourseDao studentCourse = new StudentCourseDao();
 	/* 开学日期 */
 	private static Date begin;
 	/* 当前时间 */
 	private static Date current;
 	/* 第几周 */
-	private static long week;
+	public static long week;
 	/* 星期几 */
 	private static String date;
-
+	/* 开始时间 */
+	private static String startT;
+	/* 结束时间 */
+	private static String endT;
+	/* 签到状态 */
+	public static int status;
 	/**
 	 * 静态代码块。初始化一些类内公用的变量。
 	 */
@@ -113,18 +123,26 @@ public class StudentCourseService {
 		// 签到的时间范围
 		int range = nodeNumber.getSign_range();
 		// 上课的开始时间
-		String startT = studentCourse.getBeginTime(nodeNumber.getNode_id());
+		startT = studentCourse.getBeginTime(nodeNumber.getNode_id());
+		// 上课的结束时间
+		endT = studentCourse.getEndTime(nodeNumber.getNode_id());
 		// 日期格式化
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		// 将当前时间进行格式化，只有年月日
 		String fcurrent = dateFormat.format(current);
 		String t1 = fcurrent + " " + startT;
+		String t2 = fcurrent + " " + endT;
 		try {
 			Date startTime = dateFormat1.parse(t1);
+			Date endTime = dateFormat1.parse(t2);
 			// 离上课时间差多少分钟，有正有负
 			long minute = (current.getTime() - startTime.getTime()) / (1000 * 60);
 			if (Math.abs(minute) <= range) {
+				status = 1;
+				return true;
+			} else if ((Math.abs(minute) > range) && (current.getTime() - endTime.getTime() < 0)) {
+				status = 2;
 				return true;
 			}
 			return false;
@@ -146,7 +164,7 @@ public class StudentCourseService {
 	 * @return 真假
 	 * @throws ParseException
 	 */
-	public boolean findCurrentCourse(String sid) throws ParseException {
+	public boolean findCurrentCourse(String sid) {
 		// 这个学生所上的课
 		List<Integer> course = studentCourse.allCourseBysid(sid);
 		for (Integer cid : course) {
@@ -163,8 +181,28 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * <p>Title: face</p>
-	 * <p>Description: 进行人脸签到。</p>
+	 * <p>
+	 * Title: findCname
+	 * </p>
+	 * <p>
+	 * Description: 通过课程班级号，找到班级名称。
+	 * </p>
+	 * 
+	 * @param cid 课程班级id
+	 * @return 课程班级名字
+	 */
+	public String findCname(int cid) {
+		return studentCourse.findCname(cid);
+	}
+
+	/**
+	 * <p>
+	 * Title: face
+	 * </p>
+	 * <p>
+	 * Description: 进行人脸签到。
+	 * </p>
+	 * 
 	 * @return 图片的路径
 	 * @throws InterruptedException
 	 * @throws IOException
@@ -177,8 +215,13 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * <p>Title: insertRecort</p>
-	 * <p>Description: 插入一条学生签到记录。</p>
+	 * <p>
+	 * Title: insertRecort
+	 * </p>
+	 * <p>
+	 * Description: 插入一条学生签到记录。
+	 * </p>
+	 * 
 	 * @param studentnumber 学生的学号
 	 * @throws InterruptedException
 	 * @throws IOException
@@ -192,12 +235,32 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * <p>Title: changeState</p>
-	 * <p>Description: 签到成功，修改学生的状态</p>
-	 * @param id
+	 * <p>
+	 * Title: changeState
+	 * </p>
+	 * <p>
+	 * Description: 签到成功，修改学生的状态
+	 * </p>
+	 * 
+	 * @param id 学号
+	 * @throws ParseException
 	 */
-	public void changeState(String id) {
-		studentCourse.changeStudentStatus(id);
+	public void changeState(String id) throws ParseException {
+		studentCourse.changeStudentStatus(id, status);
+	}
+
+	/**
+	 * <p>
+	 * Title: getStudentStatus
+	 * </p>
+	 * <p>
+	 * Description: 通过学号，得到学生状态
+	 * </p>
+	 * 
+	 * @param sid 学号
+	 */
+	public int getStudentStatus(String sid) {
+		return studentCourse.getStudentStatus(sid);
 	}
 
 }

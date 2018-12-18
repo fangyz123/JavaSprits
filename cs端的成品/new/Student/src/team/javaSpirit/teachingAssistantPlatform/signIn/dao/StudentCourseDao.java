@@ -18,14 +18,19 @@ public class StudentCourseDao {
 	/**
 	 * <p>Title: getStudentById</p>
 	 * <p>Description: 通过学号，查询学生对象。</p>
-	 * @param sid
-	 * @return
+	 * @param sid 学号
+	 * @return 学生对象
 	 */
 	public Students getStudentById(String sid) {
 		Session session = HibernateUtil.getSession();
 		return session.get(Students.class, sid);
 	}
-	
+	/**
+	 * <p>Title: getClassCourseBycid</p>
+	 * <p>Description: 通过班级号，查班级课程</p>
+	 * @param cid 班级号
+	 * @return 班级课程对象
+	 */
 	public ClassCourse getClassCourseBycid(int cid) {
 		Session session = HibernateUtil.getSession();
 		return session.get(ClassCourse.class, cid);
@@ -99,6 +104,23 @@ public class StudentCourseDao {
 		q.setParameter(0, node_id);
 		return (String) q.uniqueResult();
 	}
+	/**
+	 * <p>
+	 * Title: getEndTime
+	 * </p>
+	 * <p>
+	 * Description: 通过id,查找相对应的上课的结束时间。
+	 * </p>
+	 * 
+	 * @param node_id id
+	 * @return 上课的结束时间
+	 */
+	public String getEndTime(int node_id) {
+		Session session = HibernateUtil.getSession();
+		Query q = session.createQuery("select end_time from NodeNumber where node_id=?");
+		q.setParameter(0, node_id);
+		return (String) q.uniqueResult();
+	}
 
 	/**
 	 * <p>
@@ -123,17 +145,42 @@ public class StudentCourseDao {
 		tx.commit();
 	}
 
-
+	/**
+	 * Title: getStudentStatus
+	 * Description: 得到学生签到状态。
+	 * @param sid 学号
+	 * @return 学生签到状态
+	 */
+	public int getStudentStatus(String sid) {
+		Session session = HibernateUtil.getSession();
+		Query q = session.createQuery("select record_status from Studentstatus where sid=?");
+		q.setParameter(0, sid);
+		return (int)q.uniqueResult();
+	}
+	
+	/**
+	 * <p>Title: findCname</p>
+	 * <p>Description: 通过课程号，找到课程班级名</p>
+	 * @param cid 课程班级号
+	 * @return 课程班级名
+	 */
+	public String findCname(int cid) {
+		Session session = HibernateUtil.getSession();
+		Query q = session.createQuery("select class_name from ClassCourse where class_id=?");
+		q.setParameter(0, cid);
+		return (String)q.uniqueResult();
+	}
+	
 	/**
 	 * <p>Title: changeStudentStatus</p>
-	 * <p>Description: 签到成功，修改状态</p>
+	 * <p>Description: 签到成功，修改状态，正常签到为1，迟到为2</p>
 	 * @param sid 学号
 	 */
-	public void changeStudentStatus(String sid) {
+	public void changeStudentStatus(String sid,int status) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		Studentstatus studentstatus = session.get(Studentstatus.class, sid);
-		studentstatus.setRecord_status(1);
+		studentstatus.setRecord_status(status);
 		tx.commit();
 	}
 

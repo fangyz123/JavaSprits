@@ -1,6 +1,7 @@
 package team.javaSpirit.teachingAssistantPlatform.common;
 
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
+import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
 
 /**
  * 
@@ -19,5 +20,8 @@ public class Constant {
 	public static Students myStudent;
 	/* 上课班级 */
 	public static int cid;
+	/* 老师对象 */
+	public static Teacher teacher;
+	/* 图片路径 */
 	public static String imgsrc;
 }
