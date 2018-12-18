@@ -7,7 +7,6 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -33,7 +32,7 @@ import javax.swing.border.BevelBorder;
 
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.StudentSignServiceImpl;
-import team.javaSpirit.teachingAssistantPlatform.signIn.service.StudentSignInServiceImpl;
+import team.javaSpirit.teachingAssistantPlatform.studentSignIn.service.StudentSignInServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.MyItemListener;
 
 /**
@@ -540,23 +539,21 @@ public class Index extends JFrame {
 		centerpl.add(table_1);
 
 		JScrollPane scrollPane = new JScrollPane(table_1);
-		scrollPane.setBounds(0, 0, 909, 338);
+		scrollPane.setBounds(1, 1, 909, 355);
 		scrollPane.setEnabled(false);
 		centerpl.add(scrollPane);
 
 		// 请假条滚动表格设置
 		JScrollPane scrollPane_1 = new JScrollPane((Component) null);
-		scrollPane_1.setBounds(0, 338, 907, 238);
+		scrollPane_1.setBounds(1, 355, 908, 185);
 		centerpl.add(scrollPane_1);
 
 		final Object[] columnNames2 = { "姓名", "学号", "时间", "请假条" };
-		Object[][] rowData2 = { { "ddd", "男", "江苏南京", "1378313210" }, { "eee", "女", "江苏南京", "13645181705" },
-				{ "fff", "男", "江苏南京", "13585331486" }, { "ggg", "女", "江苏南京", "81513779" },
-				{ "hhh", "男", "江苏南京", "13651545936" } };
+		Object[][] rowData2 = { {"啦啦啦", "2016011352", "2018/12/17", "图片" } };
 
 		table_2 = new JTable(rowData2, columnNames2);
 		table_2.setFont(new Font("宋体", Font.PLAIN, 16));
-		table_2.setRowHeight(100);// 设置每行的高度
+		table_2.setRowHeight(150);// 设置每行的高度
 		table_2.setRowMargin(5);// 设置相邻两行单元格的距离
 		table_2.setShowHorizontalLines(true);// 是否显示水平的网格线
 		scrollPane_1.setViewportView(table_2);
@@ -887,7 +884,7 @@ public class Index extends JFrame {
 										.addComponent(menu9, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(menu10,
 												GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE))
-								.addComponent(centerpl, GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE))
+								.addComponent(centerpl, GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE))
 						.addGroup(
 								gl_bgContentPane.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_bgContentPane.createSequentialGroup()
@@ -934,7 +931,7 @@ public class Index extends JFrame {
 														GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(ComponentPlacement.RELATED).addComponent(lmenu5,
 														GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-										.addComponent(centerpl, GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+										.addComponent(centerpl, GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
 										.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE))
 						.addContainerGap()));
@@ -984,13 +981,13 @@ public class Index extends JFrame {
 		centerpl.setLayout(null);
 		JScrollPane scrollPane_1 = new JScrollPane((Component) null);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_1.setBounds(0, 0, 906, 572);
+		scrollPane_1.setBounds(1, 0,909, 546);
 		centerpl.add(scrollPane_1);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(230, 230, 250));
 		scrollPane_1.setViewportView(panel);
-		panel.setPreferredSize(new Dimension(906, 2500));
+		panel.setPreferredSize(new Dimension(908, 2500));
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
 		// 所有签到的学生
@@ -1004,7 +1001,7 @@ public class Index extends JFrame {
 					
 				}
 			});
-			j.setPreferredSize(new Dimension(170,100));
+			j.setPreferredSize(new Dimension(170,80));
 			j.setIcon(new ImageIcon("image\\stu.png"));
 			j.setHorizontalAlignment(SwingConstants.LEFT);
 			j.setForeground(new Color(100, 149, 237));
@@ -1016,7 +1013,7 @@ public class Index extends JFrame {
 
 		bgContentPane.setLayout(gl_bgContentPane);
 		// 设置窗体大小
-		this.setBounds(0, 0, 1282, 771);
+		this.setBounds(0, 0, 1282, 700);
 		// 窗体大小不能改变
 		this.setResizable(false);
 		// 居中显示
@@ -1084,7 +1081,7 @@ public class Index extends JFrame {
 
 		bgContentPane.setLayout(gl_bgContentPane);
 		// 设置窗体大小
-		this.setBounds(0, 0, 1282, 771);
+		this.setBounds(0, 0, 1282, 700);
 		// 窗体大小不能改变
 		this.setResizable(false);
 		// 居中显示

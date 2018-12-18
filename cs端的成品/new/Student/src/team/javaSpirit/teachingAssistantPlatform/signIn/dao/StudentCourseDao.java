@@ -15,6 +15,12 @@ import team.javaSpirit.teachingAssistantPlatform.entity.Times;
 import team.javaSpirit.teachingAssistantPlatform.util.HibernateUtil;
 
 public class StudentCourseDao {
+	/**
+	 * <p>Title: getStudentById</p>
+	 * <p>Description: 通过学号，查询学生对象。</p>
+	 * @param sid
+	 * @return
+	 */
 	public Students getStudentById(String sid) {
 		Session session = HibernateUtil.getSession();
 		return session.get(Students.class, sid);
