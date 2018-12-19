@@ -7,32 +7,33 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
+import team.javaSpirit.teachingAssistantPlatform.common.Communication;
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.course.service.CourseServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
+import team.javaSpirit.teachingAssistantPlatform.oneToOneControl.service.ConnectStudent;
+import team.javaSpirit.teachingAssistantPlatform.oneToOneControl.service.StudentServiceImpl;
+import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.Service;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.StudentSignServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.studentSignIn.service.StudentSignInServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.MyItemListener;
@@ -52,6 +53,8 @@ import team.javaSpirit.teachingAssistantPlatform.ui.event.MyItemListener;
 public class Index extends JFrame {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
+	/* 服务对象 */
+	Service service = new Service();
 	/* 背景面板 */
 	private JPanel bgContentPane;
 	/* 显示学生签到情况的标签 */
@@ -94,8 +97,6 @@ public class Index extends JFrame {
 	private JPanel centerpl;
 	/* 左侧聊天窗口面板 */
 	private JPanel panel_5;
-	/* 界面总的容器 */
-	private GroupLayout gl_bgContentPane;
 	/* 左侧聊天文本编辑框 */
 	private JTextField textField;
 
@@ -150,6 +151,7 @@ public class Index extends JFrame {
 		menu1 = new JPanel();
 		menu1.setLayout(null);
 		menu1.setForeground(Color.WHITE);
+		menu1.setBounds(19, 18, 90, 110);
 		menu1.setBorder(null);
 		menu1.setOpaque(false);
 		JLabel label = new JLabel();
@@ -181,7 +183,7 @@ public class Index extends JFrame {
 		comboBox.addItem("开启共享");
 		comboBox.addItem("关闭共享");
 		// 监听下拉框的选择事件
-		comboBox.addItemListener(new MyItemListener(comboBox) {
+		comboBox.addItemListener(new MyItemListener(comboBox, service) {
 		});
 		// 面板添加下拉菜单comboBox
 		menu1.add(comboBox);
@@ -200,6 +202,7 @@ public class Index extends JFrame {
 		menu2 = new JPanel();
 		menu2.setLayout(null);
 		menu2.setForeground(Color.WHITE);
+		menu2.setBounds(117, 18, 88, 110);
 		menu2.setBorder(null);
 		menu2.setOpaque(false);
 		JLabel label_4 = new JLabel("");
@@ -241,11 +244,12 @@ public class Index extends JFrame {
 		menu3 = new JPanel();
 		menu3.setLayout(null);
 		menu3.setForeground(Color.WHITE);
+		menu3.setBounds(219, 18, 88, 110);
 		menu3.setBorder(null);
 		menu3.setOpaque(false);
 		JLabel label_5 = new JLabel("");
 		label_5.setIcon(new ImageIcon("image\\gb.png"));
-		label_5.setBounds(14, 0, 60, 67);
+		label_5.setBounds(10, 13, 60, 67);
 		menu3.add(label_5);
 		// 广播按钮
 		JButton button_8 = new JButton("\u5E7F\u64AD");
@@ -279,6 +283,7 @@ public class Index extends JFrame {
 		menu4 = new JPanel();
 		menu4.setLayout(null);
 		menu4.setForeground(Color.WHITE);
+		menu4.setBounds(321, 18, 88, 99);
 		menu4.setBorder(null);
 		menu4.setOpaque(false);
 		JLabel label_6 = new JLabel("");
@@ -295,7 +300,7 @@ public class Index extends JFrame {
 		button.setForeground(new Color(100, 149, 237));
 		button.setFont(new Font("宋体", Font.BOLD, 18));
 		button.setBorder(null);
-		button.setBackground(Color.WHITE);
+		button.setBackground(null);
 		button.setBounds(0, 70, 88, 16);
 		menu4.add(button);
 	}
@@ -313,6 +318,7 @@ public class Index extends JFrame {
 		menu5 = new JPanel();
 		menu5.setLayout(null);
 		menu5.setForeground(Color.WHITE);
+		menu5.setBounds(423, 18, 88, 99);
 		menu5.setBorder(null);
 		menu5.setOpaque(false);
 		JLabel label_7 = new JLabel("");
@@ -329,7 +335,7 @@ public class Index extends JFrame {
 		button_9.setForeground(new Color(100, 149, 237));
 		button_9.setFont(new Font("宋体", Font.BOLD, 18));
 		button_9.setBorder(null);
-		button_9.setBackground(Color.WHITE);
+		button_9.setBackground(null);
 		button_9.setBounds(0, 70, 88, 16);
 		menu5.add(button_9);
 	}
@@ -347,6 +353,7 @@ public class Index extends JFrame {
 		menu6 = new JPanel();
 		menu6.setLayout(null);
 		menu6.setForeground(Color.WHITE);
+		menu6.setBounds(525, 18, 88, 99);
 		menu6.setBorder(null);
 		menu6.setOpaque(false);
 		JLabel label_8 = new JLabel("");
@@ -358,7 +365,7 @@ public class Index extends JFrame {
 		button_10.setForeground(new Color(100, 149, 237));
 		button_10.setFont(new Font("宋体", Font.BOLD, 18));
 		button_10.setBorder(null);
-		button_10.setBackground(Color.WHITE);
+		button_10.setBackground(null);
 		button_10.setBounds(0, 70, 88, 16);
 		menu6.add(button_10);
 	}
@@ -376,6 +383,7 @@ public class Index extends JFrame {
 		menu7 = new JPanel();
 		menu7.setLayout(null);
 		menu7.setForeground(Color.WHITE);
+		menu7.setBounds(631, 18, 88, 99);
 		menu7.setBorder(null);
 		menu7.setOpaque(false);
 		JLabel label_9 = new JLabel("");
@@ -391,7 +399,7 @@ public class Index extends JFrame {
 		button_11.setForeground(new Color(100, 149, 237));
 		button_11.setFont(new Font("宋体", Font.BOLD, 18));
 		button_11.setBorder(null);
-		button_11.setBackground(Color.WHITE);
+		button_11.setBackground(null);
 		button_11.setBounds(0, 70, 88, 16);
 		menu7.add(button_11);
 	}
@@ -409,6 +417,7 @@ public class Index extends JFrame {
 		menu8 = new JPanel();
 		menu8.setLayout(null);
 		menu8.setForeground(Color.WHITE);
+		menu8.setBounds(733, 18, 88, 99);
 		menu8.setBorder(null);
 		menu8.setOpaque(false);
 		JLabel label_1 = new JLabel("");
@@ -424,7 +433,7 @@ public class Index extends JFrame {
 		button_2.setForeground(new Color(100, 149, 237));
 		button_2.setFont(new Font("宋体", Font.BOLD, 18));
 		button_2.setBorder(null);
-		button_2.setBackground(Color.WHITE);
+		button_2.setBackground(null);
 		button_2.setBounds(0, 70, 88, 16);
 		menu8.add(button_2);
 	}
@@ -442,6 +451,7 @@ public class Index extends JFrame {
 		menu9 = new JPanel();
 		menu9.setLayout(null);
 		menu9.setForeground(Color.WHITE);
+		menu9.setBounds(835, 18, 88, 99);
 		menu9.setBorder(null);
 		menu9.setOpaque(false);
 		JLabel label_2 = new JLabel("");
@@ -457,7 +467,7 @@ public class Index extends JFrame {
 		button_3.setForeground(new Color(100, 149, 237));
 		button_3.setFont(new Font("宋体", Font.BOLD, 18));
 		button_3.setBorder(null);
-		button_3.setBackground(Color.WHITE);
+		button_3.setBackground(null);
 		button_3.setBounds(0, 70, 88, 16);
 		menu9.add(button_3);
 	}
@@ -475,6 +485,7 @@ public class Index extends JFrame {
 		menu10 = new JPanel();
 		menu10.setLayout(null);
 		menu10.setForeground(Color.WHITE);
+		menu10.setBounds(937, 18, 88, 99);
 		menu10.setBorder(null);
 		menu10.setOpaque(false);
 		JLabel label_3 = new JLabel("");
@@ -486,7 +497,7 @@ public class Index extends JFrame {
 		button_4.setForeground(new Color(100, 149, 237));
 		button_4.setFont(new Font("宋体", Font.BOLD, 18));
 		button_4.setBorder(null);
-		button_4.setBackground(Color.WHITE);
+		button_4.setBackground(null);
 		button_4.setBounds(0, 70, 88, 16);
 		menu10.add(button_4);
 	}
@@ -499,6 +510,7 @@ public class Index extends JFrame {
 		centerpl.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.GRAY, null, null, null));
 		centerpl.setBackground(null);
 		centerpl.setLayout(null);
+		centerpl.setBounds(117, 135, 908, 523);
 	}
 
 	/**
@@ -559,7 +571,6 @@ public class Index extends JFrame {
 		table_2.setRowMargin(5);// 设置相邻两行单元格的距离
 		table_2.setShowHorizontalLines(true);// 是否显示水平的网格线
 		scrollPane_1.setViewportView(table_2);
-		bgContentPane.setLayout(gl_bgContentPane);
 		// 设置窗体大小
 		this.setBounds(0, 0, 1282, 700);
 		// 窗体大小不能改变
@@ -643,6 +654,7 @@ public class Index extends JFrame {
 		// 学生签到信息
 		lmenu1 = new JPanel();
 		lmenu1.setBackground(new Color(176, 196, 222));
+		lmenu1.setBounds(19, 135, 90, 80);
 		lmenu1.setLayout(null);
 		lmenu1.setOpaque(false);
 		// 按钮
@@ -688,6 +700,7 @@ public class Index extends JFrame {
 		label_10.setIcon(new ImageIcon("image\\left.png"));
 		label_10.setBounds(28, 0, 62, 55);
 		lmenu2.add(label_10);
+		lmenu2.setBounds(19, 222, 90, 80);
 	}
 
 	/**
@@ -713,6 +726,7 @@ public class Index extends JFrame {
 		label_12.setIcon(new ImageIcon("image\\left.png"));
 		label_12.setBounds(28, 0, 62, 55);
 		lmenu3.add(label_12);
+		lmenu3.setBounds(19, 309, 90, 80);
 	}
 
 	/**
@@ -742,6 +756,7 @@ public class Index extends JFrame {
 		label_13.setIcon(new ImageIcon("image\\left.png"));
 		label_13.setBounds(28, 0, 62, 55);
 		lmenu4.add(label_13);
+		lmenu4.setBounds(19, 396, 90, 80);
 	}
 
 	/**
@@ -771,6 +786,7 @@ public class Index extends JFrame {
 		label_14.setIcon(new ImageIcon("image\\left.png"));
 		label_14.setBounds(28, 0, 62, 55);
 		lmenu5.add(label_14);
+		lmenu5.setBounds(19, 483, 90, 80);
 	}
 
 	/**
@@ -808,27 +824,26 @@ public class Index extends JFrame {
 	public void chatView() {
 		panel_5 = new JPanel();
 		panel_5.setLayout(null);
+		panel_5.setBounds(1039, 135, 234, 523);
 		panel_5.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.GRAY, null, null, null));
 		panel_5.setBackground((Color) null);
 		// 师生对话框
-		Label label_15 = new Label("\u804A\u5929\u6846");
-		label_15.setBackground(new Color(173, 216, 230));
-		label_15.setBounds(10, 10, 217, 387);
-		panel_5.add(label_15);
+		JScrollPane scrollPane_1 = new JScrollPane((Component) null);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_1.setBounds(5, 5, 223, 405);
+		scrollPane_1.setBackground(Color.WHITE);
+		panel_5.add(scrollPane_1);
+
 		// 音量调节框
-		Label label_16 = new Label("\u97F3\u91CF\u8C03\u8282\u6846");
-		label_16.setBackground(new Color(245, 255, 250));
-		label_16.setBounds(10, 441, 217, 125);
-		panel_5.add(label_16);
 
 		textField = new JTextField();
 		textField.setText("\u4E0A\u8BFE\u8282\u594F\u662F\u5426\u592A\u5FEB");
-		textField.setBounds(10, 411, 156, 24);
+		textField.setBounds(5, 411, 156, 24);
 		panel_5.add(textField);
 		textField.setColumns(10);
 
 		JButton button = new JButton("\u53D1\u9001");
-		button.setBounds(168, 410, 69, 27);
+		button.setBounds(165, 410, 69, 27);
 		panel_5.add(button);
 	}
 
@@ -846,12 +861,15 @@ public class Index extends JFrame {
 		long week = CourseServiceImpl.week;
 		if (cs.findCurrentCourse(Constant.myTeacher.getTid())) {
 			String cname = cs.findCname(Constant.cid);
-			lblNewLabel = new JLabel("第" + week + "周:  " + cname + "课");
+			lblNewLabel = new JLabel("第" + week + "周:" + cname + "课");
 			// time = new JLabel("<html>第" + w + "周<br><br>" + cname + "课</html>");
 		} else {
-			lblNewLabel = new JLabel("第" + week + "周:  目前没课");
-			//time = new JLabel("<html>第" + w + "周<br><br>目前没课</html>");
+			lblNewLabel = new JLabel("第" + week + "周:目前没课");
+			// time = new JLabel("<html>第" + w + "周<br><br>目前没课</html>");
 		}
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 18));
+		lblNewLabel.setBounds(1039, 48, 237, 61);
 	}
 
 	/**
@@ -864,88 +882,25 @@ public class Index extends JFrame {
 	 * </p>
 	 */
 	public void setGroupLayout() {
-		gl_bgContentPane = new GroupLayout(bgContentPane);
-		gl_bgContentPane.setHorizontalGroup(gl_bgContentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_bgContentPane.createSequentialGroup().addContainerGap()
-						.addGroup(gl_bgContentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lmenu1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lmenu4, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lmenu5, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lmenu3, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lmenu2, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-								.addComponent(menu1, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(
-								ComponentPlacement.RELATED)
-						.addGroup(gl_bgContentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_bgContentPane.createSequentialGroup()
-										.addComponent(menu2, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(menu3, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(menu4, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(menu5, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(menu6, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addComponent(menu7, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(menu8, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(menu9, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(menu10,
-												GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE))
-								.addComponent(centerpl, GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE))
-						.addGroup(
-								gl_bgContentPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_bgContentPane.createSequentialGroup()
-												.addPreferredGap(ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-												.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 123,
-														Short.MAX_VALUE)
-												.addGap(34))
-										.addGroup(gl_bgContentPane.createSequentialGroup()
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(panel_5,
-														GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)))));
-		gl_bgContentPane.setVerticalGroup(gl_bgContentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_bgContentPane.createSequentialGroup().addGroup(gl_bgContentPane
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_bgContentPane.createSequentialGroup().addGap(58).addComponent(lblNewLabel,
-								GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_bgContentPane.createSequentialGroup().addContainerGap().addGroup(gl_bgContentPane
-								.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(menu4, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-								.addComponent(menu5, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-								.addComponent(menu7, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-								.addComponent(menu6, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-								.addComponent(menu8, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-								.addComponent(menu9, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-								.addComponent(menu10, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-								.addComponent(menu1, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-								.addComponent(menu2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addComponent(menu3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE))))
-						.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-						.addGroup(
-								gl_bgContentPane.createParallelGroup(Alignment.LEADING, false)
-										.addGroup(gl_bgContentPane.createSequentialGroup()
-												.addComponent(lmenu1, GroupLayout.PREFERRED_SIZE, 80,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(lmenu2, GroupLayout.PREFERRED_SIZE, 80,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(lmenu3, GroupLayout.PREFERRED_SIZE, 80,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(lmenu4, GroupLayout.PREFERRED_SIZE, 80,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(lmenu5,
-														GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-										.addComponent(centerpl, GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
-										.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE))
-						.addContainerGap()));
+		bgContentPane.setLayout(null);
+		bgContentPane.add(lmenu1);
+		bgContentPane.add(lmenu4);
+		bgContentPane.add(lmenu5);
+		bgContentPane.add(lmenu3);
+		bgContentPane.add(lmenu2);
+		bgContentPane.add(menu1);
+		bgContentPane.add(menu2);
+		bgContentPane.add(menu3);
+		bgContentPane.add(menu4);
+		bgContentPane.add(menu5);
+		bgContentPane.add(menu6);
+		bgContentPane.add(menu7);
+		bgContentPane.add(menu8);
+		bgContentPane.add(menu9);
+		bgContentPane.add(menu10);
+		bgContentPane.add(centerpl);
+		bgContentPane.add(lblNewLabel);
+		bgContentPane.add(panel_5);
 	}
 
 	/**
@@ -1009,11 +964,22 @@ public class Index extends JFrame {
 			j.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					// 事件
-					// 学生名字
-					String sname = j.getText();
-					// 获得IP
+					// 老师新开服务
+					try {
+						System.out.println("qqqqqqqq======");
+						ConnectStudent.setupServer(Communication.sPort);
+						System.out.println("jijijj");
+						// 学生名字
+						String sname = j.getText();
+						// TODO
+						// 获得IP
+						StudentServiceImpl ss = new StudentServiceImpl();
+						String ip = ss.findIp(sname);
+						service.sendCommand(ip);
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, "已经开过服务了。");
+					}
 
-					System.out.println(j.getText());
 				}
 			});
 			j.setPreferredSize(new Dimension(170, 80));
@@ -1026,7 +992,6 @@ public class Index extends JFrame {
 			panel.add(j);
 		}
 
-		bgContentPane.setLayout(gl_bgContentPane);
 		// 设置窗体大小
 		this.setBounds(0, 0, 1282, 700);
 		// 窗体大小不能改变
@@ -1094,7 +1059,6 @@ public class Index extends JFrame {
 
 		centerpl.add(button);
 
-		bgContentPane.setLayout(gl_bgContentPane);
 		// 设置窗体大小
 		this.setBounds(0, 0, 1282, 700);
 		// 窗体大小不能改变
@@ -1176,8 +1140,6 @@ public class Index extends JFrame {
 		});
 		button.setBounds(470, 346, 120, 41);
 		centerpl.add(button);
-
-		bgContentPane.setLayout(gl_bgContentPane);
 		// 设置窗体大小
 		this.setBounds(0, 0, 1282, 700);
 		// 窗体大小不能改变

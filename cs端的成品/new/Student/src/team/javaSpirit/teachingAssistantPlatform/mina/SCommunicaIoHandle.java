@@ -8,9 +8,11 @@ import javax.imageio.ImageIO;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
-import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
+import team.javaSpirit.teachingAssistantPlatform.common.Communication;
+import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.entity.FileContent;
+import team.javaSpirit.teachingAssistantPlatform.oneToOneControl.OpenConnection;
 import team.javaSpirit.teachingAssistantPlatform.ui.ShowScreen;
 
 /**
@@ -36,11 +38,22 @@ public class SCommunicaIoHandle extends IoHandlerAdapter {
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		// 对接收过来的对象，进行强制类型转换
 		FileContent fileContent = (FileContent) message;
+		FileContent f1 = new FileContent();
+		byte b=10;
+		f1.setCommand(b);
+		session.write(f1);
 		// 如果发送的命令为1，打开屏幕展示控制台
-		if (fileContent.getCommand() == 1) {
+		if (fileContent.getCommand() == Communication.openScreen) {
 			screen = new ShowScreen();
-		} else if (fileContent.getCommand() == 2) {
+		} else if (fileContent.getCommand() == Communication.closeScreen) {
 			screen.getJf().dispose();
+		} else if (fileContent.getCommand() == Communication.connectCommand) {
+			System.out.println("okokokook");
+			FileContent f = new FileContent();
+			f.setCommand(Communication.receivedCommand);
+			session.write(f);
+			System.out.println("xianxi:"+f.getCommand());
+			new OpenConnection().conn2Server(Constant.teacher.getIp(), Communication.sPort);
 		} else {
 			// 通过对象获得字节数组
 			byte[] bytes = fileContent.getBytes();

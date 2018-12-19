@@ -106,12 +106,12 @@ public class Configure {
 		connector.setDefaultRemoteAddress(new InetSocketAddress(ip, port));
 		connectFuture = connector.connect();
 		connectFuture.awaitUninterruptibly();
-		try {
+		if (connectFuture.isConnected()) {
 			session = connectFuture.getSession();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "没开网络或没网络");
+			JOptionPane.showMessageDialog(null, "连接成功");
+		} else {
+			JOptionPane.showMessageDialog(null, "没开服务或没网络");
 		}
-		
 	}
 
 	/**

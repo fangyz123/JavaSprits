@@ -1,6 +1,7 @@
 package team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.mina.core.session.IoSession;
 
+import team.javaSpirit.teachingAssistantPlatform.common.Communication;
 import team.javaSpirit.teachingAssistantPlatform.entity.FileContent;
 import team.javaSpirit.teachingAssistantPlatform.entity.FileShare;
 import team.javaSpirit.teachingAssistantPlatform.mina.Configure;
@@ -43,21 +45,20 @@ public class Service {
 	 * Description: 进行mina框架的基本配置，开启8080端口的服务
 	 * </p>
 	 */
-	public void openService() {
+	public void openService(int port) {
 		// new一个mina框架配置基本信息的对象
 		configure = new Configure();
 		// 对连接的对象的基本信息进行初始化
 		configure.init();
 		try {
 			// 开启服务，端口是8080
-			configure.service(8080);
+			configure.service(port);
 			// 开启服务，把老师的状态改为1
 			serviceOpen.updateStatus(1);
 			// 服务开启成功，给出提示
 			JOptionPane.showMessageDialog(null, "开启服务成功。");
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "已经开启过服务了。");
-			e.printStackTrace();
 		}
 	}
 
@@ -100,8 +101,7 @@ public class Service {
 		setMessage.start();
 		// 给每个学生发送屏幕截图
 		FileContent f = new FileContent();
-		byte comand = 1;
-		f.setCommand(comand);
+		f.setCommand(Communication.openScreen);
 		for (IoSession ioSession : sessions) {
 			ioSession.write(f);
 			SendMessageThread sendMessage = new SendMessageThread(ioSession, fileShare);
@@ -123,8 +123,7 @@ public class Service {
 		// 获得所有的session
 		Collection<IoSession> sessions = configure.getAllSession();
 		FileContent f = new FileContent();
-		byte comand = 2;
-		f.setCommand(comand);
+		f.setCommand(Communication.closeScreen);
 		// 给所有的学生发送的命令为2，关闭展示
 		for (IoSession ioSession : sessions) {
 			ioSession.write(f);
@@ -138,6 +137,28 @@ public class Service {
 		SendMessageThreads.clear();
 		System.out.println(SendMessageThreads.size());
 
+	}
+
+	/**
+	 * <p>Title: sendCommand</p>
+	 * <p>Description: 点击学生的小电脑，给学生发送连接的命令。</p>
+	 * @param ip 学生的IP
+	 */
+	public void sendCommand(String ip) {
+		// 获得所有的session
+		Collection<IoSession> sessions = configure.getAllSession();
+		FileContent f = new FileContent();
+		// 发送打开服务的命令
+		f.setCommand(Communication.connectCommand);
+		System.out.println("ip:"+ip);
+		for (IoSession ioSession : sessions) {
+			String clientIP = ((InetSocketAddress) ioSession.getRemoteAddress()).getAddress().getHostAddress();
+			if (clientIP.equals(ip)) {
+				System.out.println("clientIP:"+clientIP);
+				ioSession.write(f);
+				break;
+			}
+		}
 	}
 
 	/**

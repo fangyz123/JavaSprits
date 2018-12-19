@@ -1,10 +1,12 @@
 package team.javaSpirit.teachingAssistantPlatform.mina;
 
-import java.net.InetSocketAddress;
-
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
+
+import team.javaSpirit.teachingAssistantPlatform.common.Communication;
+import team.javaSpirit.teachingAssistantPlatform.entity.FileContent;
+import team.javaSpirit.teachingAssistantPlatform.oneToOneControl.service.ConnectStudent;
 
 /**
  * <p>
@@ -27,7 +29,13 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		System.out.println("messageReceived");
-
+		// 对接收过来的对象，进行强制类型转换
+		FileContent fileContent = (FileContent) message;
+		System.out.println(fileContent.getCommand());
+		if (fileContent.getCommand() == Communication.receivedCommand) {
+			ConnectStudent cs = new ConnectStudent();
+			cs.displayImage();
+		}
 	}
 
 	/**
@@ -35,6 +43,7 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 	 */
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
+		System.out.println("messageSent");
 	}
 
 	public TCommunicaIoHandle() {
@@ -71,8 +80,6 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 	public void sessionOpened(IoSession session) throws Exception {
 		System.out.println("sessionOpened");
 		num++;
-		String clientIP = ((InetSocketAddress) session.getRemoteAddress()).getAddress().getHostAddress();
-		System.out.println("IP: " + clientIP);
 	}
 
 }

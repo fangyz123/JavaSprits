@@ -14,13 +14,13 @@ import java.util.Map;
  */
 @SuppressWarnings("serial")
 public class Events implements Serializable {
-	private Map map=new HashMap<String,Object>();//存放鼠标比例缩放的数据
+	private Map<String,Object> map=new HashMap<String,Object>();//存放鼠标比例缩放的数据
 	private InputEvent event;//存放点击事件
 	
-	public Map getMap() {
+	public Map<String,Object> getMap() {
 		return map;
 	}
-	public void setMap(Map map) {
+	public void setMap(Map<String,Object> map) {
 		this.map = map;
 	}
 	public InputEvent getEvent() {

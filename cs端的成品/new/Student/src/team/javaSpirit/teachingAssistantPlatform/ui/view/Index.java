@@ -7,23 +7,21 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
-import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
-import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.TeacherClassServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.signIn.service.StudentCourseService;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.IndexActionListener;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.RemoteMouseListener;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.SignMouseListener;
 
 /**
  * 
@@ -187,6 +185,7 @@ public class Index extends JFrame {
 		menu1.setBorder(null);
 		menu1.setForeground(new Color(255, 255, 255));
 		menu1.setLayout(null);
+		menu1.addMouseListener(new SignMouseListener(getIndex()));
 		// 签到图标
 		JLabel lb1 = new JLabel("");
 		lb1.setBounds(13, 10, 60, 60);
@@ -422,6 +421,7 @@ public class Index extends JFrame {
 		menu2.setBorder(null);
 		menu2.setForeground(new Color(255, 255, 255));
 		menu2.setLayout(null);
+		menu2.addMouseListener(new RemoteMouseListener(getIndex()));
 		// 远程监控图标
 		JLabel lb2 = new JLabel("");
 		lb2.setBounds(13, 10, 60, 60);

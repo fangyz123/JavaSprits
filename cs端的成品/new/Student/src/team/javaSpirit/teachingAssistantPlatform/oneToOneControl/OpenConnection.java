@@ -27,7 +27,7 @@ public class OpenConnection {
 	private Socket socket;
 	//这是学生端，但是这修改为客户端，连接教师端
 	public void conn2Server( String ip,int port) throws Exception {
-
+		System.out.println("连接成功");
 		// 连接教师端
 		socket = new Socket(ip, port);
 		InputStream ins = socket.getInputStream();

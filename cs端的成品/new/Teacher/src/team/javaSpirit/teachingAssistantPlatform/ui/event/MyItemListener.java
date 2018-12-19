@@ -5,6 +5,7 @@ import java.awt.event.ItemListener;
 
 import javax.swing.JComboBox;
 
+import team.javaSpirit.teachingAssistantPlatform.common.Communication;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.Service;
 
 /**
@@ -46,8 +47,8 @@ public class MyItemListener implements ItemListener {
 	 * 
 	 * @param comboBox
 	 */
-	public MyItemListener(JComboBox<?> comboBox) {
-		service = new Service();
+	public MyItemListener(JComboBox<?> comboBox,Service service) {
+		this.service = service;
 		this.comboBox = comboBox;
 	}
 
@@ -59,7 +60,7 @@ public class MyItemListener implements ItemListener {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			if (comboBox.getSelectedItem() == "开启") {
 				// 开启服务
-				service.openService();
+				service.openService(Communication.tPort);
 			} else if (comboBox.getSelectedItem() == "关闭") {
 				// 关闭服务
 				service.closeServise();
