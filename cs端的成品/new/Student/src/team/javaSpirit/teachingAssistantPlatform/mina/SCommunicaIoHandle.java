@@ -38,21 +38,15 @@ public class SCommunicaIoHandle extends IoHandlerAdapter {
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		// 对接收过来的对象，进行强制类型转换
 		FileContent fileContent = (FileContent) message;
-		FileContent f1 = new FileContent();
-		byte b=10;
-		f1.setCommand(b);
-		session.write(f1);
+		System.out.println("messageReceived: " + fileContent.getCommand());
+		System.out.println(session.getLocalAddress().toString());
+		System.out.println(session.getRemoteAddress().toString());
 		// 如果发送的命令为1，打开屏幕展示控制台
 		if (fileContent.getCommand() == Communication.openScreen) {
 			screen = new ShowScreen();
 		} else if (fileContent.getCommand() == Communication.closeScreen) {
 			screen.getJf().dispose();
 		} else if (fileContent.getCommand() == Communication.connectCommand) {
-			System.out.println("okokokook");
-			FileContent f = new FileContent();
-			f.setCommand(Communication.receivedCommand);
-			session.write(f);
-			System.out.println("xianxi:"+f.getCommand());
 			new OpenConnection().conn2Server(Constant.teacher.getIp(), Communication.sPort);
 		} else {
 			// 通过对象获得字节数组
@@ -65,12 +59,20 @@ public class SCommunicaIoHandle extends IoHandlerAdapter {
 
 	}
 
+	@Override
+	public void sessionCreated(IoSession session) throws Exception {
+		System.out.println("sessionCreated");
+	}
+
+	@Override
+	public void sessionOpened(IoSession session) throws Exception {
+	}
+
 	/**
 	 * 监听客户端写给服务器的信息，在其进行相对应的处理。
 	 */
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
-		System.out.println("messageSent");
 	}
 
 	/**

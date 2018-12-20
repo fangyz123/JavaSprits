@@ -27,11 +27,10 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
-import team.javaSpirit.teachingAssistantPlatform.common.Communication;
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.course.service.CourseServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
-import team.javaSpirit.teachingAssistantPlatform.oneToOneControl.service.ConnectStudent;
+import team.javaSpirit.teachingAssistantPlatform.oneToOneControl.service.MyServiceThread;
 import team.javaSpirit.teachingAssistantPlatform.oneToOneControl.service.StudentServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.Service;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.StudentSignServiceImpl;
@@ -967,7 +966,8 @@ public class Index extends JFrame {
 					// 老师新开服务
 					try {
 						System.out.println("qqqqqqqq======");
-						ConnectStudent.setupServer(Communication.sPort);
+//						ConnectStudent.setupServer(Communication.sPort);
+						new MyServiceThread().start();
 						System.out.println("jijijj");
 						// 学生名字
 						String sname = j.getText();

@@ -4,9 +4,7 @@ import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
-import team.javaSpirit.teachingAssistantPlatform.common.Communication;
 import team.javaSpirit.teachingAssistantPlatform.entity.FileContent;
-import team.javaSpirit.teachingAssistantPlatform.oneToOneControl.service.ConnectStudent;
 
 /**
  * <p>
@@ -20,22 +18,12 @@ import team.javaSpirit.teachingAssistantPlatform.oneToOneControl.service.Connect
  * @date 2018年11月28日
  */
 public class TCommunicaIoHandle extends IoHandlerAdapter {
-	/* 连接数量 */
-	public static int num = 0;
-
 	/**
 	 * 监听学生端写过来的信息，将其接收并对其内容进行相对应的回复。
 	 */
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
-		System.out.println("messageReceived");
-		// 对接收过来的对象，进行强制类型转换
-		FileContent fileContent = (FileContent) message;
-		System.out.println(fileContent.getCommand());
-		if (fileContent.getCommand() == Communication.receivedCommand) {
-			ConnectStudent cs = new ConnectStudent();
-			cs.displayImage();
-		}
+
 	}
 
 	/**
@@ -43,7 +31,6 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 	 */
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
-		System.out.println("messageSent");
 	}
 
 	public TCommunicaIoHandle() {
@@ -61,8 +48,6 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 	@Override
 	public void sessionClosed(IoSession session) throws Exception {
 		System.out.println("sessionClosed");
-		num--;
-		System.out.println(num);
 	}
 
 	@Override
@@ -79,7 +64,6 @@ public class TCommunicaIoHandle extends IoHandlerAdapter {
 	@Override
 	public void sessionOpened(IoSession session) throws Exception {
 		System.out.println("sessionOpened");
-		num++;
 	}
 
 }
