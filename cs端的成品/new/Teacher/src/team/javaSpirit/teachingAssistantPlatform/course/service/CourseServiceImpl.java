@@ -38,7 +38,7 @@ public class CourseServiceImpl {
 		// 相差几天
 		long days = (current.getTime() - begin.getTime()) / (1000 * 60 * 60 * 24);
 		// 第几周
-		week = days / 7;
+		week = (days - 1) / 7 + 1;
 		// 星期几
 		String[] weekDays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
 		Calendar cal = Calendar.getInstance();

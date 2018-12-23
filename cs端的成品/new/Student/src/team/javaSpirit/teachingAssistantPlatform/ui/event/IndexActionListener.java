@@ -34,7 +34,7 @@ public class IndexActionListener implements ActionListener {
 			this.setSignButton();
 		} else if ("远程监控".equals(s)) {
 			this.setRemoteButton();
-		} else if ("开启远程监控".equals(s)) {
+		} else if ("开启远程连接".equals(s)) {
 			this.setStartRemoteButton();
 		} else if ("×".equals(s)) {
 			this.setCloseButton();

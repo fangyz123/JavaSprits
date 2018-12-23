@@ -17,7 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -26,16 +25,17 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.course.service.CourseServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
-import team.javaSpirit.teachingAssistantPlatform.oneToOneControl.service.MyServiceThread;
-import team.javaSpirit.teachingAssistantPlatform.oneToOneControl.service.StudentServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.Service;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.StudentSignServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.studentSignIn.service.StudentSignInServiceImpl;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.IndexActionListener;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.MyItemListener;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.StuShowActionListener;
 
 /**
  * 
@@ -159,11 +159,9 @@ public class Index extends JFrame {
 		// 面板添加图片标签label
 		menu1.add(label);
 		// 按钮
-		JButton button_1 = new JButton("\u8FDC\u7A0B\u76D1\u63A7");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		JButton button_1 = new JButton("远程监控");
+		// 添加事件
+		button_1.addActionListener(new IndexActionListener(this));
 		button_1.setForeground(new Color(100, 149, 237));
 		button_1.setFont(new Font("宋体", Font.BOLD, 18));
 		button_1.setBorder(null);
@@ -209,11 +207,8 @@ public class Index extends JFrame {
 		label_4.setBounds(14, 13, 61, 58);
 		menu2.add(label_4);
 		// 录屏按钮
-		JButton button_7 = new JButton("\u5F55\u5C4F");
-		button_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		JButton button_7 = new JButton("录屏");
+		button_7.addActionListener(new IndexActionListener(this));
 		button_7.setForeground(new Color(100, 149, 237));
 		button_7.setFont(new Font("宋体", Font.BOLD, 18));
 		button_7.setBorder(null);
@@ -251,7 +246,9 @@ public class Index extends JFrame {
 		label_5.setBounds(10, 13, 60, 67);
 		menu3.add(label_5);
 		// 广播按钮
-		JButton button_8 = new JButton("\u5E7F\u64AD");
+		JButton button_8 = new JButton("广播");
+		// 添加事件
+		button_8.addActionListener(new IndexActionListener(this));
 		button_8.setForeground(new Color(100, 149, 237));
 		button_8.setFont(new Font("宋体", Font.BOLD, 18));
 		button_8.setBorder(null);
@@ -290,12 +287,8 @@ public class Index extends JFrame {
 		label_6.setBounds(13, 10, 60, 60);
 		menu4.add(label_6);
 		// 学生演示按钮
-		JButton button = new JButton("\u5B66\u751F\u6F14\u793A");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				jumpSelectstu();
-			}
-		});
+		JButton button = new JButton("学生演示");
+		button.addActionListener(new IndexActionListener(this));
 		button.setForeground(new Color(100, 149, 237));
 		button.setFont(new Font("宋体", Font.BOLD, 18));
 		button.setBorder(null);
@@ -325,12 +318,8 @@ public class Index extends JFrame {
 		label_7.setBounds(13, 10, 60, 60);
 		menu5.add(label_7);
 		// 随机点名按钮
-		JButton button_9 = new JButton("\u968F\u673A\u70B9\u540D");
-		button_9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jumpRandomcall();
-			}
-		});
+		JButton button_9 = new JButton("随机点名");
+		button_9.addActionListener(new IndexActionListener(this));
 		button_9.setForeground(new Color(100, 149, 237));
 		button_9.setFont(new Font("宋体", Font.BOLD, 18));
 		button_9.setBorder(null);
@@ -360,7 +349,7 @@ public class Index extends JFrame {
 		label_8.setBounds(13, 10, 60, 60);
 		menu6.add(label_8);
 		// 分组教学按钮
-		JButton button_10 = new JButton("\u5206\u7EC4\u6559\u5B66");
+		JButton button_10 = new JButton("分组教学");
 		button_10.setForeground(new Color(100, 149, 237));
 		button_10.setFont(new Font("宋体", Font.BOLD, 18));
 		button_10.setBorder(null);
@@ -390,7 +379,7 @@ public class Index extends JFrame {
 		label_9.setBounds(13, 10, 60, 60);
 		menu7.add(label_9);
 		// 课堂小测按钮
-		JButton button_11 = new JButton("\u8BFE\u5802\u5C0F\u6D4B");
+		JButton button_11 = new JButton("课堂小测");
 		button_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -424,7 +413,7 @@ public class Index extends JFrame {
 		label_1.setBounds(13, 10, 60, 60);
 		menu8.add(label_1);
 		// 发布作业按钮
-		JButton button_2 = new JButton("\u53D1\u5E03\u4F5C\u4E1A");
+		JButton button_2 = new JButton("发布作业");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -458,7 +447,7 @@ public class Index extends JFrame {
 		label_2.setBounds(13, 10, 60, 60);
 		menu9.add(label_2);
 		// 课堂反馈按钮
-		JButton button_3 = new JButton("\u8BFE\u5802\u53CD\u9988");
+		JButton button_3 = new JButton("课堂反馈");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -492,7 +481,7 @@ public class Index extends JFrame {
 		label_3.setBounds(13, 10, 60, 60);
 		menu10.add(label_3);
 		// 资源共享按钮
-		JButton button_4 = new JButton("\u8D44\u6E90\u5171\u4EAB");
+		JButton button_4 = new JButton("资源共享");
 		button_4.setForeground(new Color(100, 149, 237));
 		button_4.setFont(new Font("宋体", Font.BOLD, 18));
 		button_4.setBorder(null);
@@ -524,25 +513,34 @@ public class Index extends JFrame {
 	public void centerContent() {
 		// 签到情况的服务
 		StudentSignInServiceImpl ss = new StudentSignInServiceImpl();
-		// 正常签到
-		List<Students> normalStu = ss.SignInStudent();
-		// 迟到签到
-		List<Students> LateStu = ss.LateStudent();
-		final Object[] columnNames = { "签到", "迟到", "旷课", "请假" };
-		int row = normalStu.size() + LateStu.size();
-		Object[][] rowData = new Object[row][6];
+		// 学生签到的情况
+		List<Object[]> signStu = ss.SignInStudent();
+		final Object[] columnNames = { "签到", "迟到", "请假", "旷课" };
+		int row = signStu.size();
+		Object[][] rowData = new Object[row][4];
 		// 正常签到的
-		int i;
-		for (i = 0; i < normalStu.size(); i++) {
-			Students s = normalStu.get(i);
-			rowData[i][0] = s.getSid() + "-" + s.getName();
+		int i = 0, j = 0, k = 0, l = 0;
+		for (Object[] stu : signStu) {
+			if ((int) stu[2] == 1) {
+				rowData[i][0] = stu[0] + "-" + stu[1];
+				i++;
+			} else if ((int) stu[2] == 2) {
+				rowData[j][1] = stu[0] + "-" + stu[1];
+				j++;
+			} else if ((int) stu[2] == 3) {
+				rowData[k][2] = stu[0] + "-" + stu[1];
+				k++;
+			} else if ((int) stu[2] == 0) {
+				rowData[l][3] = stu[0] + "-" + stu[1];
+				l++;
+			}
 		}
-		// 迟到的
-		for (int j = 0; j < LateStu.size(); j++) {
-			Students s = LateStu.get(j);
-			rowData[j][1] = s.getSid() + "-" + s.getName();
-		}
+
 		table_1 = new JTable(rowData, columnNames);
+		// 设置table内容居中显示
+		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+		tcr.setHorizontalAlignment(SwingConstants.CENTER);
+		table_1.setDefaultRenderer(Object.class, tcr);
 		table_1.setBounds(1, 32, 907, 150);
 		table_1.setFont(new Font("宋体", Font.PLAIN, 16));
 		table_1.setRowHeight(50);// 设置每行的高度
@@ -657,16 +655,12 @@ public class Index extends JFrame {
 		lmenu1.setLayout(null);
 		lmenu1.setOpaque(false);
 		// 按钮
-		JButton bt8 = new JButton("\u7B7E\u5230\u4FE1\u606F");
+		JButton bt8 = new JButton("签到信息");
 
 		// bt8.setBackground(null);
 		bt8.setBounds(0, 57, 90, 23);
 		lmenu1.add(bt8);
-		bt8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jumpIndex();
-			}
-		});
+		bt8.addActionListener(new IndexActionListener(this));
 		bt8.setBorder(null);
 
 		JLabel label_11 = new JLabel("");
@@ -690,7 +684,7 @@ public class Index extends JFrame {
 		lmenu2.setLayout(null);
 		lmenu2.setOpaque(false);
 		// 按钮
-		JButton button_12 = new JButton("\u8BFE\u5802\u52A0\u5206");
+		JButton button_12 = new JButton("课堂加分");
 		button_12.setBorder(null);
 		button_12.setBounds(0, 57, 90, 23);
 		lmenu2.add(button_12);
@@ -716,7 +710,7 @@ public class Index extends JFrame {
 		lmenu3.setLayout(null);
 		lmenu3.setOpaque(false);
 		// 按钮
-		JButton button_13 = new JButton("\u5C0F\u6D4B\u6210\u7EE9");
+		JButton button_13 = new JButton("小测成绩");
 		button_13.setBorder(null);
 		button_13.setBounds(0, 57, 90, 23);
 		lmenu3.add(button_13);
@@ -742,11 +736,8 @@ public class Index extends JFrame {
 		lmenu4.setLayout(null);
 		lmenu4.setOpaque(false);
 		// 按钮
-		JButton button_5 = new JButton("\u5B66\u751F\u4F5C\u4E1A");
-		button_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		JButton button_5 = new JButton("学生作业");
+		button_5.addActionListener(new IndexActionListener(this));
 		button_5.setBorder(null);
 		button_5.setBounds(0, 57, 90, 23);
 		lmenu4.add(button_5);
@@ -772,11 +763,9 @@ public class Index extends JFrame {
 		lmenu5.setLayout(null);
 		lmenu5.setOpaque(false);
 		// 按钮
-		JButton button_6 = new JButton("\u5907\u5FD8\u5F55");
-		button_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		JButton button_6 = new JButton("备忘录");
+		// 为按钮添加事件
+		button_6.addActionListener(new IndexActionListener(this));
 		button_6.setBorder(null);
 		button_6.setBounds(0, 57, 90, 23);
 		lmenu5.add(button_6);
@@ -938,7 +927,7 @@ public class Index extends JFrame {
 	 * Title: selectstuContent
 	 * </p>
 	 * <p>
-	 * Description:学生演示内容页（学生按钮）
+	 * Description:学生演示内容页，有小电脑和名字（学生按钮）
 	 * </p>
 	 */
 	public void selectstuContent() {
@@ -960,28 +949,8 @@ public class Index extends JFrame {
 		List<Students> listStu = ss.allSignStudent();
 		for (Students s : listStu) {
 			JButton j = new JButton(s.getName());
-			j.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					// 事件
-					// 老师新开服务
-					try {
-						System.out.println("qqqqqqqq======");
-//						ConnectStudent.setupServer(Communication.sPort);
-						new MyServiceThread().start();
-						System.out.println("jijijj");
-						// 学生名字
-						String sname = j.getText();
-						// TODO
-						// 获得IP
-						StudentServiceImpl ss = new StudentServiceImpl();
-						String ip = ss.findIp(sname);
-						service.sendCommand(ip);
-					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, "已经开过服务了。");
-					}
-
-				}
-			});
+			// 为学生的小电脑和名字添加点击事件
+			j.addActionListener(new StuShowActionListener(j, service));
 			j.setPreferredSize(new Dimension(170, 80));
 			j.setIcon(new ImageIcon("image\\stu.png"));
 			j.setHorizontalAlignment(SwingConstants.LEFT);
@@ -1038,42 +1007,6 @@ public class Index extends JFrame {
 	/**
 	 * 
 	 * <p>
-	 * Title: stuPreContent
-	 * </p>
-	 * <p>
-	 * Description: 选中某个学生桌面的内容页
-	 * </p>
-	 */
-	public void stuPreContent() {
-		JButton button = new JButton("\u9000\u51FA");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				jumpSelectstu();
-			}
-		});
-		button.setForeground(new Color(100, 149, 237));
-		button.setFont(new Font("宋体", Font.BOLD, 18));
-		button.setBorder(null);
-		button.setBackground(Color.LIGHT_GRAY);
-		button.setBounds(852, 0, 57, 21);
-
-		centerpl.add(button);
-
-		// 设置窗体大小
-		this.setBounds(0, 0, 1282, 700);
-		// 窗体大小不能改变
-		this.setResizable(false);
-		// 居中显示
-		this.setLocationRelativeTo(null);
-		// 设置图标
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("image\\logo1.png"));
-		// 窗体可见
-		this.setVisible(true);
-	}
-
-	/**
-	 * 
-	 * <p>
 	 * Title: jumpStuPre
 	 * </p>
 	 * <p>
@@ -1097,8 +1030,6 @@ public class Index extends JFrame {
 		chatView();
 		// 布局设置
 		setGroupLayout();
-		// 内容设置
-		stuPreContent();
 	}
 
 	/**
@@ -1113,31 +1044,26 @@ public class Index extends JFrame {
 	public void randomCallContent() {
 		centerpl.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("\u5B66\u53F7  \u59D3\u540D");
+		JLabel lblNewLabel_1 = new JLabel("学号  姓名");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("微软雅黑", Font.PLAIN, 30));
 		lblNewLabel_1.setBounds(184, 102, 522, 231);
 		centerpl.add(lblNewLabel_1);
 
-		JButton btnNewButton = new JButton("\u5F00\u59CB");
+		JButton btnNewButton = new JButton("开始");
 		btnNewButton.setFont(new Font("幼圆", Font.PLAIN, 18));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				lblNewLabel_1.setText("");
-			}
-		});
+		// 为开始按钮添加事件
+		btnNewButton.addActionListener(new IndexActionListener(this));
 		btnNewButton.setBounds(313, 346, 120, 41);
 		btnNewButton.setBorder(UIManager.getBorder("Button.border"));
 		btnNewButton.setBackground(new Color(230, 230, 250));
 		centerpl.add(btnNewButton);
 
-		JButton button = new JButton("\u6682\u505C");
+		JButton button = new JButton("暂停");
 		button.setBackground(new Color(230, 230, 250));
 		button.setFont(new Font("幼圆", Font.PLAIN, 18));
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		// 为暂停按钮添加事件
+		button.addActionListener(new IndexActionListener(this));
 		button.setBounds(470, 346, 120, 41);
 		centerpl.add(button);
 		// 设置窗体大小

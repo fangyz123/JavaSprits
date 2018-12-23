@@ -25,7 +25,7 @@ import team.javaSpirit.teachingAssistantPlatform.ui.MyJframe;
 public class ConnectStudent {
 	private ObjectOutputStream ous;// 输出流，传送点击事件
 	private DataInputStream ins;// 输入流，展示图片
-	private MyJframe jf = new MyJframe(ous);// 用于展示对象屏幕
+	private MyJframe jf = null;// 用于展示对象屏幕
 	// 与服务器端的连接
 	private ServerSocket serverSocket;
 
@@ -37,6 +37,9 @@ public class ConnectStudent {
 				try {
 					// 产生“阻塞”，直至客户端有人传输
 					Socket socket = serverSocket.accept();
+					if (jf == null) {
+						jf = new MyJframe(ous);
+					}
 					// 得到输入流，读取图片数据
 					ins = new DataInputStream(socket.getInputStream());
 					// 得到输出流，发送事件对象
@@ -59,9 +62,5 @@ public class ConnectStudent {
 			JOptionPane.showMessageDialog(null, "已经开过服务了。");
 		}
 	}
-
-	/*public void displayImage() {
-
-	}*/
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.util.HibernateUtil;
 
@@ -22,26 +23,21 @@ import team.javaSpirit.teachingAssistantPlatform.util.HibernateUtil;
 public class StudentSignInDaoImpl {
 
 	/**
-	 * <p>Title: searchSignInStudent</p>
-	 * <p>Description: 查看学生正常签到的情况,利用两表连接，返回学生表的信息。</p>
+	 * <p>
+	 * Title: searchSignInStudent
+	 * </p>
+	 * <p>
+	 * Description: 通过课程id，查看学生签到的情况,利用三表连接，返回学生的信息。
+	 * </p>
+	 * 
 	 * @return
 	 */
-	public List<Students> searchSignInStudent() {
+	public List<Object[]> searchSignInStudent() {
 		Session session = HibernateUtil.getSession();
-		Query q = session
-				.createQuery("select s from Students s,Studentstatus s1 where s1.record_status=1 and s.sid=s1.sid");
-		return q.list();
-	}
-	
-	/**
-	 * <p>Title: searchSignInStudent</p>
-	 * <p>Description: 查看学生签到迟到的情况,利用两表连接，返回学生表的信息。</p>
-	 * @return
-	 */
-	public List<Students> searchLateStudent() {
-		Session session = HibernateUtil.getSession();
-		Query q = session
-				.createQuery("select s from Students s,Studentstatus s1 where s1.record_status=2 and s.sid=s1.sid");
+		String sql = "select s.sid,s.name,s1.record_status from Students s,Studentstatus s1,StudentClass s2 "
+				+ "where s2.classin.class_id=? and s1.sid=s2.student.sid and s.sid=s1.sid ";
+		Query q = session.createQuery(sql);
+		q.setParameter(0, Constant.cid);
 		return q.list();
 	}
 

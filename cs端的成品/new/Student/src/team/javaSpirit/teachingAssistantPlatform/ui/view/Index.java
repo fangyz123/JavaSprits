@@ -611,7 +611,7 @@ public class Index extends JFrame {
 		closepl.setBounds(113, 14, 104, 30);
 		closepl.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("远程监控");
+		JLabel lblNewLabel_1 = new JLabel("远程共享");
 		lblNewLabel_1.setForeground(SystemColor.textInactiveText);
 		lblNewLabel_1.setBounds(10, 5, 63, 23);
 		closepl.add(lblNewLabel_1);
@@ -624,7 +624,7 @@ public class Index extends JFrame {
 		closebt.setBorder(null);
 		centerpl.add(closepl);
 		// 向contentpl中添加控件
-		JButton remortbt = new JButton("开启远程监控");
+		JButton remortbt = new JButton("开启远程连接");
 		remortbt.setForeground(SystemColor.textInactiveText);
 		remortbt.setFont(new Font("宋体", Font.PLAIN, 14));
 		remortbt.setBounds(66, 130, 129, 31);

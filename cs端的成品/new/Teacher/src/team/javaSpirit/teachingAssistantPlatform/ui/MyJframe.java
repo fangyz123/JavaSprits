@@ -51,7 +51,7 @@ public class MyJframe extends JFrame {
 		setLocation(0, 0);
 		//setSize((int) screenDimension.getWidth(), (int) screenDimension.getHeight());
 		setVisible(true); // 可见
-		setAlwaysOnTop(true);
+		setAlwaysOnTop(false);
 		setResizable(false);//不可改变jframe的大小
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		add(jLabel);
