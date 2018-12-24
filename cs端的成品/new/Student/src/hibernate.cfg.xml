@@ -49,5 +49,7 @@
 			class="team.javaSpirit.teachingAssistantPlatform.entity.Term" />
 		<mapping
 			class="team.javaSpirit.teachingAssistantPlatform.entity.Times" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.ShareResource" />
 	</session-factory>
 </hibernate-configuration>
