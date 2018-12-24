@@ -66,12 +66,14 @@ public class LoginController {
 		String role=request.getParameter("identity");
 		loginservice.insertLogin(name, role);
 		//把学号存入数据
-		request.getServletContext().setAttribute("username", name);
+		request.getSession().setAttribute("username",  name);
+		//request.getServletContext().setAttribute("username", name);
 		String username=this.loginservice.findNameUsing(name, role);
 		//把名字存入
-		request.getServletContext().setAttribute("name", username);
+		request.getSession().setAttribute("name",  username);
+		//request.getServletContext().setAttribute("name", username);
 		if(role.equals("teacher")) {
-			return "redirect:teacher/index.jsp";
+			return "redirect:Teacher/index.jsp";
 			
 		}else if(role.equals("student")) {
 			return "redirect:student/index.jsp";

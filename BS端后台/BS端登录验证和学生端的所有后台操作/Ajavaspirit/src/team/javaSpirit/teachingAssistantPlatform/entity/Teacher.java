@@ -34,7 +34,7 @@ public class Teacher {
 	private Set<LoadTeacher> teachers = new HashSet<LoadTeacher> (0);
 	
 	@Id
-	@GenericGenerator(name="myincrement",strategy="increment")
+	@GenericGenerator(name="myincrement",strategy="assigned")
 	@GeneratedValue(generator="myincrement")
 	public String getTid() {
 		return tid;
