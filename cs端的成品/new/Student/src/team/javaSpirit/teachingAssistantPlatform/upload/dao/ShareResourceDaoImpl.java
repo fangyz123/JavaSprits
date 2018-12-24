@@ -24,20 +24,23 @@ public class ShareResourceDaoImpl {
 	public static List<ShareResource> getAllResources(){
 		Session session=HibernateUtil.getSession();
 		Query query=session.createQuery("from ShareResource");
-		return query.list();
+		List<ShareResource> list=query.list();
+		session.close();
+		return list;
 	}
 	/**
 	 * 
 	 * <p>Title: saveUploadResource</p>
 	 * <p>Description: 将指定的资源保存到数据库</p>
 	 * @param sr
-	 * @return
+	 * @return 返回插入成功的对象
 	 */
 	public static Object saveUploadResource(ShareResource sr) {
 		Session session=HibernateUtil.getSession();
 		session.beginTransaction();
 		Object o=session.save(sr);
 		session.getTransaction().commit();
+		session.close();
 		return o;
 	}
 }

@@ -1,5 +1,8 @@
 package team.javaSpirit.teachingAssistantPlatform.facecheck;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacpp.opencv_imgcodecs;
 import org.bytedeco.javacpp.helper.opencv_objdetect;
@@ -9,6 +12,9 @@ import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.FrameGrabber.Exception;
+
+import team.javaSpirit.teachingAssistantPlatform.common.Constant;
+
 import org.bytedeco.javacv.OpenCVFrameConverter;
 
 /**
@@ -24,7 +30,7 @@ import org.bytedeco.javacv.OpenCVFrameConverter;
  *
  */
 public class recordCamera {
-	public static void recordCamera(FrameGrabber grabber, CanvasFrame canvas) throws Exception {
+	public static String recordCamera(FrameGrabber grabber, CanvasFrame canvas) throws Exception {
 		/**
 		 * <p>
 		 * Title:initTrain
@@ -36,6 +42,7 @@ public class recordCamera {
 		 * </p>
 		 */
 		Loader.load(opencv_objdetect.class);
+		boolean bool = false;
 		OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();// 转换器
 		IplImage grabbedImage = converter.convert(grabber.grab());
 		// 抓取一帧视频并将其转换为图像，至于用这个图像用来做什么？加水印，人脸识别等等自行添加
@@ -43,18 +50,14 @@ public class recordCamera {
 		Mat mat = converter.convertToMat(grabber.grabFrame());
 		// FrameRecorder recorder = FrameRecorder.createDefault(outputFile,
 		// width,height);
-		opencv_imgcodecs.imwrite("faceimg\\1-hello.jpg", mat);
+		String sid = Constant.myStudent.getSid();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String d = dateFormat.format(date);
+		String src = "faceimg\\" + d + "-" + sid + ".jpg";
+		opencv_imgcodecs.imwrite(src, mat);
+		bool = true;
 		System.out.println("照片保存成功");
-		System.exit(0);
-		// recorder.start();//开启录制器
-		Frame rotatedFrame = converter.convert(grabbedImage);// 不知道为什么这里不做转换就不能推到rtmp
-		while (canvas.isVisible() && (grabbedImage = converter.convert(grabber.grab())) != null) {
-			rotatedFrame = converter.convert(grabbedImage);
-			canvas.showImage(rotatedFrame);
-			if (startTime == 0) {
-				startTime = System.currentTimeMillis();
-			}
-
-		}
+		return src;
 	}
 }

@@ -18,7 +18,7 @@
 
 		<!-- 【实体类映射】 -->
 		<mapping
-			class="team.javaSpirit.teachingAssistantPlatform.entity.ClassAdministration" />
+			class="team.javaSpirit.teachingAssistantPlatform.entity.ClassAdministration"/>
 		<mapping
 			class="team.javaSpirit.teachingAssistantPlatform.entity.ClassCourse" />
 		<mapping

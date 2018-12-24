@@ -8,6 +8,9 @@ import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.OpenCVFrameConverter.ToIplImage;
+
+import team.javaSpirit.teachingAssistantPlatform.firstcheck.FirstRecord;
+
 import org.bytedeco.javacv.OpenCVFrameGrabber;
 
 /**
@@ -22,7 +25,7 @@ import org.bytedeco.javacv.OpenCVFrameGrabber;
  * @date 2018年11月19日
  */
 public class JcvTest {
-	public static void captureFace() throws Exception, InterruptedException, IOException {
+	public static String captureFace() throws Exception, InterruptedException, IOException {
 		/**
 		 * <p>
 		 * Title:initTrain
@@ -47,30 +50,32 @@ public class JcvTest {
 		canvas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		System.out.println("获取摄像头成功");
 		System.out.println("检测人脸");
+		String imagesrc = null;
 		while (true) {
-			if (!canvas.isDisplayable()) {
-				grabber.stop();// 停止抓取
-			}
 			Frame frame = grabber.grab();
 			ToIplImage ti = new ToIplImage();
 			Mat src = ti.convertToMat(frame);
 			boolean bool=true;
 			FaceDetection.faceDetection(src,bool);
 			canvas.showImage(frame);// 获取摄像头图像并放到窗口上显示，frame是一帧视频图像
-			
-			if (FaceDetection.faceDetection(src,bool)!=-1&&c) {
+			if (FaceDetection.faceDetection(src,bool)==0&&c) {
 				c=false;
-				recordCamera.recordCamera(grabber,canvas);
+				imagesrc = recordCamera.recordCamera(grabber,canvas);
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				canvas.dispose();
 			}
+			if (!canvas.isDisplayable()) {
+				grabber.stop();// 停止抓取
+				break;
+			}
 			canvas.setAlwaysOnTop(true);
 			Thread.sleep(50);// 50毫秒刷新一次图像
 		}
+		return imagesrc;
 	}
 
 }

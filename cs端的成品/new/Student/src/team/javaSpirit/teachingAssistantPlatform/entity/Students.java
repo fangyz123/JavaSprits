@@ -38,6 +38,8 @@ public class Students {
 	private ClassAdministration classAdministrantion;
 	/* 学生ip */
 	private String ip;
+	/* 图片信息 */
+	private String image;
 
 	@Id
 	@GenericGenerator(name = "myincrement", strategy = "assigned")
@@ -90,6 +92,14 @@ public class Students {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

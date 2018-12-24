@@ -16,25 +16,55 @@ import team.javaSpirit.teachingAssistantPlatform.util.HibernateUtil;
 
 public class StudentCourseDao {
 	/**
-	 * <p>Title: getStudentById</p>
-	 * <p>Description: 通过学号，查询学生对象。</p>
+	 * <p>
+	 * Title: getStudentById
+	 * </p>
+	 * <p>
+	 * Description: 通过学号，查询学生对象。
+	 * </p>
+	 * 
 	 * @param sid 学号
 	 * @return 学生对象
 	 */
 	public Students getStudentById(String sid) {
 		Session session = HibernateUtil.getSession();
-		return session.get(Students.class, sid);
+		Students s = session.get(Students.class, sid);
+		session.close();
+		return s;
 	}
 	/**
-	 * <p>Title: getClassCourseBycid</p>
-	 * <p>Description: 通过课程班级号，查班级课程</p>
+	 * <p>Title: setImageById</p>
+	 * <p>Description: 第一次签到，保存图片/p>
+	 * @param sid 学生学号
+	 * @param image 图片路径
+	 */
+	public void setImageById(String sid,String image) {
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		Students s=session.get(Students.class, sid);
+		s.setImage(image);
+		tx.commit();
+		session.close();
+	}
+
+	/**
+	 * <p>
+	 * Title: getClassCourseBycid
+	 * </p>
+	 * <p>
+	 * Description: 通过课程班级号，查班级课程
+	 * </p>
+	 * 
 	 * @param cid 课程班级号
 	 * @return 课程班级对象
 	 */
 	public ClassCourse getClassCourseBycid(int cid) {
 		Session session = HibernateUtil.getSession();
-		return session.get(ClassCourse.class, cid);
+		ClassCourse cc = session.get(ClassCourse.class, cid);
+		session.close();
+		return cc;
 	}
+
 	/**
 	 * <p>
 	 * Title: allCourse
@@ -50,7 +80,9 @@ public class StudentCourseDao {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("select classin.class_id from StudentClass where student.sid=?");
 		q.setParameter(0, sid);
-		return q.list();
+		List<Integer> list = q.list();
+		session.close();
+		return list;
 	}
 
 	/**
@@ -68,7 +100,9 @@ public class StudentCourseDao {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("from Times where classin.class_id=?");
 		q.setParameter(0, class_id);
-		return q.list();
+		List<Times> list = q.list();
+		session.close();
+		return list;
 	}
 
 	/**
@@ -84,7 +118,9 @@ public class StudentCourseDao {
 	public Date getStartTime() {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("select time_begin from Term where status=1");
-		return (Date) q.uniqueResult();
+		Date date = (Date) q.uniqueResult();
+		session.close();
+		return date;
 	}
 
 	/**
@@ -102,8 +138,11 @@ public class StudentCourseDao {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("select start_time from NodeNumber where node_id=?");
 		q.setParameter(0, node_id);
-		return (String) q.uniqueResult();
+		String s = (String) q.uniqueResult();
+		session.close();
+		return s;
 	}
+
 	/**
 	 * <p>
 	 * Title: getEndTime
@@ -119,7 +158,9 @@ public class StudentCourseDao {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("select end_time from NodeNumber where node_id=?");
 		q.setParameter(0, node_id);
-		return (String) q.uniqueResult();
+		String s = (String) q.uniqueResult();
+		session.close();
+		return s;
 	}
 
 	/**
@@ -132,7 +173,7 @@ public class StudentCourseDao {
 	 * 
 	 * @param r 签到表的对象
 	 */
-	public void insertRecort(Students sid,ClassCourse cid,String image) {
+	public void insertRecort(Students sid, ClassCourse cid, String image) {
 		Session session = HibernateUtil.getSession();
 		Record record = new Record();
 		Transaction tx = session.beginTransaction();
@@ -143,11 +184,12 @@ public class StudentCourseDao {
 		record.setImage(image);
 		session.save(record);
 		tx.commit();
+		session.close();
 	}
 
 	/**
-	 * Title: getStudentStatus
-	 * Description: 得到学生签到状态。
+	 * Title: getStudentStatus Description: 得到学生签到状态。
+	 * 
 	 * @param sid 学号
 	 * @return 学生签到状态
 	 */
@@ -155,12 +197,19 @@ public class StudentCourseDao {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("select record_status from Studentstatus where sid=?");
 		q.setParameter(0, sid);
-		return (int)q.uniqueResult();
+		int status = (int) q.uniqueResult();
+		session.close();
+		return status;
 	}
-	
+
 	/**
-	 * <p>Title: findCname</p>
-	 * <p>Description: 通过课程号，找到课程班级名</p>
+	 * <p>
+	 * Title: findCname
+	 * </p>
+	 * <p>
+	 * Description: 通过课程号，找到课程班级名
+	 * </p>
+	 * 
 	 * @param cid 课程班级号
 	 * @return 课程班级名
 	 */
@@ -168,20 +217,28 @@ public class StudentCourseDao {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("select class_name from ClassCourse where class_id=?");
 		q.setParameter(0, cid);
-		return (String)q.uniqueResult();
+		String s = (String) q.uniqueResult();
+		session.close();
+		return s;
 	}
-	
+
 	/**
-	 * <p>Title: changeStudentStatus</p>
-	 * <p>Description: 签到成功，修改状态，正常签到为1，迟到为2</p>
+	 * <p>
+	 * Title: changeStudentStatus
+	 * </p>
+	 * <p>
+	 * Description: 签到成功，修改状态，正常签到为1，迟到为2
+	 * </p>
+	 * 
 	 * @param sid 学号
 	 */
-	public void changeStudentStatus(String sid,int status) {
+	public void changeStudentStatus(String sid, int status) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		Studentstatus studentstatus = session.get(Studentstatus.class, sid);
 		studentstatus.setRecord_status(status);
 		tx.commit();
+		session.close();
 	}
 
 }

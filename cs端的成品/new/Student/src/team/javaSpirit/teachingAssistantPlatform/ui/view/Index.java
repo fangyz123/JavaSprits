@@ -23,6 +23,7 @@ import javax.swing.border.BevelBorder;
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.entity.ShareResource;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
+import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
 import team.javaSpirit.teachingAssistantPlatform.signIn.service.StudentCourseService;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.IndexActionListener;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.RemoteMouseListener;
@@ -181,7 +182,10 @@ public class Index extends JFrame {
 		menu1.setBorder(null);
 		menu1.setForeground(new Color(255, 255, 255));
 		menu1.setLayout(null);
-		menu1.addMouseListener(new SignMouseListener(this));
+		// 事件对象
+		SignMouseListener signEvent = new SignMouseListener(this);
+		// 事件监听
+		menu1.addMouseListener(signEvent);
 		// 签到图标
 		JLabel lb1 = new JLabel("");
 		lb1.setBounds(13, 10, 60, 60);
@@ -195,7 +199,8 @@ public class Index extends JFrame {
 		menu1.add(bt1);
 		bt1.setFont(new Font("宋体", Font.BOLD, 14));
 		bt1.setForeground(new Color(100, 149, 237));
-		bt1.addActionListener(event);
+		// 事件监听
+		bt1.addMouseListener(signEvent);
 		bt1.setBorder(null);
 		bt1.setBackground(Color.WHITE);
 		bgContentPane.add(menu1);
@@ -219,12 +224,15 @@ public class Index extends JFrame {
 				g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
 			}
 		};
-		menu7.addMouseListener(new ShareResourceMouseListener(this));
+		// 事件对象
+		ShareResourceMouseListener shareEvent = new ShareResourceMouseListener(this);
+		// 添加事件
+		menu7.addMouseListener(shareEvent);
 		menu7.setBounds(785, 28, 88, 99);
 		menu7.setBorder(null);
 		menu7.setForeground(Color.WHITE);
 		menu7.setLayout(null);
-		
+
 		// 资源共享菜单图标
 		JLabel lb7 = new JLabel("");
 		lb7.setBounds(13, 10, 60, 60);
@@ -232,13 +240,14 @@ public class Index extends JFrame {
 		lb7.setIcon(new ImageIcon("image/menu7.jpg"));
 		// 资源共享菜单按钮
 		JButton bt7 = new JButton("资源共享");
-		bt7.addMouseListener(new ShareResourceMouseListener(this));
+		// 添加事件
+		bt7.addMouseListener(shareEvent);
 		bt7.setBounds(13, 70, 61, 17);
 		bt7.setForeground(new Color(100, 149, 237));
 		bt7.setFont(new Font("宋体", Font.BOLD, 14));
 		bt7.setBorder(null);
 		bt7.setBackground(Color.WHITE);
-		
+
 		menu7.add(bt7);
 		bgContentPane.add(menu7);
 	}
@@ -729,12 +738,16 @@ public class Index extends JFrame {
 		List<ShareResource> list = ShareResourceDaoImpl.getAllResources();
 		// 遍历所有已上传的资源
 		for (ShareResource sr : list) {
-			if (sr.getOldfile() == null || sr.getStu() == null || sr.getUploadtime() == null) {
-
-			} else {
+			if (sr.getOldfile() != null && sr.getUploadtime() != null) {
 				Students s = sr.getStu();
-				JLabel jl = new JLabel(
-						"题目：" + sr.getOldfile() + "   上传者：" + s.getName() + "    时间：" + sr.getUploadtime());
+				Teacher t = sr.getTeacher();
+				JLabel jl = null;
+				if (t == null) {
+					jl = new JLabel("题目：" + sr.getOldfile() + "   上传者：" + s.getName() + "    时间：" + sr.getUploadtime());
+				} else if (s == null) {
+					jl = new JLabel(
+							"题目：" + sr.getOldfile() + "   上传者：" + t.getTname() + "    时间：" + sr.getUploadtime());
+				}
 				jl.setFont(new Font("宋体", Font.BOLD, 14));
 				jl.setPreferredSize(new Dimension(700, 45));
 				jl.setHorizontalAlignment(SwingConstants.CENTER);

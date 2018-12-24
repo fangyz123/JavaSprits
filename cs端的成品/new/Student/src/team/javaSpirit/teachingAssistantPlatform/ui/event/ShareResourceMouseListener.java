@@ -25,13 +25,11 @@ public class ShareResourceMouseListener implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	//鼠标进入共享资源菜单时改变鼠标形状

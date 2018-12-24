@@ -18,6 +18,7 @@ public class ShareResource {
 	private String newfile;
 	private Students stu;
 	private Date uploadtime;
+	private Teacher teacher;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getId() {
@@ -45,6 +46,14 @@ public class ShareResource {
 	}
 	public void setStu(Students stu) {
 		this.stu = stu;
+	}
+	@ManyToOne
+	@JoinColumn(name="tid")
+	public Teacher getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 	public Date getUploadtime() {
 		return uploadtime;

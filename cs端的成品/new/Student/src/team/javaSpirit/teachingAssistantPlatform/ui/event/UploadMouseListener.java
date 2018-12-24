@@ -36,7 +36,7 @@ public class UploadMouseListener implements MouseListener {
 		int x=jchooser.showDialog(new JLabel(), "确定");
 		if(x==JFileChooser.APPROVE_OPTION) {
 			File file=jchooser.getSelectedFile();
-			//将指定的文件保持到本地和数据库
+			//将指定的文件保存到本地和数据库
 			ShareResourceServiceImpl ss=new ShareResourceServiceImpl();
 			//判断文件是否上传成功并做出回应
 			int i=ss.saveSelectedFile(file);
@@ -52,25 +52,21 @@ public class UploadMouseListener implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
