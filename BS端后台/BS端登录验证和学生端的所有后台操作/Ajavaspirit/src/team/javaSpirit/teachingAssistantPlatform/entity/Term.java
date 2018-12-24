@@ -1,6 +1,7 @@
 package team.javaSpirit.teachingAssistantPlatform.entity;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +20,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="term")
 public class Term {
-	int term_id;//序列号
-	Date time_begin;//学期开始日期
-	Date time_end;//学期结束日期
-	int status;//学期状态
+	private int term_id;//序列号
+	private Date time_begin;//学期开始日期
+	private Date time_end;//学期结束日期
+	private int status;//学期状态
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

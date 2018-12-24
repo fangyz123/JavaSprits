@@ -27,13 +27,15 @@ public class StudentController {
 	private StudentService studentservice;
 	
 	@RequestMapping("/change")
-	public void changeNews(HttpServletRequest request) {
+	public String changeNews(HttpServletRequest request) {
 		System.out.println("change");
-		Object obj=request.getServletContext().getAttribute("username");
+		//Object obj=request.getServletContext().getAttribute("username");
+		Object obj=request.getSession().getAttribute("username");
 		String sid=(String)obj;
 		String password=request.getParameter("password");
 		studentservice.changePassword(sid, password);
 		System.out.println(password);
+		return "redirect:student/index.jsp";
 	}
 	
 	
@@ -49,7 +51,7 @@ public class StudentController {
 		//ÉÏ´«Í¼Æ¬
 		String rootPath=request.getServletContext().getRealPath("/");
 		String o=rootPath+"/"+"upload/";
-		String name=(String)request.getServletContext().getAttribute("username");
+		String name=(String)request.getSession().getAttribute("username");
 		//Random ra =new Random();
 		
 		//(int)(1+Math.random()*(10-1+1));
@@ -97,7 +99,7 @@ public class StudentController {
 	public String changedown(HttpServletRequest request,HttpServletResponse response) {
 		String exists="down";
 		request.getServletContext().setAttribute("exists", exists);
-		String username=(String)request.getServletContext().getAttribute("username");
+		String username=(String)request.getSession().getAttribute("username");
 		List<LeavePaper> set=this.studentservice.searchPicture(username);
 		request.getServletContext().setAttribute("pictures", set);
 		return "redirect:student/papers.jsp";

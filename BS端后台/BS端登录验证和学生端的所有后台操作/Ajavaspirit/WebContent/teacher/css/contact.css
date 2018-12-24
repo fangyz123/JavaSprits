@@ -37,25 +37,6 @@
     transition: 0.5s all;
     font-weight: 700;
 }
-<!- 修改格式->
-.contact-left input[type="submit"] {
-    outline: none;
-    padding: 15px 0;
-    font-size: 14px;
-    color: #fff;
-    background: #000000;
-    width: 45.6%;
-    border: none;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-left: 1.4em;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    transition: 0.5s all;
-    font-weight: 700;
-}
 .contact-left h4 {
     color: #444;
     font-size: 1em;
@@ -220,10 +201,6 @@
 }
 
 @media(max-width:320px) {}
-
-.select{
-    padding: 15px 15px;
-}
 
 
 /*--//responsive--*/
