@@ -49,14 +49,16 @@ public class StudentController {
 		String teacher=request.getParameter("tea");
 		System.out.println("leaev");
 		//ÉÏ´«Í¼Æ¬
-		String rootPath=request.getServletContext().getRealPath("/");
-		String o=rootPath+"/"+"upload/";
+		String rootPath=request.getServletContext().getRealPath("/upload");
+		//String rootPath="D:\\JavaEEnew\\workpath\\Ajavaspirit\\WebContent\\upload";
+		System.out.println("Â·¾¶ °¡"+rootPath);
+		//String o=rootPath+"/"+"upload/";
 		String name=(String)request.getSession().getAttribute("username");
 		//Random ra =new Random();
 		
 		//(int)(1+Math.random()*(10-1+1));
 		String nameNow=name+file.getOriginalFilename();
-		File targetFile = new File(o, nameNow);
+		File targetFile = new File(rootPath, nameNow);
 		if (!targetFile.exists()) {
 		    targetFile.mkdirs();
 		}

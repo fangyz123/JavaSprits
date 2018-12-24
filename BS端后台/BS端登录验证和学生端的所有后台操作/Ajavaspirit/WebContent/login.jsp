@@ -86,8 +86,8 @@
 							$("#checkLogin").text("");
 							result=true;
 						} else {
-							alert("密码不正确！");
-							//$("#checkLogin").text("密码不正确！");
+							//alert("密码不正确！");
+							$("#checkPassword").text("密码不正确！");
 							result=false;
 						}
 					}
