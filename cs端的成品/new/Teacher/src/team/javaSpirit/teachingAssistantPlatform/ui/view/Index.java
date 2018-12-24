@@ -10,6 +10,9 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -98,6 +101,8 @@ public class Index extends JFrame {
 	private JPanel panel_5;
 	/* 左侧聊天文本编辑框 */
 	private JTextField textField;
+	/* 监听事件 */
+	private IndexActionListener event;
 
 	/**
 	 * Launch the application.
@@ -161,7 +166,7 @@ public class Index extends JFrame {
 		// 按钮
 		JButton button_1 = new JButton("远程监控");
 		// 添加事件
-		button_1.addActionListener(new IndexActionListener(this));
+		button_1.addActionListener(event);
 		button_1.setForeground(new Color(100, 149, 237));
 		button_1.setFont(new Font("宋体", Font.BOLD, 18));
 		button_1.setBorder(null);
@@ -208,7 +213,7 @@ public class Index extends JFrame {
 		menu2.add(label_4);
 		// 录屏按钮
 		JButton button_7 = new JButton("录屏");
-		button_7.addActionListener(new IndexActionListener(this));
+		button_7.addActionListener(event);
 		button_7.setForeground(new Color(100, 149, 237));
 		button_7.setFont(new Font("宋体", Font.BOLD, 18));
 		button_7.setBorder(null);
@@ -248,7 +253,7 @@ public class Index extends JFrame {
 		// 广播按钮
 		JButton button_8 = new JButton("广播");
 		// 添加事件
-		button_8.addActionListener(new IndexActionListener(this));
+		button_8.addActionListener(event);
 		button_8.setForeground(new Color(100, 149, 237));
 		button_8.setFont(new Font("宋体", Font.BOLD, 18));
 		button_8.setBorder(null);
@@ -288,11 +293,11 @@ public class Index extends JFrame {
 		menu4.add(label_6);
 		// 学生演示按钮
 		JButton button = new JButton("学生演示");
-		button.addActionListener(new IndexActionListener(this));
+		button.addActionListener(event);
 		button.setForeground(new Color(100, 149, 237));
 		button.setFont(new Font("宋体", Font.BOLD, 18));
 		button.setBorder(null);
-		button.setBackground(null);
+		button.setBackground(Color.WHITE);
 		button.setBounds(0, 70, 88, 16);
 		menu4.add(button);
 	}
@@ -319,11 +324,11 @@ public class Index extends JFrame {
 		menu5.add(label_7);
 		// 随机点名按钮
 		JButton button_9 = new JButton("随机点名");
-		button_9.addActionListener(new IndexActionListener(this));
+		button_9.addActionListener(event);
 		button_9.setForeground(new Color(100, 149, 237));
 		button_9.setFont(new Font("宋体", Font.BOLD, 18));
 		button_9.setBorder(null);
-		button_9.setBackground(null);
+		button_9.setBackground(Color.WHITE);
 		button_9.setBounds(0, 70, 88, 16);
 		menu5.add(button_9);
 	}
@@ -353,7 +358,7 @@ public class Index extends JFrame {
 		button_10.setForeground(new Color(100, 149, 237));
 		button_10.setFont(new Font("宋体", Font.BOLD, 18));
 		button_10.setBorder(null);
-		button_10.setBackground(null);
+		button_10.setBackground(Color.WHITE);
 		button_10.setBounds(0, 70, 88, 16);
 		menu6.add(button_10);
 	}
@@ -387,7 +392,7 @@ public class Index extends JFrame {
 		button_11.setForeground(new Color(100, 149, 237));
 		button_11.setFont(new Font("宋体", Font.BOLD, 18));
 		button_11.setBorder(null);
-		button_11.setBackground(null);
+		button_11.setBackground(Color.WHITE);
 		button_11.setBounds(0, 70, 88, 16);
 		menu7.add(button_11);
 	}
@@ -421,7 +426,7 @@ public class Index extends JFrame {
 		button_2.setForeground(new Color(100, 149, 237));
 		button_2.setFont(new Font("宋体", Font.BOLD, 18));
 		button_2.setBorder(null);
-		button_2.setBackground(null);
+		button_2.setBackground(Color.WHITE);
 		button_2.setBounds(0, 70, 88, 16);
 		menu8.add(button_2);
 	}
@@ -455,7 +460,7 @@ public class Index extends JFrame {
 		button_3.setForeground(new Color(100, 149, 237));
 		button_3.setFont(new Font("宋体", Font.BOLD, 18));
 		button_3.setBorder(null);
-		button_3.setBackground(null);
+		button_3.setBackground(Color.WHITE);
 		button_3.setBounds(0, 70, 88, 16);
 		menu9.add(button_3);
 	}
@@ -485,7 +490,7 @@ public class Index extends JFrame {
 		button_4.setForeground(new Color(100, 149, 237));
 		button_4.setFont(new Font("宋体", Font.BOLD, 18));
 		button_4.setBorder(null);
-		button_4.setBackground(null);
+		button_4.setBackground(Color.WHITE);
 		button_4.setBounds(0, 70, 88, 16);
 		menu10.add(button_4);
 	}
@@ -518,7 +523,6 @@ public class Index extends JFrame {
 		final Object[] columnNames = { "签到", "迟到", "请假", "旷课" };
 		int row = signStu.size();
 		Object[][] rowData = new Object[row][4];
-		// 正常签到的
 		int i = 0, j = 0, k = 0, l = 0;
 		for (Object[] stu : signStu) {
 			if ((int) stu[2] == 1) {
@@ -660,7 +664,7 @@ public class Index extends JFrame {
 		// bt8.setBackground(null);
 		bt8.setBounds(0, 57, 90, 23);
 		lmenu1.add(bt8);
-		bt8.addActionListener(new IndexActionListener(this));
+		bt8.addActionListener(event);
 		bt8.setBorder(null);
 
 		JLabel label_11 = new JLabel("");
@@ -737,7 +741,7 @@ public class Index extends JFrame {
 		lmenu4.setOpaque(false);
 		// 按钮
 		JButton button_5 = new JButton("学生作业");
-		button_5.addActionListener(new IndexActionListener(this));
+		button_5.addActionListener(event);
 		button_5.setBorder(null);
 		button_5.setBounds(0, 57, 90, 23);
 		lmenu4.add(button_5);
@@ -765,7 +769,7 @@ public class Index extends JFrame {
 		// 按钮
 		JButton button_6 = new JButton("备忘录");
 		// 为按钮添加事件
-		button_6.addActionListener(new IndexActionListener(this));
+		button_6.addActionListener(event);
 		button_6.setBorder(null);
 		button_6.setBounds(0, 57, 90, 23);
 		lmenu5.add(button_6);
@@ -1053,7 +1057,8 @@ public class Index extends JFrame {
 		JButton btnNewButton = new JButton("开始");
 		btnNewButton.setFont(new Font("幼圆", Font.PLAIN, 18));
 		// 为开始按钮添加事件
-		btnNewButton.addActionListener(new IndexActionListener(this));
+		event.setLblNewLabel_1(lblNewLabel_1);
+		btnNewButton.addActionListener(event);
 		btnNewButton.setBounds(313, 346, 120, 41);
 		btnNewButton.setBorder(UIManager.getBorder("Button.border"));
 		btnNewButton.setBackground(new Color(230, 230, 250));
@@ -1063,7 +1068,7 @@ public class Index extends JFrame {
 		button.setBackground(new Color(230, 230, 250));
 		button.setFont(new Font("幼圆", Font.PLAIN, 18));
 		// 为暂停按钮添加事件
-		button.addActionListener(new IndexActionListener(this));
+		button.addActionListener(event);
 		button.setBounds(470, 346, 120, 41);
 		centerpl.add(button);
 		// 设置窗体大小
@@ -1115,5 +1120,25 @@ public class Index extends JFrame {
 	public Index() {
 		// 设置关闭状态
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		event = new IndexActionListener(this);
+		// 窗口最小化时软件dispose
+		this.addWindowListener(new WindowAdapter() {
+			// 图标化窗口时调用事件
+			public void windowIconified(WindowEvent e) {
+				dispose(); // 窗口最小化时dispose该窗口
+			}
+		});
+		this.addWindowStateListener(new WindowStateListener() {
+			public void windowStateChanged(WindowEvent state) {
+				if (state.getNewState() == 1 || state.getNewState() == 7) {
+					Suspensionbox s = new Suspensionbox();
+					System.out.println("窗口最小化");
+				} else if (state.getNewState() == 0) {
+					System.out.println("窗口恢复到初始状态");
+				}
+			}
+		});
+		this.setVisible(true);
 	}
+
 }
