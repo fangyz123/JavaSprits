@@ -12,6 +12,7 @@ import team.javaSpirit.teachingAssistantPlatform.entity.ClassCourse;
 import team.javaSpirit.teachingAssistantPlatform.entity.NodeNumber;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.entity.Times;
+import team.javaSpirit.teachingAssistantPlatform.facecheck.JcvTest;
 import team.javaSpirit.teachingAssistantPlatform.firstcheck.FirstInvoke;
 import team.javaSpirit.teachingAssistantPlatform.signIn.dao.StudentCourseDao;
 
@@ -87,6 +88,7 @@ public class StudentCourseService {
 		}
 		return false;
 	}
+	
 
 	/**
 	 * <p>
@@ -180,6 +182,10 @@ public class StudentCourseService {
 		return false;
 	}
 
+
+	public void setImg(String sid,String image) {
+		studentCourse.setImageById(sid, image);
+	}
 	/**
 	 * <p>
 	 * Title: findCname
@@ -208,12 +214,15 @@ public class StudentCourseService {
 	 * @throws IOException
 	 * @throws Exception
 	 */
-	public String face() throws InterruptedException, IOException, Exception {
+	public void firstFace() throws InterruptedException, IOException, Exception {
 		Constant.imgsrc = null;
 		Constant.imgsrc = FirstInvoke.firstInvoke();
-		return Constant.imgsrc;
 	}
 
+	public void faceCheck() throws InterruptedException, IOException, Exception {
+		Constant.imgsrc = null;
+		Constant.imgsrc = JcvTest.captureFace();
+	}
 	/**
 	 * <p>
 	 * Title: insertRecort

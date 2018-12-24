@@ -35,8 +35,8 @@ public class LoadStudentDaoImpl {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		session.save(ls);
-//		session.close();
 		tx.commit();
+		session.close();
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class LoadStudentDaoImpl {
 	public Students getStudentById(String sid) {
 		Session session = HibernateUtil.getSession();
 		Students s = session.get(Students.class, sid);
-//		session.close();
+		session.close();
 		return s;
 	}
 
@@ -73,9 +73,9 @@ public class LoadStudentDaoImpl {
 		Transaction tx = session.beginTransaction();
 		Students p = session.get(Students.class, s.getSid());
 		p.setIp(ip);
-//		session.close();
 //		session.update(p);可写可不写
 		tx.commit();
+		session.close();
 		return p;
 	}
 
@@ -84,8 +84,8 @@ public class LoadStudentDaoImpl {
 		Transaction tx = session.beginTransaction();
 		Students p = session.get(Students.class, s.getSid());
 		p.setPassword(pwd);
-//		session.close();
 //		session.update(p);可写可不写
 		tx.commit();
+		session.close();
 	}
 }

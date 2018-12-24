@@ -53,7 +53,7 @@ public class IndexActionListener implements ActionListener {
 				&& scs.getStudentStatus(Constant.myStudent.getSid()) == 0) {
 			try {
 				// 人脸识别
-				scs.face();
+				scs.firstFace();
 				// 修改数据库
 				scs.changeState(Constant.myStudent.getSid());
 				scs.insertRecort(Constant.myStudent.getSid());
