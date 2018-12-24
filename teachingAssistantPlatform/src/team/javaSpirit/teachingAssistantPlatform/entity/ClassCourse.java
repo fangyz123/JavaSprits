@@ -22,7 +22,7 @@ import javax.persistence.Table;
  * 上课班级
  */
 @Entity
-@Table(name="classCourse")
+@Table(name="classcourse")
 public class ClassCourse {
 	private int class_id;//上课班级号
 	private String class_name;//班级名字

@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * 教师登录类
  */
 @Entity
-@Table(name="loadTeacher")
+@Table(name="loadteacher")
 public class LoadTeacher {
 	private int id;//流水号
 	private Date login_time;//登录时间
