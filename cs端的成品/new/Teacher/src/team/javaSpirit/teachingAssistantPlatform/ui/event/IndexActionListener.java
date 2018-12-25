@@ -45,16 +45,7 @@ public class IndexActionListener implements ActionListener {
 			// 没有实现录屏的功能
 		} else if ("广播".equals(e.getActionCommand())) {
 			// 没有实现广播的功能
-		} else if ("学生演示".equals(e.getActionCommand())) {
-			// 跳转到学生演示界面，显示每个学生的小电脑和名字
-			this.index.jumpSelectstu();
-		} else if ("随机点名".equals(e.getActionCommand())) {
-			// 跳转到随机点名界面，展示"学号 姓名"、开始和暂停的按钮
-			this.index.jumpRandomcall();
-		} else if ("签到信息".equals(e.getActionCommand())) {
-			// 显示学生的签到情况
-			this.index.jumpIndex();
-		} else if ("学生作业".equals(e.getActionCommand())) {
+		}else if ("学生作业".equals(e.getActionCommand())) {
 			// 没有实现学生作业的功能
 		} else if ("开始".equals(e.getActionCommand())) {
 			// 随机点名的事件

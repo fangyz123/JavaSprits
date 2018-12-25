@@ -32,13 +32,22 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.course.service.CourseServiceImpl;
+import team.javaSpirit.teachingAssistantPlatform.entity.ShareResource;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
+import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.Service;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.StudentSignServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.studentSignIn.service.StudentSignInServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.IndexActionListener;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.MyItemListener;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.RandomCallMouseListener;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.ResourceMouseListener;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.ShareResourceMouseListener;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.StuShowActionListener;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.StudentShowMouseListener;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.StudentSignMouseListener;
+import team.javaSpirit.teachingAssistantPlatform.ui.event.UploadMouseListener;
+import team.javaSpirit.teachingAssistantPlatform.upload.dao.ShareResourceDaoImpl;
 
 /**
  * 
@@ -287,19 +296,24 @@ public class Index extends JFrame {
 		menu4.setBounds(321, 18, 88, 99);
 		menu4.setBorder(null);
 		menu4.setOpaque(false);
+
 		JLabel label_6 = new JLabel("");
 		label_6.setIcon(new ImageIcon("image\\xsys.png"));
 		label_6.setBounds(13, 10, 60, 60);
 		menu4.add(label_6);
 		// 学生演示按钮
 		JButton button = new JButton("学生演示");
-		button.addActionListener(event);
 		button.setForeground(new Color(100, 149, 237));
 		button.setFont(new Font("宋体", Font.BOLD, 18));
 		button.setBorder(null);
 		button.setBackground(Color.WHITE);
 		button.setBounds(0, 70, 88, 16);
 		menu4.add(button);
+		// 事件对象
+		StudentShowMouseListener stuShow = new StudentShowMouseListener(this);
+		// 添加事件监听
+		menu4.addMouseListener(stuShow);
+		button.addMouseListener(stuShow);
 	}
 
 	/**
@@ -324,13 +338,17 @@ public class Index extends JFrame {
 		menu5.add(label_7);
 		// 随机点名按钮
 		JButton button_9 = new JButton("随机点名");
-		button_9.addActionListener(event);
 		button_9.setForeground(new Color(100, 149, 237));
 		button_9.setFont(new Font("宋体", Font.BOLD, 18));
 		button_9.setBorder(null);
 		button_9.setBackground(Color.WHITE);
 		button_9.setBounds(0, 70, 88, 16);
 		menu5.add(button_9);
+		// 事件对象
+		RandomCallMouseListener randomCall = new RandomCallMouseListener(this);
+		// 添加事件监听
+		menu5.addMouseListener(randomCall);
+		button_9.addMouseListener(randomCall);
 	}
 
 	/**
@@ -485,6 +503,7 @@ public class Index extends JFrame {
 		label_3.setIcon(new ImageIcon("image\\zygx.png"));
 		label_3.setBounds(13, 10, 60, 60);
 		menu10.add(label_3);
+		menu10.addMouseListener(new ShareResourceMouseListener(this));
 		// 资源共享按钮
 		JButton button_4 = new JButton("资源共享");
 		button_4.setForeground(new Color(100, 149, 237));
@@ -493,6 +512,7 @@ public class Index extends JFrame {
 		button_4.setBackground(Color.WHITE);
 		button_4.setBounds(0, 70, 88, 16);
 		menu10.add(button_4);
+		button_4.addMouseListener(new ShareResourceMouseListener(this));
 	}
 
 	/**
@@ -608,8 +628,8 @@ public class Index extends JFrame {
 		chatView();
 		// 布局设置
 		setGroupLayout();
-		// 学生信息滚动表格设置
-		centerContent();
+		// 学生演示滚动表格设置
+		selectstuContent();
 	}
 
 	/**
@@ -658,20 +678,23 @@ public class Index extends JFrame {
 		lmenu1.setBounds(19, 135, 90, 80);
 		lmenu1.setLayout(null);
 		lmenu1.setOpaque(false);
-		// 按钮
-		JButton bt8 = new JButton("签到信息");
-
-		// bt8.setBackground(null);
-		bt8.setBounds(0, 57, 90, 23);
-		lmenu1.add(bt8);
-		bt8.addActionListener(event);
-		bt8.setBorder(null);
 
 		JLabel label_11 = new JLabel("");
 		label_11.setIcon(new ImageIcon("image\\left.png"));
 		label_11.setBounds(28, 0, 62, 55);
 		lmenu1.add(label_11);
+		// 按钮
+		JButton bt8 = new JButton("签到信息");
+		bt8.setBounds(0, 57, 90, 23);
+		bt8.setBorder(null);
 		lmenu1.setLayout(null);
+		lmenu1.add(bt8);
+
+		// 事件对象
+		StudentSignMouseListener studentSign = new StudentSignMouseListener(this);
+		// 添加事件监听
+		lmenu1.addMouseListener(studentSign);
+		bt8.addMouseListener(studentSign);
 	}
 
 	/**
@@ -921,7 +944,7 @@ public class Index extends JFrame {
 		chatView();
 		// 布局设置
 		setGroupLayout();
-		// 内容设置
+		// 内容页，显示学生签到请假情况
 		centerContent();
 	}
 
@@ -1004,8 +1027,114 @@ public class Index extends JFrame {
 		chatView();
 		// 布局设置
 		setGroupLayout();
-		// 内容设置
+		// 内容设置，学生演示内容页，有小电脑和名字（学生按钮）
 		selectstuContent();
+	}
+
+	/**
+	 * 
+	 * <p>
+	 * Title: setShareResource
+	 * </p>
+	 * <p>
+	 * Description:资源共享
+	 * </p>
+	 */
+	public void setShareResource() {
+		centerpl.setLayout(null);
+		// 内容展示标题
+		JLabel title = new JLabel("历 史 资 源");
+		title.setForeground(new Color(119, 136, 153));
+		title.setFont(new Font("宋体", Font.BOLD, 16));
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		title.setBounds(341, 20, 105, 26);
+		// 上传文件图片
+		centerpl.add(title);
+		JLabel uploads = new JLabel("");
+		uploads.setIcon(new ImageIcon("image/upload.jpg"));
+		uploads.setBounds(750, 10, 124, 36);
+		centerpl.add(uploads);
+		uploads.addMouseListener(new UploadMouseListener(this));
+		// 滚动条
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setLocation(47, 64);
+		scrollPane.setSize(840, 400);
+		scrollPane.setBorder(null);
+		centerpl.add(scrollPane);
+		// 资源列表容器
+		JPanel text = new JPanel() {
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				ImageIcon ii = new ImageIcon("image/img1.png");
+				g.drawImage(ii.getImage(), 0, 0, getWidth(), getHeight(), ii.getImageObserver());
+			}
+		};
+		text.setBackground(null);
+		text.setForeground(new Color(173, 216, 230));
+		text.setPreferredSize(new Dimension(700, 1000));
+		scrollPane.setViewportView(text);
+		// 获取所有资源
+		List<ShareResource> list = ShareResourceDaoImpl.getAllResources();
+		// 遍历所有已上传的资源
+		for (ShareResource sr : list) {
+			if (sr.getOldfile() == null || sr.getUploadtime() == null) {
+
+			} else {
+				Students s = sr.getStu();
+				Teacher t = sr.getTeacher();
+				JLabel jl = null;
+				if (s != null) {
+					jl = new JLabel("题目：" + sr.getOldfile() + "   上传者：" + s.getName() + "    时间：" + sr.getUploadtime());
+				} else if (t != null) {
+					jl = new JLabel(
+							"题目：" + sr.getOldfile() + "   上传者：" + t.getTname() + "    时间：" + sr.getUploadtime());
+				}
+				jl.setFont(new Font("宋体", Font.BOLD, 14));
+				jl.setPreferredSize(new Dimension(840, 45));
+				jl.setHorizontalAlignment(SwingConstants.CENTER);
+				jl.addMouseListener(new ResourceMouseListener(this, sr));
+				text.add(jl);
+			}
+		}
+		// 设置窗体大小
+		this.setBounds(0, 0, 1282, 700);
+		// 窗体大小不能改变
+		this.setResizable(false);
+		// 居中显示
+		this.setLocationRelativeTo(null);
+		// 设置图标
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("image\\logo1.png"));
+		// 窗体可见
+		this.setVisible(true);
+	}
+
+	/**
+	 * <p>
+	 * Title: jumpShareResource
+	 * </p>
+	 * <p>
+	 * Description: 跳转到资源共享的页面
+	 * </p>
+	 */
+	public void jumpShareResource() {
+		// 顶部菜单栏
+		topMenu();
+		// 左侧菜单栏
+		leftMenu();
+		// 设置背景图
+		setBackground();
+		// 设置布局方式为绝对定位
+		this.getContentPane().setLayout(null);
+		// 时间标志
+		setTime();
+		// 中间容器
+		centerPanel();
+		// 聊天窗口
+		chatView();
+		// 布局设置
+		setGroupLayout();
+		// 共享资源设置
+		setShareResource();
 	}
 
 	/**
@@ -1110,7 +1239,7 @@ public class Index extends JFrame {
 		chatView();
 		// 布局设置
 		setGroupLayout();
-		// 内容设置
+		// 内容设置，随机点名的内容设置
 		randomCallContent();
 	}
 
@@ -1120,6 +1249,7 @@ public class Index extends JFrame {
 	public Index() {
 		// 设置关闭状态
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// 事件监听的对象
 		event = new IndexActionListener(this);
 		// 窗口最小化时软件dispose
 		this.addWindowListener(new WindowAdapter() {
@@ -1132,9 +1262,7 @@ public class Index extends JFrame {
 			public void windowStateChanged(WindowEvent state) {
 				if (state.getNewState() == 1 || state.getNewState() == 7) {
 					Suspensionbox s = new Suspensionbox();
-					System.out.println("窗口最小化");
-				} else if (state.getNewState() == 0) {
-					System.out.println("窗口恢复到初始状态");
+					s.init();
 				}
 			}
 		});
