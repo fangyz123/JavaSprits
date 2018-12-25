@@ -24,13 +24,11 @@ public class RemoteMouseListener implements MouseListener {
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	//鼠标进入远程监控菜单触发此业务逻辑

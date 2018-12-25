@@ -48,8 +48,6 @@ public class JcvTest {
 		// 开始获取摄像头数据
 		CanvasFrame canvas = new CanvasFrame("摄像头");// 新建一个窗口
 		canvas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		System.out.println("获取摄像头成功");
-		System.out.println("检测人脸");
 		String imagesrc = null;
 		while (true) {
 			Frame frame = grabber.grab();
@@ -58,7 +56,7 @@ public class JcvTest {
 			boolean bool=true;
 			FaceDetection.faceDetection(src,bool);
 			canvas.showImage(frame);// 获取摄像头图像并放到窗口上显示，frame是一帧视频图像
-			if (FaceDetection.faceDetection(src,bool)==0&&c) {
+			if (FaceDetection.faceDetection(src,bool)==-1&&c) {
 				c=false;
 				imagesrc = recordCamera.recordCamera(grabber,canvas);
 				try {

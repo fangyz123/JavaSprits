@@ -30,11 +30,7 @@ public class IndexActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand();
-		if ("签到".equals(s)) {
-			this.setSignButton();
-		} else if ("远程监控".equals(s)) {
-			this.setRemoteButton();
-		} else if ("开启远程连接".equals(s)) {
+		if ("开启远程连接".equals(s)) {
 			this.setStartRemoteButton();
 		} else if ("×".equals(s)) {
 			this.setCloseButton();

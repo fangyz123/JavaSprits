@@ -4,18 +4,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.bytedeco.javacpp.Loader;
-import org.bytedeco.javacpp.opencv_imgcodecs;
-import org.bytedeco.javacpp.helper.opencv_objdetect;
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.opencv_core.Mat;
+import org.bytedeco.javacpp.opencv_imgcodecs;
+import org.bytedeco.javacpp.helper.opencv_objdetect;
 import org.bytedeco.javacv.CanvasFrame;
-import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.FrameGrabber.Exception;
+import org.bytedeco.javacv.OpenCVFrameConverter;
 
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
-
-import org.bytedeco.javacv.OpenCVFrameConverter;
 
 /**
  * <p>
@@ -57,7 +55,6 @@ public class recordCamera {
 		String src = "faceimg\\" + d + "-" + sid + ".jpg";
 		opencv_imgcodecs.imwrite(src, mat);
 		bool = true;
-		System.out.println("照片保存成功");
 		return src;
 	}
 }

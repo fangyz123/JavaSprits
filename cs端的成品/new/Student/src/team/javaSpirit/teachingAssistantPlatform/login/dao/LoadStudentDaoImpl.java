@@ -73,7 +73,6 @@ public class LoadStudentDaoImpl {
 		Transaction tx = session.beginTransaction();
 		Students p = session.get(Students.class, s.getSid());
 		p.setIp(ip);
-//		session.update(p);可写可不写
 		tx.commit();
 		session.close();
 		return p;
@@ -84,7 +83,6 @@ public class LoadStudentDaoImpl {
 		Transaction tx = session.beginTransaction();
 		Students p = session.get(Students.class, s.getSid());
 		p.setPassword(pwd);
-//		session.update(p);可写可不写
 		tx.commit();
 		session.close();
 	}

@@ -8,6 +8,8 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -24,6 +26,8 @@ import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.entity.ShareResource;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
+import team.javaSpirit.teachingAssistantPlatform.signIn.dao.StudentCourseDao;
+import team.javaSpirit.teachingAssistantPlatform.signIn.service.SignTimerTask;
 import team.javaSpirit.teachingAssistantPlatform.signIn.service.StudentCourseService;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.IndexActionListener;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.RemoteMouseListener;
@@ -182,10 +186,7 @@ public class Index extends JFrame {
 		menu1.setBorder(null);
 		menu1.setForeground(new Color(255, 255, 255));
 		menu1.setLayout(null);
-		// 事件对象
-		SignMouseListener signEvent = new SignMouseListener(this);
-		// 事件监听
-		menu1.addMouseListener(signEvent);
+
 		// 签到图标
 		JLabel lb1 = new JLabel("");
 		lb1.setBounds(13, 10, 60, 60);
@@ -199,11 +200,16 @@ public class Index extends JFrame {
 		menu1.add(bt1);
 		bt1.setFont(new Font("宋体", Font.BOLD, 14));
 		bt1.setForeground(new Color(100, 149, 237));
-		// 事件监听
-		bt1.addMouseListener(signEvent);
+
 		bt1.setBorder(null);
 		bt1.setBackground(Color.WHITE);
 		bgContentPane.add(menu1);
+
+		// 事件对象
+		SignMouseListener signEvent = new SignMouseListener(this);
+		// 事件监听
+		menu1.addMouseListener(signEvent);
+		bt1.addMouseListener(signEvent);
 	}
 
 	/**
@@ -430,7 +436,7 @@ public class Index extends JFrame {
 		menu2.setBorder(null);
 		menu2.setForeground(new Color(255, 255, 255));
 		menu2.setLayout(null);
-		menu2.addMouseListener(new RemoteMouseListener(this));
+
 		// 远程监控图标
 		JLabel lb2 = new JLabel("");
 		lb2.setBounds(13, 10, 60, 60);
@@ -439,14 +445,19 @@ public class Index extends JFrame {
 		// 远程监控按钮
 		JButton bt2 = new JButton("远程监控");
 		bt2.setBounds(13, 70, 61, 17);
-		// 点击事件
-		bt2.addActionListener(event);
+
 		menu2.add(bt2);
 		bt2.setForeground(new Color(100, 149, 237));
 		bt2.setFont(new Font("宋体", Font.BOLD, 14));
 		bt2.setBackground(Color.WHITE);
 		bt2.setBorder(null);
 		bgContentPane.add(menu2);
+		// 事件对象
+		RemoteMouseListener remote = new RemoteMouseListener(this);
+		// 添加事件
+		menu2.addMouseListener(remote);
+		bt2.addMouseListener(remote);
+
 	}
 
 	/**
@@ -540,6 +551,9 @@ public class Index extends JFrame {
 		time.setFont(new Font("宋体", Font.BOLD, 12));
 		time.setForeground(new Color(128, 128, 128));
 		bgContentPane.add(time);
+
+		// 启动定时任务
+		new SignTimerTask();
 	}
 
 	/**
@@ -638,6 +652,7 @@ public class Index extends JFrame {
 		remortbt.setForeground(SystemColor.textInactiveText);
 		remortbt.setFont(new Font("宋体", Font.PLAIN, 14));
 		remortbt.setBounds(66, 130, 129, 31);
+		//添加事件监听
 		remortbt.addActionListener(event);
 		contentpl.add(remortbt);
 
@@ -665,7 +680,6 @@ public class Index extends JFrame {
 		chatlog1.setBackground(SystemColor.textInactiveText);
 		chatlog1.setBounds(291, 34, 54, 15);
 		chatpl.add(chatlog1);
-//		bgContentPane.add(centerpl);
 	}
 
 	/**
@@ -820,9 +834,6 @@ public class Index extends JFrame {
 	 * 主窗体创建
 	 */
 	public Index() {
-		/**
-		 * 窗体设置
-		 */
 		// 设置窗体大小
 		this.setBounds(0, 0, 1000, 600);
 		// 窗体大小不能改变
@@ -835,6 +846,17 @@ public class Index extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// 窗体可见
 		this.setVisible(true);
+		// 事件监听
 		event = new IndexActionListener(this);
+		// 关闭窗体的事件监听
+		this.addWindowListener(new WindowAdapter() {
+			// 关闭窗口时，更改数据的teacherstatus状态
+			public void windowClosing(WindowEvent e) {
+				super.windowClosing(e);
+				// 更改状态
+				StudentCourseDao scs = new StudentCourseDao();
+				scs.changeStudentStatus(Constant.myStudent.getSid(), 0);
+			}
+		});
 	}
 }

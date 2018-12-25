@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 import javax.imageio.ImageIO;
@@ -55,12 +54,10 @@ public class CaptureThread extends Thread {
 			//将图片数据写入内存流中
 			ImageIO.write(bimage, "png", byout);
 		} catch (IOException e) {
-			System.out.println("截屏图片写入内存流中出现异常");
 			try {
 				dataOutputStream.close();
 				socket.close();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
@@ -85,7 +82,6 @@ public class CaptureThread extends Thread {
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}//1000/20
 				
@@ -95,11 +91,9 @@ public class CaptureThread extends Thread {
 					socket.close();
 					
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				e.printStackTrace();
-				System.out.println("网络有问题,截屏失败");
 			}
 			
 		}

@@ -7,15 +7,25 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 /**
-* <p>Title: IpUtil</p>
-* <p>Description: 获得IP工具包。</p>
-* @author Fang Yuzhen
-* @date 2018年12月13日
+ * <p>
+ * Title: IpUtil
+ * </p>
+ * <p>
+ * Description: 获得IP工具包。
+ * </p>
+ * 
+ * @author Fang Yuzhen
+ * @date 2018年12月13日
  */
 public class IpUtil {
 	/**
-	 * <p>Title: getRealIP</p>
-	 * <p>Description: 获得局域网的IP</p>
+	 * <p>
+	 * Title: getRealIP
+	 * </p>
+	 * <p>
+	 * Description: 获得局域网的IP
+	 * </p>
+	 * 
 	 * @return IP地址
 	 */
 	public static String getRealIP() {
@@ -34,13 +44,11 @@ public class IpUtil {
 					continue;
 				}
 				Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
-				System.out.println(netInterface.getDisplayName());
 				while (addresses.hasMoreElements()) {
 					InetAddress ip = addresses.nextElement();
 					if (ip != null) {
 						// ipv4
 						if (ip instanceof Inet4Address) {
-							System.out.println("ipv4 = " + ip.getHostAddress());
 							return ip.getHostAddress();
 						}
 					}
@@ -48,7 +56,6 @@ public class IpUtil {
 				break;
 			}
 		} catch (SocketException e) {
-			System.err.println("Error when getting host ip address" + e.getMessage());
 		}
 		return null;
 	}

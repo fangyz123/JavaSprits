@@ -66,7 +66,7 @@ public class FaceRecognition {
 		int counter = 0;
 		for (File image : imageFiles) {
 			Mat img = imread(image.getAbsolutePath(), CV_LOAD_IMAGE_GRAYSCALE);
-			int label = Integer.parseInt(image.getName().split("\\-")[0]);
+			int label = Integer.parseInt(image.getName().split("\\-")[3]);
 			images.put(counter, img);
 			labelsBuf.put(counter, label);
 			counter++;

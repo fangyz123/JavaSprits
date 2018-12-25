@@ -1,5 +1,7 @@
 package team.javaSpirit.teachingAssistantPlatform.mina;
 
+import javax.swing.JOptionPane;
+
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.service.IoService;
 import org.apache.mina.core.service.IoServiceListener;
@@ -7,7 +9,6 @@ import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
-
 
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.SendMessage;
 
@@ -27,27 +28,23 @@ public class SessionListener implements IoServiceListener {
 	private NioSocketConnector connector;
 
 	public SessionListener(NioSocketConnector connector) {
-		this.connector=connector;
+		this.connector = connector;
 	}
 
 	@Override
 	public void serviceActivated(IoService arg0) throws Exception {
-		System.out.println("SessionListener  serviceActivated");
 	}
 
 	@Override
 	public void serviceDeactivated(IoService arg0) throws Exception {
-		System.out.println("SessionListener  serviceDeactivated");
 	}
 
 	@Override
 	public void serviceIdle(IoService arg0, IdleStatus arg1) throws Exception {
-		System.out.println("SessionListener  serviceIdle");
 	}
 
 	@Override
 	public void sessionClosed(IoSession arg0) throws Exception {
-		System.out.println("SessionListener  sessionCloseds");
 	}
 
 	/**
@@ -64,7 +61,7 @@ public class SessionListener implements IoServiceListener {
 	 * 当session销毁时，进行3次的重连操作。一个10秒的时间。 以1s,3s,6s的机制重连一次。
 	 * 
 	 * @throws InterruptedException
-	  */
+	 */
 	@Override
 	public void sessionDestroyed(IoSession session) throws InterruptedException {
 		int waitTime = 0;
@@ -77,12 +74,11 @@ public class SessionListener implements IoServiceListener {
 			// 获取会话
 			session = connectFuture.getSession();
 			if (session.isConnected()) {
-				System.out.println("连接成功");
 				break;
 			}
 		}
 		if (!session.isConnected()) {
-			System.out.println("10s重连失败，请检查网络后，手动重连！");
+			JOptionPane.showMessageDialog(null, "10s重连失败，请检查网络后，手动重连！");
 		}
 	}
 
