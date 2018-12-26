@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//WebContent/student/contact.jsp=UTF-8
+encoding//WebContent/student/css/style.css=UTF-8
+encoding//WebContent/student/index.jsp=UTF-8
+encoding//WebContent/student/qingjia.jsp=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/entity=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/entity/Students.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/login/control/LoginController.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/login/dao/LoginDao.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/login/service/LoginService.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/teacher/addstudent/controller/AddStudentController.java=UTF-8
+encoding/<project>=GBK
