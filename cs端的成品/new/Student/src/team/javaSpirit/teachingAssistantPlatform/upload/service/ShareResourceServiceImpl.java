@@ -122,7 +122,6 @@ public class ShareResourceServiceImpl {
 			try {
 				file.createNewFile();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 				return "1";
 			}
@@ -140,7 +139,6 @@ public class ShareResourceServiceImpl {
 					os.close();
 					return "3";
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					return "2";
 				}

@@ -1,9 +1,5 @@
 package team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service;
 
-import java.io.IOException;
-
-import javax.swing.JOptionPane;
-
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
 import team.javaSpirit.teachingAssistantPlatform.mina.Configure;

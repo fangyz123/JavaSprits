@@ -24,4 +24,6 @@ public class Constant {
 	public static Teacher teacher;
 	/* 图片路径 */
 	public static String imgsrc;
+	/* 下课时间 */
+	public static String endT;
 }

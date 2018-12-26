@@ -36,6 +36,7 @@ import team.javaSpirit.teachingAssistantPlatform.entity.ShareResource;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.Service;
+import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.ServiceOperationServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.StudentSignServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.studentSignIn.service.StudentSignInServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.IndexActionListener;
@@ -1251,11 +1252,19 @@ public class Index extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// 事件监听的对象
 		event = new IndexActionListener(this);
+
 		// 窗口最小化时软件dispose
 		this.addWindowListener(new WindowAdapter() {
 			// 图标化窗口时调用事件
 			public void windowIconified(WindowEvent e) {
 				dispose(); // 窗口最小化时dispose该窗口
+			}
+			//关闭窗口时，更改数据的teacherstatus状态
+			public void windowClosing(WindowEvent e) {
+				super.windowClosing(e);
+				// 更改状态
+				ServiceOperationServiceImpl sos=new ServiceOperationServiceImpl();
+				sos.updateStatus(0);
 			}
 		});
 		this.addWindowStateListener(new WindowStateListener() {

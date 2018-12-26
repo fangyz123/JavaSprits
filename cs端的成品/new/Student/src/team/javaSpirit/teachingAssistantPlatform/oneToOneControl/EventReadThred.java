@@ -73,7 +73,7 @@ public class EventReadThred extends Thread {
 				imgWidth = (double) screenSize.getWidth();
 				imgHeight = (double) screenSize.getHeight();
 				if (jlableWidth == 0 || jlableHeight == 0) {
-					
+
 					robot.mouseMove(me.getX(), me.getY());
 				} else {
 					double m = (double) imgWidth;
@@ -81,7 +81,7 @@ public class EventReadThred extends Thread {
 							.format((me.getX() - locationX) * (imgWidth / jlableWidth)));
 					int y = Integer.parseInt(new java.text.DecimalFormat("0")
 							.format((me.getY() - locationYLast) * (imgHeight / jlableHeight)));
-					
+
 					robot.mouseMove(x, y);// 45-11=34
 				}
 
@@ -111,12 +111,10 @@ public class EventReadThred extends Thread {
 	}
 
 	/**
-	 * 进行事件回放。在连接未关闭的时候一直读取事件流。获得events对象，然后从中获取点击事件
-	 * 确定点击事件的类型，进行准确地回放。
+	 * 进行事件回放。在连接未关闭的时候一直读取事件流。获得events对象，然后从中获取点击事件 确定点击事件的类型，进行准确地回放。
 	 */
 	@Override
 	public void run() {
-		System.out.println("事件回放线程连接成功！");
 
 		while (!socket.isClosed()) {
 
@@ -126,10 +124,8 @@ public class EventReadThred extends Thread {
 					Events events = (Events) eventobj;
 					InputEvent e = events.getEvent();
 					Map map = events.getMap();
-					
-					if (map.isEmpty()) {
-						System.out.println("map is null");
-					} else {
+
+					if (!map.isEmpty()) {
 
 						jlableWidth = 0;
 						jlableHeight = 0;
@@ -140,12 +136,12 @@ public class EventReadThred extends Thread {
 
 							int w = (int) map.get("jlableWidth");
 							jlableWidth = (double) w;
-							
+
 						}
 						if (map.get("jlableHeight") != null) {
 							int h = (int) map.get("jlableHeight");
 							jlableHeight = (double) h;
-							
+
 						}
 						if (map.get("locationX") != null) {
 							locationX = (double) map.get("locationX");
@@ -154,15 +150,12 @@ public class EventReadThred extends Thread {
 							locationYLast = (double) map.get("locationYLast");
 						}
 
-						
 					}
-					
+
 					actionEvent(e);// 回放事件
 				}
 			} catch (IOException | ClassNotFoundException e1) {
-				System.out.println("读取不到事件object");
 
-				
 			}
 
 		}
