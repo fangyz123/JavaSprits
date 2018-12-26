@@ -1,7 +1,6 @@
 package team.javaSpirit.teachingAssistantPlatform.ui.view;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -62,22 +61,8 @@ public class Suspensionbox extends JFrame implements ActionListener {
 	private JPanel menu5;
 	/* 服务对象 */
 	Service service = new Service();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Suspensionbox frame = new Suspensionbox();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	/* 是否调用回调事件，得到位置坐标 */
+	private boolean isdisplay = true;
 
 	/**
 	 * <p>
@@ -145,7 +130,7 @@ public class Suspensionbox extends JFrame implements ActionListener {
 		comboBox.addItem("开启共享");
 		comboBox.addItem("关闭共享");
 		// 监听下拉框的选择事件
-		comboBox.addItemListener(new MyItemListener(comboBox,service) {
+		comboBox.addItemListener(new MyItemListener(comboBox, service) {
 		});
 		// 面板添加下拉菜单comboBox
 		menu1.add(comboBox);
@@ -315,8 +300,19 @@ public class Suspensionbox extends JFrame implements ActionListener {
 		button_3.setFont(new Font("宋体", Font.BOLD, 18));
 		button_3.setBorder(null);
 		button_3.setBackground(null);
-
 		menu5.add(button_3);
+
+	}
+
+	/**
+	 * <p>
+	 * Title: setWindow
+	 * </p>
+	 * <p>
+	 * Description: 窗口的设置。有上隐藏窗口、返回主界面、向下固定窗口。
+	 * </p>
+	 */
+	public void setWindow() {
 		// 向上隐藏窗口
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("image\\sq.png"));
@@ -332,9 +328,12 @@ public class Suspensionbox extends JFrame implements ActionListener {
 		label.setIcon(new ImageIcon("image\\return.png"));
 		label.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				//窗体不可见
+				isdisplay = false;
+				setVisible(isdisplay);
+				dispose();
 				Index l = new Index();
-				l.jumpIndex();
-				setVisible(false);
+				l.init();
 			}
 		});
 		label.setBounds(684, 50, 58, 41);
@@ -349,23 +348,34 @@ public class Suspensionbox extends JFrame implements ActionListener {
 		});
 		label_1.setBounds(684, 95, 58, 41);
 		contentPane.add(label_1);
-
 	}
 
 	/**
-	 * Create the frame.
+	 * <p>
+	 * Title: init
+	 * </p>
+	 * <p>
+	 * Description: 窗体的初始化
+	 * </p>
 	 */
-	public Suspensionbox() {
-		setType(Type.UTILITY);
-		setUndecorated(true);
-		// 窗口置顶
-		this.setAlwaysOnTop(true);
+	public void init() {
 		this.setBackground();
 		this.setRemotecontrol();
 		this.setRecordScreen();
 		this.setBroadcast();
 		this.setStuzs();
 		this.setRandomcall();
+		this.setWindow();
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Suspensionbox() {
+		setUndecorated(true);
+		setType(Type.UTILITY);
+		// 窗口置顶
+		this.setAlwaysOnTop(true);
 
 		timer.start();
 		addMouseListener(new MouseAdapter() {
@@ -389,7 +399,9 @@ public class Suspensionbox extends JFrame implements ActionListener {
 				}
 			}
 		});
-		setVisible(true);
+		//窗体可见
+		isdisplay = true;
+		setVisible(isdisplay);
 	}
 
 	/**
@@ -402,8 +414,11 @@ public class Suspensionbox extends JFrame implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		frameLeft = getLocationOnScreen().x;
-		frameTop = getLocationOnScreen().y;
+		//如果隐藏或销毁了窗体，不执行
+		if (isdisplay) {
+			frameLeft = getLocationOnScreen().x;
+			frameTop = getLocationOnScreen().y;
+		}
 		frameWidth = getWidth();
 		frameHeight = getHeight();
 		screenXX = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;

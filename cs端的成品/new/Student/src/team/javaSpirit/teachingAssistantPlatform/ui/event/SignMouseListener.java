@@ -40,24 +40,23 @@ public class SignMouseListener implements MouseListener {
 		if (scs.findCurrentCourse(Constant.myStudent.getSid())
 				&& scs.getStudentStatus(Constant.myStudent.getSid()) == 0) {
 			try {
-				System.out.println("tutu"+Constant.myStudent.getImage());
 				if (Constant.myStudent.getImage() == null) {
 					// 人脸检测
 					scs.firstFace();
 					scs.setImg(Constant.myStudent.getSid(), Constant.imgsrc);
 				} else {
-					//人脸识别
+					// 人脸识别
 					scs.faceCheck();
-					// 修改数据库
-					scs.changeState(Constant.myStudent.getSid());
-					scs.insertRecort(Constant.myStudent.getSid());
-					if (StudentCourseService.status == 2) {
-						JOptionPane.showMessageDialog(null, "啊哦，你迟到了");
-					} else {
-						JOptionPane.showMessageDialog(null, "您已签到成功");
-					}
-				}				
-				
+				}
+				// 修改数据库
+				scs.changeState(Constant.myStudent.getSid());
+				scs.insertRecort(Constant.myStudent.getSid());
+				if (StudentCourseService.status == 2) {
+					JOptionPane.showMessageDialog(null, "啊哦，你迟到了");
+				} else {
+					JOptionPane.showMessageDialog(null, "您已签到成功");
+				}
+
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -71,13 +70,11 @@ public class SignMouseListener implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 

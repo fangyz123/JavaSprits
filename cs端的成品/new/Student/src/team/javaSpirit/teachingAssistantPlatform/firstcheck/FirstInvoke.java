@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.Frame;
-import org.bytedeco.javacv.OpenCVFrameGrabber;
 import org.bytedeco.javacv.OpenCVFrameConverter.ToIplImage;
+import org.bytedeco.javacv.OpenCVFrameGrabber;
 
 public class FirstInvoke {
 	public static String firstInvoke() throws Exception, InterruptedException, IOException {
@@ -20,8 +20,6 @@ public class FirstInvoke {
 		// 开始获取摄像头数据
 		CanvasFrame canvas = new CanvasFrame("正在签到");// 新建一个窗口
 		canvas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		System.out.println("获取摄像头成功");
-		System.out.println("检测人脸");
 		String imagesrc = null;
 		while (true) {
 			Frame frame = grabber.grab();

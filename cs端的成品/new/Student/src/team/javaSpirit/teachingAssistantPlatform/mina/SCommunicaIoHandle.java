@@ -38,9 +38,6 @@ public class SCommunicaIoHandle extends IoHandlerAdapter {
 	public void messageReceived(IoSession session, Object message) throws Exception {
 		// 对接收过来的对象，进行强制类型转换
 		FileContent fileContent = (FileContent) message;
-		System.out.println("messageReceived: " + fileContent.getCommand());
-		System.out.println(session.getLocalAddress().toString());
-		System.out.println(session.getRemoteAddress().toString());
 		// 如果发送的命令为1，打开屏幕展示控制台
 		if (fileContent.getCommand() == Communication.openScreen) {
 			screen = new ShowScreen();
@@ -61,7 +58,6 @@ public class SCommunicaIoHandle extends IoHandlerAdapter {
 
 	@Override
 	public void sessionCreated(IoSession session) throws Exception {
-		System.out.println("sessionCreated");
 	}
 
 	@Override
@@ -80,7 +76,6 @@ public class SCommunicaIoHandle extends IoHandlerAdapter {
 	 */
 	@Override
 	public void sessionIdle(IoSession session, IdleStatus status) throws Exception {
-		System.out.println("sessionIdle");
 		if (session != null) {
 			session.getCloseFuture();
 		}
@@ -88,17 +83,14 @@ public class SCommunicaIoHandle extends IoHandlerAdapter {
 
 	@Override
 	public void sessionClosed(IoSession session) throws Exception {
-		System.out.println("session close");
 	}
 
 	@Override
 	public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
-		System.out.println("exceptionCaught");
 	}
 
 	@Override
 	public void inputClosed(IoSession session) throws Exception {
-		System.out.println("inputClosed");
 		session.getService().dispose();
 	}
 

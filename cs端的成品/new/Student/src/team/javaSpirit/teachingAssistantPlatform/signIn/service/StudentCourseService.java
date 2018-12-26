@@ -88,7 +88,6 @@ public class StudentCourseService {
 		}
 		return false;
 	}
-	
 
 	/**
 	 * <p>
@@ -174,6 +173,7 @@ public class StudentCourseService {
 			for (Times time : courseTime) {
 				if (compareWeek(time) && compareDate(time) && compareTime(time)) {
 					Constant.cid = cid;
+					Constant.endT = endT;
 					return true;
 				}
 			}
@@ -182,10 +182,10 @@ public class StudentCourseService {
 		return false;
 	}
 
-
-	public void setImg(String sid,String image) {
+	public void setImg(String sid, String image) {
 		studentCourse.setImageById(sid, image);
 	}
+
 	/**
 	 * <p>
 	 * Title: findCname
@@ -223,6 +223,7 @@ public class StudentCourseService {
 		Constant.imgsrc = null;
 		Constant.imgsrc = JcvTest.captureFace();
 	}
+
 	/**
 	 * <p>
 	 * Title: insertRecort

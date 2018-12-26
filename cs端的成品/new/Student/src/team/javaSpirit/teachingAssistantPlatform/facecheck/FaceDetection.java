@@ -68,7 +68,6 @@ public class FaceDetection {
 		// -- Detect faces
 		RectVector faces = new RectVector();
 		faceCascade.detectMultiScale(frameGray, faces);// 分类器对象调用进行人脸检测（输入的图像，输出的矩形向量组）
-		System.out.println("标记矩形");
 		// 【4】标记--在脸部画矩形
 		for (int i = 0; i < faces.size(); i++) {
 			Rect face_i = faces.get(i);
@@ -78,7 +77,6 @@ public class FaceDetection {
 				bool = false;
 				FaceRecognition.initTrain();// 人脸初始训练
 				int count = FaceRecognition.faceRecognise(src);// 人脸的识别
-				System.out.println("识别完成");
 				return count;
 			}
 

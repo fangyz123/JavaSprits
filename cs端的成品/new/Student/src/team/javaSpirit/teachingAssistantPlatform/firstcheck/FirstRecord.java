@@ -33,7 +33,6 @@ public class FirstRecord {
 		String src = "faceimg\\" + d + "-" + sid + ".jpg";
 		opencv_imgcodecs.imwrite(src, mat);
 		bool = true;
-		System.out.println("照片保存成功");
 		return src;
 	}
 }

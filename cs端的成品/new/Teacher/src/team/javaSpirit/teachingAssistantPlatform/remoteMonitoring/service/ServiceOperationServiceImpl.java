@@ -7,7 +7,7 @@ import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.dao.ServiceOpe
  * Title: ServiceOpenServiceImpl
  * </p>
  * <p>
- * Description: 老师开启服务时，调用相关的Dao类，完成相关的服务。
+ * Description: 老师操作远程共享时，调用相关的Dao类，完成相关的服务。
  * </p>
  * 
  * @author Fang Yuzhen
