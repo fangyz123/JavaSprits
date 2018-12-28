@@ -89,9 +89,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 </head>
 
-<body>
+<body style="height: ;">
 	<!-- header_top -->
-	<div class="header" id="home">
+	<div class="header" id="home" >
 		<%@ include file="head.jsp"%>
 
 
@@ -101,9 +101,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 		<!-- banner -->
-		<!-- <div class="banner_inner"
-			>
-			<div class="services-breadcrumb">
+		<div class="banner_inner" style="background-image: url('images/banner1.jpg')">
+			<h3 class="tittle-w3ls"  ><span style="margin-top:50px;margin-left:150px;display: inline-block;">未审核请假条</span></h3>
+			<!-- <div class="services-breadcrumb">
 				<div class="inner_breadcrumb">
 
 					<ul class="short">
@@ -111,19 +111,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<li>请假</li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 
-		</div> -->
+		</div>
 		<!--//banner -->
 
 
 	</div>
 	<!--// header_top -->
 	<!-- top Products -->
-	<div class="ab_content" style="background:url(images/2.png) no-repeat;    background-size: 120%;width:100%;heigth:100%;border:solid 1px red;">
+	<div class="ab_content" style=" margin-top:0px ; padding-top:20px;">
 		<!--  style=" background-image:url('images/divbg.jpeg') -->
-		<div class="container">
-			<h3 class="tittle-w3ls">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未审核请假条</h3>
+		<div class="container" >
+			<!-- <h3 class="tittle-w3ls">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未审核请假条</h3> -->
 
 			<!-- <div class="inner_sec_info_w3ls_agile" > -->
 			<div class="row">
@@ -178,7 +178,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!-- <div class="clearfix"></div> -->
 
 			</div>
-
+			<div style="height:175px">&nbsp;
+			</div>
 
 			<div class="clearfix"></div>
 			<!-- <div>
@@ -195,8 +196,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 				<div style="margin-top:0px;color:white;text-align: center">
 					<p>
-						© 2018 Surf Inn. All rights reserved | Design by <a
-							href="http://w3layouts.com/">W3layouts</a>
+						© 2018 TTOOL . All rights reserved | Design by javaspirit
 					</p>
 				</div>
 			</div>

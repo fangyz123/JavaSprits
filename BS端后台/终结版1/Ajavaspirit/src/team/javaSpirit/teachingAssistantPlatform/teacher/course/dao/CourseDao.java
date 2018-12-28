@@ -16,9 +16,11 @@ public class CourseDao {
 	@Resource
 	private SessionFactory sessionFactory;
 	
-	public List<String> findAll(){
+	public String findAll(String coursename){
 		Session session = this.sessionFactory.getCurrentSession();
-		Query q = session.createQuery("select course.cname from Course course");
-		return q.list();
+		Query q = session.createQuery("select cname from Course  where cname=?");
+		q.setString(0, coursename);
+		return  (String)q.uniqueResult();
+		
 	}
 }

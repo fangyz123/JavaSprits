@@ -57,8 +57,9 @@ public class CreateClassController {
 			System.out.println(node);
 			createClassService.addTimesServiceImpl(weeks, node, date, className);
 		}
-		
-		model.addAttribute("classname", className);
-		return "Teacher/successcreateclass";
+		request.setAttribute("classname", className);
+		//model.addAttribute("classname", className);
+		//return "Teacher/successcreateclass";
+		return "Teacher/addstudent";
 	}
 }

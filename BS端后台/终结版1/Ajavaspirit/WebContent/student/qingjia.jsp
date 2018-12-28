@@ -392,8 +392,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 				<div class="copy_right">
 					<p>
-						© 2018 TTool. All rights reserved | Design by <a
-							href="http://w3layouts.com/">javaSpirit</a>
+						© 2018 TTOOL . All rights reserved | Design by javaspirit
 					</p>
 				</div>
 			</div>

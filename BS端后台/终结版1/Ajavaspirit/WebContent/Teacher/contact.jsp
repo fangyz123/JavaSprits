@@ -179,7 +179,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="container">
 				
 				<div style="margin-top:0px;color:white;text-align: center">
-					<p>© 2018 All rights reserved | Design by SoftwareCollege Of HBNU</p>
+					<p>© 2018 TTOOL . All rights reserved | Design by javaspirit</p>
 				</div>
 			</div>
 		</div>

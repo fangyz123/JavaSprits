@@ -101,29 +101,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 		<!-- banner -->
-		<!-- <div class="banner_inner"
-			style="background-image: url('images/banner3.jpg')">
+		<div class="banner_inner"
+			style="background-image: url('images/banner1.jpg')">
 			<div class="services-breadcrumb">
-				<div class="inner_breadcrumb">
+				
+				<h3 class="tittle-w3ls"  ><span style="margin-top:50px;margin-left:150px;display: inline-block;">历史假条</span></h3>
+				<!-- <div class="inner_breadcrumb">
 
 					<ul class="short">
 						<li><a href="index.jsp" style="color: #00BFFF">首页</a><i>|</i></li>
 						<li>请假</li>
 					</ul>
-				</div>
+				</div> -->
 			</div>
 
-		</div> -->
+		</div>
 		<!--//banner -->
 
 
 	</div>
 	<!--// header_top -->
 	<!-- top Products -->
-	<div class="ab_content" style="background:url(images/ban.png) no-repeat;    background-size: 120%;width:100%;heigth:100%;border:solid 1px red;">
+	<div class="ab_content" style=" margin-top:0px ; padding-top:20px;">
 		<!--  style=" background-image:url('images/divbg.jpeg') -->
 		<div class="container">
-			<h3 class="tittle-w3ls">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请假条</h3>
+			<!-- <h3 class="tittle-w3ls">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请假条</h3> -->
 
 			<!-- <div class="inner_sec_info_w3ls_agile" > -->
 			<div class="row">
@@ -215,8 +217,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 				<div style="margin-top:0px;color:white;text-align: center">
 					<p>
-						© 2018 Surf Inn. All rights reserved | Design by <a
-							href="http://w3layouts.com/">W3layouts</a>
+						© 2018 TTOOL . All rights reserved | Design by javaspirit
 					</p>
 				</div>
 			</div>

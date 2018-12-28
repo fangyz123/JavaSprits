@@ -92,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!--// header_top -->
 <!-- top Products -->
 	
-		<div class="ab_content" style="background:url(images/1.png) no-repeat;    background-size: 120%;width:100%;heigth:100%;height:600px;">
+		<div class="ab_content" style="background:url(images/22.jpg) no-repeat;    background-size: 120%;width:100%;heigth:100%;height:600px;">
 		<div class="container" style="width:400px">
 						<div class="row">
 							<div class="col-md-5 contact_grid_right" style="background-color:rgba(255,255,255,0.6);width: 400px;" >
@@ -134,7 +134,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="container">
 				
 				<div style="color: white;text-align: center;">
-					<p>©  2018 All rights reserved | Design by SoftwareCollege Of HBNU</p>
+					<p>© 2018 TTOOL . All rights reserved | Design by javaspirit</p>
 				</div>
 			</div>
 		</div>

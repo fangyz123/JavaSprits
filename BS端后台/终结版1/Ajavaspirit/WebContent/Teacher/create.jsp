@@ -140,7 +140,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					type:"POST",
 					success:function(res){
 						if("ok"==res){
-							$("#classnametip").text("班级名称可用");
+							
 							rep=true;
 						}else{
 							$("#classnametip").text("班级名称已存在，请改名称");
@@ -229,7 +229,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<!--// header_top -->
 <!-- top Products -->
-	<div class="ab_content" style="background:url(images/22.jpg) no-repeat;    background-size: 120%;width:100%;heigth:100%;">
+	<div class="ab_content" style="background:url(images/22.jpg) no-repeat;    background-size: 150%;width:100%;heigth:100%;">
 		<div class="container" style="width:400px">
 						<div class="row">
 							<div class="col-md-5 contact_grid_right" style="background-color:rgba(255,255,255,0.6);width: 400px;" >
@@ -239,7 +239,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="col-md-12 col-sm-6 contact_left_grid">
 										班级名称：<input type="text" id="className" name="className" placeholder="班级名称" onblur="checkclassName(true);" onfocus="clearInfo_classname()" style="margin-top:10px;margin-bottom:10px;"><span id="classnametip" style="color:#f00;"> </span><br>
 										开课周数：<input type="text" id="weekcount" name="weekcount" placeholder="开课周数(例如：1-18)" onblur="checkweek()" onfocus="clearInfo_week()" style="margin-top:10px;margin-bottom:10px;"><span id="weektip" style=color:#f00></span><br>
-										课程名称：<input type="text" id="course" name="cname" placeholder="课程名称"  onblur="checkcname(true);" onfocus="clearInfo_cname()" onKeyUp="searchWord()" style="margin-top:10px;margin-bottom:10px;"><span id="cnametip" style=color:#f00></span><br>
+										课程名称：<input type="text" id="course" name="cname" placeholder="课程名称"  onblur="checkcname(true);" onfocus="clearInfo_cname()" style="margin-top:10px;margin-bottom:10px;"><span id="cnametip" style=color:#f00></span><br>
 										<div id="msg"></div>
 									</div>
 									
@@ -275,7 +275,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="container">
 				
 				<div style="margin-top:0px;color:white;text-align: center">
-					<p>© 2018 All rights reserved | Design by SoftwareCollege Of HBNU</p>
+					<p>© 2018 TTOOL . All rights reserved | Design by javaspirit</p>
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,7 @@
 package team.javaSpirit.teachingAssistantPlatform.teacher.course.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -41,7 +42,22 @@ public class CourseContoller {
 				s.append("'"+searchCourse.get(i)+"'"+",");
 			}
 		}
-		respone.getWriter().print(s);
+		respone.getWriter().print(s);	
+		
+	}
+	
+	@RequestMapping("Teacher/Courses")
+	public void acquier(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		String cname = request.getParameter("course");
+		System.out.println(cname);
+		String acquier = this.courseService.courseList(cname);
+		if(acquier==null) {
+			response.getWriter().print("f");
+		}else {
+			response.getWriter().print("ok");
+		}
 	}
 	
 }

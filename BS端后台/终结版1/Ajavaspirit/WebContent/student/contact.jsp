@@ -187,7 +187,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="container">
 				
 				<div class="copy_right">
-					<p>©  2018 Surf Inn. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+					<p>© 2018 TTOOL . All rights reserved | Design by javaspirit</p>
 				</div>
 			</div>
 		</div>

@@ -16,7 +16,7 @@ public class CourseService {
 	@Resource
 	private CourseDao courseDao;
 	
-	public List<String> courseList(){
-		return this.courseDao.findAll();
+	public String courseList(String coursename){
+		return this.courseDao.findAll(coursename);
 	}
 }
