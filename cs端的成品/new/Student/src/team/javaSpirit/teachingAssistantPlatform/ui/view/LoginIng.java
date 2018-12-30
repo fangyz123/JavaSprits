@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -93,7 +94,7 @@ public class LoginIng extends JFrame {
 		//设置关闭状态
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//设置图标
-		this.setIconImage(null);
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("image\\logo1.png"));
 		//窗体可见
 		this.setVisible(true);
 	}

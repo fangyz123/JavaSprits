@@ -116,6 +116,9 @@ public class LoginActionListener implements ActionListener {
 		             }else if(i==3) {
 			            	 if(isCancel==false) 
 			            		 JOptionPane.showMessageDialog(null,"密码不正确","ERROR_MESSAGE",JOptionPane.ERROR_MESSAGE);
+		             }else if(i==5) {
+		            	 if(isCancel==false) 
+		            		 JOptionPane.showMessageDialog(null,"该用户已经登录","ERROR_MESSAGE",JOptionPane.ERROR_MESSAGE);
 		             }
 			             return "2";
 				}

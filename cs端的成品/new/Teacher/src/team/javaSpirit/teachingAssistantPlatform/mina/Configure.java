@@ -10,13 +10,13 @@ package team.javaSpirit.teachingAssistantPlatform.mina;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.Collection;
 
-import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+
+import team.javaSpirit.teachingAssistantPlatform.ui.view.Index;
 
 /**
  * <p>
@@ -53,7 +53,7 @@ public class Configure {
 	 * Description: 初始化函数。 为连接new一个对象，设置连接超时时间、编码过滤器、日志。 设置监听处理类，处理消息的接收情况、读空闲时间。
 	 * </p>
 	 */
-	public void init() {
+	public void init(Index index) {
 		// 创建一个连接对象
 		accept = new NioSocketAcceptor();
 		// 编码和解码工厂,可以传大数据量
@@ -67,7 +67,7 @@ public class Configure {
 		// 添加内置日志
 		accept.getFilterChain().addLast("logging", new LoggingFilter());
 		// 设置适配器（监听）
-		accept.setHandler(new TCommunicaIoHandle());
+		accept.setHandler(new TCommunicaIoHandle(index));
 	}
 
 	/**
@@ -83,16 +83,6 @@ public class Configure {
 	 */
 	public void service(int port) throws IOException {
 		accept.bind(new InetSocketAddress(port));
-	}
-
-	/**
-	 * <p>Title: getAllSession</p>
-	 * <p>Description: 获得所有与服务器连接的客户端会话session。</p>
-	 * @return Collection<IoSession> IoSession的集合
-	 */
-	public Collection<IoSession> getAllSession() {
-		Collection<IoSession> sessions = accept.getManagedSessions().values();
-		return sessions;
 	}
 
 	public NioSocketAcceptor getAccept() {

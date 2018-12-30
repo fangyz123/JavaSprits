@@ -1,5 +1,7 @@
 package team.javaSpirit.teachingAssistantPlatform.common;
 
+import org.apache.mina.core.session.IoSession;
+
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
 
@@ -26,4 +28,6 @@ public class Constant {
 	public static String imgsrc;
 	/* 下课时间 */
 	public static String endT;
+	/* 连接老师端的会话 */
+	public static IoSession session = null;
 }

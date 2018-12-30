@@ -23,6 +23,7 @@ public class TeacherLoginMouseActionListener implements MouseListener {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		this.login.dispose();
 		Modify modify=new Modify();
 		modify.init();
 	}

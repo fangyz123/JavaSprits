@@ -122,7 +122,6 @@ public class ListenerThread extends Thread {
 			events.setEvent(e);
 			ous.writeObject(events);//【】有可能在这里写不进去。所以是不是得先把ous给初始化了
 		} catch (IOException e1) {
-			System.out.println("发送事件对象出现异常");
 			e1.printStackTrace();
 		}
 	}

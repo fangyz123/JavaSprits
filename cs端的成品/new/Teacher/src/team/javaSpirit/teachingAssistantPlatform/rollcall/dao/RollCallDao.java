@@ -9,6 +9,17 @@ import team.javaSpirit.teachingAssistantPlatform.entity.ClassCourse;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.util.HibernateUtil;
 
+/**
+ * <p>
+ * Title: RollCallDao
+ * </p>
+ * <p>
+ * Description: 找到本课程的所有学生。
+ * </p>
+ * 
+ * @author Fang Yuzhen
+ * @date 2018年12月25日
+ */
 public class RollCallDao {
 	/**
 	 * <p>
@@ -26,6 +37,7 @@ public class RollCallDao {
 		Query q = session.createQuery("select sc.student from StudentClass sc where sc.classin.class_id=? ");
 		q.setParameter(0, class_id);
 		List<Students> list = q.list();
+		session.close();
 		return list;
 	}
 
@@ -41,7 +53,9 @@ public class RollCallDao {
 	 */
 	public ClassCourse getClassCourseByCid(int cid) {
 		Session session = HibernateUtil.getSession();
-		return session.get(ClassCourse.class, cid);
+		ClassCourse c = session.get(ClassCourse.class, cid);
+		session.close();
+		return c;
 	}
-	
+
 }

@@ -5,6 +5,7 @@ import org.hibernate.Transaction;
 
 import team.javaSpirit.teachingAssistantPlatform.entity.LoadStudent;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
+import team.javaSpirit.teachingAssistantPlatform.entity.Studentstatus;
 import team.javaSpirit.teachingAssistantPlatform.util.HibernateUtil;
 
 /**
@@ -83,6 +84,20 @@ public class LoadStudentDaoImpl {
 		Transaction tx = session.beginTransaction();
 		Students p = session.get(Students.class, s.getSid());
 		p.setPassword(pwd);
+		tx.commit();
+		session.close();
+	}
+	public Studentstatus checkStatus(String sno) {
+		Session session = HibernateUtil.getSession();
+		Studentstatus ss=session.get(Studentstatus.class, sno);
+		session.close();
+		return ss;
+	}
+	public void updateStatus(String sno) {
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		Studentstatus ss=session.get(Studentstatus.class, sno);
+		ss.setRecord_status(4);
 		tx.commit();
 		session.close();
 	}

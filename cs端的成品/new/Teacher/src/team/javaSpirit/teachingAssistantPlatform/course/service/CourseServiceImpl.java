@@ -123,7 +123,7 @@ public class CourseServiceImpl {
 			// 离上课时间差多少分钟，有正有负
 			long mminute = (current.getTime() - startTime.getTime()) / (1000 * 60);
 			long lminute = (current.getTime() - endTime.getTime()) / (1000 * 60);
-			if (mminute >= 0 && lminute <= 0) {
+			if ((Math.abs(mminute) <=10)|| (mminute>=0 && lminute <= 0)) {
 				return true;
 			}
 		} catch (ParseException e) {

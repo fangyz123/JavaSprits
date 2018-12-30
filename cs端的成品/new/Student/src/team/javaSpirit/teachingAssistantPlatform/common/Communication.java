@@ -24,5 +24,7 @@ public class Communication {
 	public final static byte connectCommand = 3;
 	/* 学生给老师发收到的命令 */
 	public final static byte receivedCommand = 4;
+	/* 学生给老师发关闭连接的命令 */
+	public final static byte closeCommand = 5;
 
 }

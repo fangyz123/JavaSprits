@@ -5,6 +5,7 @@ import java.util.Date;
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.entity.LoadStudent;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
+import team.javaSpirit.teachingAssistantPlatform.entity.Studentstatus;
 import team.javaSpirit.teachingAssistantPlatform.login.dao.LoadStudentDaoImpl;
 import team.javaSpirit.teachingAssistantPlatform.util.IpUtil;
 
@@ -49,14 +50,20 @@ public class LoadStudentServiceImpl {
 			if (s.getState() != 1) {
 				return 2;
 			} else if (s.getPassword().equals(password)) {
-				String ip = IpUtil.getRealIP();
-				Students st = this.loadStudentDaoImpl.updateStudentIp(s, ip);
-				Constant.myStudent = st;
-				LoadStudent ls = new LoadStudent();
-				ls.setLogin_time(new Date());
-				ls.setStudent(st);
-				loadStudentDaoImpl.saveLoadStudent(ls);
-				return 4;
+				Studentstatus ss=this.loadStudentDaoImpl.checkStatus(s.getSid());
+				if(ss.getRecord_status()==0) {
+					String ip = IpUtil.getRealIP();
+					Students st = this.loadStudentDaoImpl.updateStudentIp(s, ip);
+					Constant.myStudent = st;
+					LoadStudent ls = new LoadStudent();
+					ls.setLogin_time(new Date());
+					ls.setStudent(st);
+					loadStudentDaoImpl.saveLoadStudent(ls);
+					this.loadStudentDaoImpl.updateStatus(s.getSid());
+					return 4;
+				}
+				else
+					return 5;
 			} else {
 				return 3;
 			}

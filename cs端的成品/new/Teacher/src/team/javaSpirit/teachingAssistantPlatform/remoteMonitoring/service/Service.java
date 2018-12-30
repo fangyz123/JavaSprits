@@ -1,19 +1,21 @@
 package team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.JOptionPane;
 
 import org.apache.mina.core.session.IoSession;
 
 import team.javaSpirit.teachingAssistantPlatform.common.Communication;
+import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.entity.FileContent;
 import team.javaSpirit.teachingAssistantPlatform.entity.FileShare;
 import team.javaSpirit.teachingAssistantPlatform.mina.Configure;
+import team.javaSpirit.teachingAssistantPlatform.ui.view.Index;
 
 /**
  * <p>
@@ -31,11 +33,28 @@ public class Service {
 	private Configure configure;
 	/* 设置图片的线程 */
 	private SetMessageThread setMessage = null;
-	private List<SendMessageThread> SendMessageThreads = new ArrayList<SendMessageThread>();
+	private List<SendMessageThread> sendMessageThreads = new ArrayList<SendMessageThread>();
 	// new一个图片设置和获得图片的对象
 	private FileShare fileShare = null;
 	// 服务开启成功，对数据库的操作对象
 	ServiceOperationServiceImpl serviceOpen = new ServiceOperationServiceImpl();
+	/* 页面对象 */
+	private Index index;
+
+	/**
+	 * <p>
+	 * Title:
+	 * </p>
+	 * <p>
+	 * Description: 有参构造函数。
+	 * </p>
+	 * 
+	 * @param index index页面
+	 */
+	public Service(Index index) {
+		super();
+		this.index = index;
+	}
 
 	/**
 	 * <p>
@@ -49,7 +68,7 @@ public class Service {
 		// new一个mina框架配置基本信息的对象
 		configure = new Configure();
 		// 对连接的对象的基本信息进行初始化
-		configure.init();
+		configure.init(index);
 		try {
 			// 开启服务，端口是8080
 			configure.service(port);
@@ -89,26 +108,31 @@ public class Service {
 	 * </p>
 	 */
 	public void openScreenShare() {
-		// 获得所有的session
-		Collection<IoSession> sessions = configure.getAllSession();
-		// new一个图片设置和获得图片的对象
-		if (fileShare == null) {
-			fileShare = new FileShare();
+		// 前面只有是空的（也就是第一次点开启共享）
+		if (sendMessageThreads.size() == 0) {
+			// new一个图片设置和获得图片的对象
+			if (fileShare == null) {
+				fileShare = new FileShare();
+			}
+			// 开启设置图片的线程
+			setMessage = new SetMessageThread(fileShare);
+			SetMessageThread.index = 0;
+			setMessage.start();
+			// 给每个学生发送屏幕截图
+			FileContent f = new FileContent();
+			f.setCommand(Communication.openScreen);
+			// 遍历hashMap
+			Iterator<ConcurrentHashMap.Entry<String, IoSession>> entries = Constant.studentSession.entrySet()
+					.iterator();
+			while (entries.hasNext()) {
+				ConcurrentHashMap.Entry<String, IoSession> entry = entries.next();
+				IoSession session = entry.getValue();
+				session.write(f);
+				SendMessageThread sendMessage = new SendMessageThread(session, fileShare);
+				sendMessageThreads.add(sendMessage);
+				sendMessage.start();
+			}
 		}
-		// 开启设置图片的线程
-		setMessage = new SetMessageThread(fileShare);
-		SetMessageThread.index = 0;
-		setMessage.start();
-		// 给每个学生发送屏幕截图
-		FileContent f = new FileContent();
-		f.setCommand(Communication.openScreen);
-		for (IoSession ioSession : sessions) {
-			ioSession.write(f);
-			SendMessageThread sendMessage = new SendMessageThread(ioSession, fileShare);
-			SendMessageThreads.add(sendMessage);
-			sendMessage.start();
-		}
-		System.out.println(SendMessageThreads.size());
 	}
 
 	/**
@@ -120,45 +144,53 @@ public class Service {
 	 * </p>
 	 */
 	public void closeScreenShare() {
-		// 获得所有的session
-		Collection<IoSession> sessions = configure.getAllSession();
-		FileContent f = new FileContent();
-		f.setCommand(Communication.closeScreen);
-		// 给所有的学生发送的命令为2，关闭展示
-		for (IoSession ioSession : sessions) {
-			ioSession.write(f);
+		//必须先开启再关闭才有效
+		if (sendMessageThreads.size() > 0) {
+			FileContent f = new FileContent();
+			f.setCommand(Communication.closeScreen);
+			// 给所有的学生发送的命令为2，关闭展示
+			Iterator<ConcurrentHashMap.Entry<String, IoSession>> entries = Constant.studentSession.entrySet()
+					.iterator();
+			while (entries.hasNext()) {
+				ConcurrentHashMap.Entry<String, IoSession> entry = entries.next();
+				IoSession session = entry.getValue();
+				session.write(f);
+			}
+			// 退出所有的线程
+			setMessage.setRun(false);
+			for (SendMessageThread sendMessageThread : sendMessageThreads) {
+				sendMessageThread.setRun(false);
+			}
+			// 清除ArrayList所有的发送线程
+			sendMessageThreads.clear();
 		}
-		// 退出所有的线程
-		setMessage.setRun(false);
-		for (SendMessageThread sendMessageThread : SendMessageThreads) {
-			sendMessageThread.setRun(false);
-		}
-		// 清除ArrayList所有的发送线程
-		SendMessageThreads.clear();
-		System.out.println(SendMessageThreads.size());
-
 	}
 
 	/**
-	 * <p>Title: sendCommand</p>
-	 * <p>Description: 点击学生的小电脑，给学生发送连接的命令。</p>
+	 * <p>
+	 * Title: sendCommand
+	 * </p>
+	 * <p>
+	 * Description: 点击学生的小电脑，给学生发送连接的命令。
+	 * </p>
+	 * 
 	 * @param ip 学生的IP
 	 */
-	public void sendCommand(String ip) {
+	public void sendCommand(IoSession session) {
 		// 获得所有的session
-		Collection<IoSession> sessions = configure.getAllSession();
 		FileContent f = new FileContent();
 		// 发送打开服务的命令
 		f.setCommand(Communication.connectCommand);
-		System.out.println("ip:"+ip);
-		for (IoSession ioSession : sessions) {
-			String clientIP = ((InetSocketAddress) ioSession.getRemoteAddress()).getAddress().getHostAddress();
-			if (clientIP.equals(ip)) {
-				System.out.println("clientIP:"+clientIP);
-				ioSession.write(f);
-				break;
-			}
-		}
+		session.write(f);
+	}
+	
+	/**
+	 * <p>Title: getSendMessageThreads</p>
+	 * <p>Description: 得到发送线程。由于后续的发送。</p>
+	 * @return List<SendMessageThread>线程发送对象
+	 */
+	public List<SendMessageThread> getSendMessageThreads() {
+		return sendMessageThreads;
 	}
 
 	/**

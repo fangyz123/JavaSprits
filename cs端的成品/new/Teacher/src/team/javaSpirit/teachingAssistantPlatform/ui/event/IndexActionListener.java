@@ -38,17 +38,8 @@ public class IndexActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// 远程监控：目前没有页面的实现，用下拉菜单
-		if ("远程监控".equals(e.getActionCommand())) {
-			// 没有相应的页面，不实现
-		} else if ("录屏".equals(e.getActionCommand())) {
-			// 没有实现录屏的功能
-		} else if ("广播".equals(e.getActionCommand())) {
-			// 没有实现广播的功能
-		}else if ("学生作业".equals(e.getActionCommand())) {
-			// 没有实现学生作业的功能
-		} else if ("开始".equals(e.getActionCommand())) {
-			// 随机点名的事件
+		// 随机点名的事件
+		if ("开始".equals(e.getActionCommand())) {
 			if (rcs == null) {
 				rcs = new RollCallService();
 			}

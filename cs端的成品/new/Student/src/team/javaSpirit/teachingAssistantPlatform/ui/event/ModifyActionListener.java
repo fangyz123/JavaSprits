@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import team.javaSpirit.teachingAssistantPlatform.login.service.LoadStudentServiceImpl;
+import team.javaSpirit.teachingAssistantPlatform.ui.view.Login;
 import team.javaSpirit.teachingAssistantPlatform.ui.view.Modify;
 
 /**
@@ -61,6 +62,8 @@ public class ModifyActionListener implements ActionListener {
                 }else {
                 	JOptionPane.showMessageDialog(null,"请返回登录","ERROR_MESSAGE",JOptionPane.ERROR_MESSAGE);
                 	modify.dispose();
+                	Login login=new Login();
+                	login.init();
                 }
             }
 	}

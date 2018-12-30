@@ -3,6 +3,7 @@ package team.javaSpirit.teachingAssistantPlatform.ui.event;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import team.javaSpirit.teachingAssistantPlatform.ui.view.Login;
 import team.javaSpirit.teachingAssistantPlatform.ui.view.Modify;
 
 /**
@@ -18,7 +19,10 @@ import team.javaSpirit.teachingAssistantPlatform.ui.view.Modify;
  * @date 2018年12月13日
  */
 public class LoginMouseActionListener implements MouseListener {
-
+	private Login login;
+	public LoginMouseActionListener(Login login) {
+		this.login=login;
+	}
 	/**
 	 * 
 	 * <p>
@@ -32,6 +36,7 @@ public class LoginMouseActionListener implements MouseListener {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		this.login.dispose();
 		Modify modify = new Modify();
 		modify.init();
 	}

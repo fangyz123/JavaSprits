@@ -3,7 +3,6 @@ package team.javaSpirit.teachingAssistantPlatform.ui.view;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -12,8 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowStateListener;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,6 +30,8 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import org.apache.mina.core.session.IoSession;
+
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.course.service.CourseServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.entity.ShareResource;
@@ -37,7 +39,6 @@ import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.Service;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.ServiceOperationServiceImpl;
-import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.StudentSignServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.studentSignIn.service.StudentSignInServiceImpl;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.IndexActionListener;
 import team.javaSpirit.teachingAssistantPlatform.ui.event.MyItemListener;
@@ -66,7 +67,7 @@ public class Index extends JFrame {
 	/** serialVersionUID */
 	private static final long serialVersionUID = 1L;
 	/* 服务对象 */
-	Service service = new Service();
+	private Service service;
 	/* 背景面板 */
 	private JPanel bgContentPane;
 	/* 显示学生签到情况的标签 */
@@ -113,22 +114,8 @@ public class Index extends JFrame {
 	private JTextField textField;
 	/* 监听事件 */
 	private IndexActionListener event;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Index frame = new Index();
-					frame.init();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	/* 最小化窗口对象 */
+	private Suspensionbox suspensionbox = null;
 
 	/**
 	 * <p>
@@ -195,7 +182,7 @@ public class Index extends JFrame {
 		comboBox.addItem("开启共享");
 		comboBox.addItem("关闭共享");
 		// 监听下拉框的选择事件
-		comboBox.addItemListener(new MyItemListener(comboBox, service) {
+		comboBox.addItemListener(new MyItemListener(service) {
 		});
 		// 面板添加下拉菜单comboBox
 		menu1.add(comboBox);
@@ -631,6 +618,8 @@ public class Index extends JFrame {
 		setGroupLayout();
 		// 学生演示滚动表格设置
 		selectstuContent();
+		// 设置位置监听
+		setListener();
 	}
 
 	/**
@@ -972,13 +961,13 @@ public class Index extends JFrame {
 		panel.setPreferredSize(new Dimension(908, 2500));
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-		// 所有签到的学生
-		StudentSignServiceImpl ss = new StudentSignServiceImpl();
-		List<Students> listStu = ss.allSignStudent();
-		for (Students s : listStu) {
-			JButton j = new JButton(s.getName());
+		// 所有连接的学生
+		Iterator<ConcurrentHashMap.Entry<String, IoSession>> entries = Constant.studentSession.entrySet().iterator();
+		while (entries.hasNext()) {
+			ConcurrentHashMap.Entry<String, IoSession> entry = entries.next();
+			JButton j = new JButton(entry.getKey());
 			// 为学生的小电脑和名字添加点击事件
-			j.addActionListener(new StuShowActionListener(j, service));
+			j.addActionListener(new StuShowActionListener(service));
 			j.setPreferredSize(new Dimension(170, 80));
 			j.setIcon(new ImageIcon("image\\stu.png"));
 			j.setHorizontalAlignment(SwingConstants.LEFT);
@@ -1245,37 +1234,94 @@ public class Index extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * <p>
+	 * Title: setListener
+	 * </p>
+	 * <p>
+	 * Description: 设置窗口操作的监听。
+	 * </p>
+	 */
+	public void setListener() {
+		// 窗口最小化时软件dispose
+		this.addWindowListener(new WindowAdapter() {
+			// 图标化窗口时调用事件
+			public void windowIconified(WindowEvent e) {
+				// 窗口最小化时dispose该窗口
+				dispose();
+				// 先把以前的销毁
+				if (suspensionbox != null) {
+					suspensionbox.setIsdisplay(false);
+					suspensionbox.dispose();
+				}
+				// 设置最小化窗口
+				// 最小化窗口对象
+				suspensionbox = new Suspensionbox(service, getIndex());
+				suspensionbox.init();
+				suspensionbox.setIsdisplay(true);
+			}
+
+			// 关闭窗口时，更改数据的teacherstatus状态
+			public void windowClosing(WindowEvent e) {
+				super.windowClosing(e);
+				// 关闭发送屏幕共享的线程
+				if (service.getSendMessageThreads().size() > 0) {
+					service.closeScreenShare();
+				}
+				// 更改状态
+				ServiceOperationServiceImpl sos = new ServiceOperationServiceImpl();
+				sos.updateStatus(0);
+				// 清除hashMap
+				Constant.studentSession.clear();
+			}
+		});
+	}
+
+	/**
+	 * <p>
+	 * Title:
+	 * </p>
+	 * <p>
+	 * Description: 构造函数。
+	 * </p>
 	 */
 	public Index() {
+		// 为页面提供服务的对象
+		service = new Service(this);
+
 		// 设置关闭状态
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// 事件监听的对象
 		event = new IndexActionListener(this);
 
-		// 窗口最小化时软件dispose
-		this.addWindowListener(new WindowAdapter() {
-			// 图标化窗口时调用事件
-			public void windowIconified(WindowEvent e) {
-				dispose(); // 窗口最小化时dispose该窗口
-			}
-			//关闭窗口时，更改数据的teacherstatus状态
-			public void windowClosing(WindowEvent e) {
-				super.windowClosing(e);
-				// 更改状态
-				ServiceOperationServiceImpl sos=new ServiceOperationServiceImpl();
-				sos.updateStatus(0);
-			}
-		});
-		this.addWindowStateListener(new WindowStateListener() {
-			public void windowStateChanged(WindowEvent state) {
-				if (state.getNewState() == 1 || state.getNewState() == 7) {
-					Suspensionbox s = new Suspensionbox();
-					s.init();
-				}
-			}
-		});
 		this.setVisible(true);
+	}
+
+	/**
+	 * <p>
+	 * Title: getSuspensionbox
+	 * </p>
+	 * <p>
+	 * Description: 得到悬浮框对象
+	 * </p>
+	 * 
+	 * @return 悬浮框对象
+	 */
+	public Suspensionbox getSuspensionbox() {
+		return suspensionbox;
+	}
+
+	/**
+	 * <p>
+	 * Title: getIndex
+	 * </p>
+	 * <p>
+	 * Description: 得到Index页面的对象
+	 * </p>
+	 * 
+	 * @return Index对象
+	 */
+	public Index getIndex() {
+		return this;
 	}
 
 }
