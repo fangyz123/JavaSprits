@@ -1,0 +1,10 @@
+https://www.baidu.com/s?wd=http&rsv_spt=1&rsv_iqid=0xcc8faa600005fd51&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&rqlang=cn&tn=baiduhome_pg&rsv_enter=1&oq=post&inputT=2212&rsv_t=40e3px%2F1jYqUPrGhhQpvFoDqkluJDe7XZYicHOAZBRy7C%2FCrppXHj59xWf3pJiM22ysA&rsv_pq=eae2b2c000067b45&rsv_sug3=7&rsv_sug1=5&rsv_sug7=100&bs=post
+
+以&分隔的参数，key=value形式
+
+请求方式：post get
+请求参数：key=value
+
+服务器端响应：字节流
+类型：文件或字符
+字符格式：html,xml,json

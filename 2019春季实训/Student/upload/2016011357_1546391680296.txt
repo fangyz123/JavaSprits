@@ -1,0 +1,45 @@
+public static void emm() throws Exception, IOException {
+		OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
+		// 转换器
+		OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
+		// 从视频流中获得值指贴图片
+		Frame grabframe = grabber.grab();
+		// 抓取一帧视频并将其转换为图像，至于用这个图像用来做什么？加水印，人脸识别等等自行添加
+		IplImage grabbedImage = null;
+		if (grabframe != null) {
+			System.out.println("获得第一帧");
+			grabbedImage = converter.convert(grabframe);
+			System.out.println(grabbedImage);
+			// 保存图片到本地
+			opencv_imgcodecs.cvSaveImage("E:\\test.jpg", grabbedImage);
+			// 将IplImage转为Frame
+			Frame convertFrame2 = converter.convert(grabbedImage);
+			// 将图片指针转为二进制byte[] start
+			Java2DFrameConverter java2dFrameConverter = new Java2DFrameConverter();
+			BufferedImage bufferedImage = java2dFrameConverter.convert(convertFrame2);
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			ImageIO.write(bufferedImage, "jpg", out);
+			byte[] readFile = out.toByteArray();
+			// 将图片指针转为二进制byte[] end
+//          byte[] readFile = FileUtils.readFileToByteArray(new File("F:\\hello112.jpg"));  //读取本地图片
+			 //发送图片到图片服务器
+//            Client client = new Client();
+//            WebResource resource = client.resource("http://localhost:8088/imgWeb/upload/hello112.jpg");
+//            resource.put(String.class, readFile);
+            //图片资源释放释放资源
+            grabbedImage.release();
+		}
+
+	}
+
+
+
+
+System.exit(0)是退出整个程序，如果有多个窗口，全部都销毁退出。
+setDefaultCloseOperation()是设置用户在此窗体上发起 "close" 时默认执行的操作。必须指定以下选项之一： 
+
+DO_NOTHING_ON_CLOSE（在 WindowConstants 中定义）：不执行任何操作；要求程序在已注册的 WindowListener 对象的 windowClosing 方法中处理该操作。 
+HIDE_ON_CLOSE（在 WindowConstants 中定义）：调用任意已注册的 WindowListener 对象后自动隐藏该窗体。 
+DISPOSE_ON_CLOSE（在 WindowConstants 中定义）：调用任意已注册 WindowListener 的对象后自动隐藏并释放该窗体。 
+EXIT_ON_CLOSE（在 JFrame 中定义）：使用 System exit 方法退出应用程序。仅在应用程序中使用。 
+默认情况下，该值被设置为 HIDE_ON_CLOSE

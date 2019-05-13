@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//src/team/javaSpirit/teachingAssistantPlatform/entity/FileContent.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/facematch/Base64Util.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/facematch/GsonUtils.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/facematch/HttpUtil.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/firstcheck/FirstInvoke.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/mina/SCommunicaIoHandle.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/remoteMonitoring/service/Client.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/ShowScreen.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/view/ConnectRemind.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/util/IpUtil.java=UTF-8
+encoding/<project>=UTF-8
