@@ -4,6 +4,7 @@ import org.hibernate.Session;
 
 import team.javaSpirit.teachingAssistantPlatform.entity.LoadTeacher;
 import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
+import team.javaSpirit.teachingAssistantPlatform.entity.Teacherstatus;
 import team.javaSpirit.teachingAssistantPlatform.util.HibernateUtil;
 
 
@@ -37,6 +38,7 @@ public class LoadTeacherDaoImpl {
 		session.beginTransaction();
 		session.save(t);
 		session.getTransaction().commit();
+		session.close();
 	}
 
 	/**
@@ -53,7 +55,9 @@ public class LoadTeacherDaoImpl {
 	 */
 	public Teacher getTeacherById(String id) {
 		Session session = HibernateUtil.getSession();
-		return session.get(Teacher.class, id);
+		Teacher t=session.get(Teacher.class, id);
+		session.close();
+		return t;
 	}
 
 	/**
@@ -75,6 +79,7 @@ public class LoadTeacherDaoImpl {
 		Teacher s = session.get(Teacher.class, t.getTid());
 		s.setIp(ip);
 		session.getTransaction().commit();
+		session.close();
 		return s;
 	}
 
@@ -96,5 +101,20 @@ public class LoadTeacherDaoImpl {
 		Teacher s = session.get(Teacher.class, t.getTid());
 		s.setPassword(password);
 		session.getTransaction().commit();
+		session.close();
+	}
+	public Teacherstatus checkStatus(String sno) {
+		Session session = HibernateUtil.getSession();
+		Teacherstatus ts=session.get(Teacherstatus.class, sno);
+		session.close();
+		return ts;
+	}
+	public void updateStatus(String sno) {
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		Teacherstatus ts=session.get(Teacherstatus.class, sno);
+		ts.setStatus(4);
+		session.getTransaction().commit();
+		session.close();
 	}
 }

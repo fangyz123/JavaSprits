@@ -34,13 +34,11 @@ public class IpUtil {
 					continue;
 				}
 				Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
-				System.out.println(netInterface.getDisplayName());
 				while (addresses.hasMoreElements()) {
 					InetAddress ip = addresses.nextElement();
 					if (ip != null) {
 						// ipv4
 						if (ip instanceof Inet4Address) {
-							System.out.println("ipv4 = " + ip.getHostAddress());
 							return ip.getHostAddress();
 						}
 					}
@@ -48,7 +46,6 @@ public class IpUtil {
 				break;
 			}
 		} catch (SocketException e) {
-			System.err.println("Error when getting host ip address" + e.getMessage());
 		}
 		return null;
 	}

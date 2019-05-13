@@ -21,6 +21,8 @@ import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactor
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
+import team.javaSpirit.teachingAssistantPlatform.common.Constant;
+
 /**
  * <p>
  * Title: Configure
@@ -101,13 +103,14 @@ public class Configure {
 	 * @param port 开启服务的端口号
 	 * @throws IOException
 	 */
-	public void connect(String ip, int port){
+	public void connect(String ip, int port) {
 		// 设置默认访问地址localhost
 		connector.setDefaultRemoteAddress(new InetSocketAddress(ip, port));
 		connectFuture = connector.connect();
 		connectFuture.awaitUninterruptibly();
 		if (connectFuture.isConnected()) {
 			session = connectFuture.getSession();
+			Constant.session = session;
 			JOptionPane.showMessageDialog(null, "连接成功");
 		} else {
 			JOptionPane.showMessageDialog(null, "没开服务或没网络");

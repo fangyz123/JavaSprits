@@ -38,7 +38,9 @@ public class StudentSignInDaoImpl {
 				+ "where s2.classin.class_id=? and s1.sid=s2.student.sid and s.sid=s1.sid ";
 		Query q = session.createQuery(sql);
 		q.setParameter(0, Constant.cid);
-		return q.list();
+		List<Object[]> list = q.list();
+		session.close();
+		return list;
 	}
 
 }

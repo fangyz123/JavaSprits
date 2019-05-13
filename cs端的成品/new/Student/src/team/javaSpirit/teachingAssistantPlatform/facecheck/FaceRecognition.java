@@ -51,7 +51,7 @@ public class FaceRecognition {
 	 * </p>
 	 */
 	public static void initTrain() {
-		File root = new File("cameraImage");
+		File root = new File("faceimg");
 		FilenameFilter imgFilter = new FilenameFilter() {
 			public boolean accept(File dir, String name) {
 				name = name.toLowerCase();
@@ -66,7 +66,8 @@ public class FaceRecognition {
 		int counter = 0;
 		for (File image : imageFiles) {
 			Mat img = imread(image.getAbsolutePath(), CV_LOAD_IMAGE_GRAYSCALE);
-			int label = Integer.parseInt(image.getName().split("\\-")[3]);
+			String s=image.getName().split("\\-")[3];
+			int label = Integer.parseInt(s.split("\\.")[0]);
 			images.put(counter, img);
 			labelsBuf.put(counter, label);
 			counter++;
@@ -74,7 +75,7 @@ public class FaceRecognition {
 
 		FaceRecognizer faceRecognizer = LBPHFaceRecognizer.create();
 		faceRecognizer.train(images, labels);
-		faceRecognizer.save("e:\\test\\lbphfaces.xml");
+		faceRecognizer.save("xmlCreate\\lbphfaces.xml");
 		faceRecognizer.close();
 	}
 

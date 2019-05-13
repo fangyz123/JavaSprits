@@ -50,12 +50,10 @@ public class ShowImageThread extends Thread {
 				// 放到界面上.加到标签上
 				jf.setImgLabel(image);
 			} catch (IOException e) {
-				System.out.println("学生端断开连接");
 				try {
 					ins.close();
 					serverSocket.close();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				e.printStackTrace();

@@ -5,6 +5,7 @@ import java.util.Date;
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
 import team.javaSpirit.teachingAssistantPlatform.entity.LoadTeacher;
 import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
+import team.javaSpirit.teachingAssistantPlatform.entity.Teacherstatus;
 import team.javaSpirit.teachingAssistantPlatform.login.dao.LoadTeacherDaoImpl;
 import team.javaSpirit.teachingAssistantPlatform.util.IpUtil;
 
@@ -48,15 +49,21 @@ public class TeacherServiceImpl {
 			if (s.getState() != 1) {
 				return 2;
 			} else if (s.getPassword().equals(password)) {
-				String ip = IpUtil.getRealIP();
-				Teacher t = this.loadTeacherDaoImpl.updateTeacherIp(s, ip);
-				Constant.myTeacher=t;
-				// 向登录表中插入信息
-				LoadTeacher lt = new LoadTeacher();
-				lt.setLogin_time(new Date());
-				lt.setTeacher(t);
-				this.loadTeacherDaoImpl.saveLoadTeacher(lt);
-				return 4;
+				Teacherstatus ts=this.loadTeacherDaoImpl.checkStatus(s.getTid());
+				if(ts.getStatus()==0) {
+					String ip = IpUtil.getRealIP();
+					Teacher t = this.loadTeacherDaoImpl.updateTeacherIp(s, ip);
+					Constant.myTeacher=t;
+					// 向登录表中插入信息
+					LoadTeacher lt = new LoadTeacher();
+					lt.setLogin_time(new Date());
+					lt.setTeacher(t);
+					this.loadTeacherDaoImpl.saveLoadTeacher(lt);
+					this.loadTeacherDaoImpl.updateStatus(s.getTid());
+					return 4;
+				}else {
+					return 5;
+				}
 			} else {
 				return 3;
 			}

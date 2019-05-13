@@ -1,3 +1,4 @@
+
 package team.javaSpirit.teachingAssistantPlatform.test;
 
 import java.awt.EventQueue;

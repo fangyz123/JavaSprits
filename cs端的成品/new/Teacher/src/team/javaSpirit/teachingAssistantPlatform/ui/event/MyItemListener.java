@@ -3,8 +3,6 @@ package team.javaSpirit.teachingAssistantPlatform.ui.event;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.JComboBox;
-
 import team.javaSpirit.teachingAssistantPlatform.common.Communication;
 import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.Service;
 
@@ -22,8 +20,6 @@ import team.javaSpirit.teachingAssistantPlatform.remoteMonitoring.service.Servic
 public class MyItemListener implements ItemListener {
 	/* 开启连接的服务 */
 	private Service service;
-	/* 下拉框 */
-	private JComboBox<?> comboBox;
 
 	/**
 	 * <p>
@@ -47,9 +43,8 @@ public class MyItemListener implements ItemListener {
 	 * 
 	 * @param comboBox
 	 */
-	public MyItemListener(JComboBox<?> comboBox,Service service) {
+	public MyItemListener(Service service) {
 		this.service = service;
-		this.comboBox = comboBox;
 	}
 
 	/**
@@ -58,16 +53,19 @@ public class MyItemListener implements ItemListener {
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
-			if (comboBox.getSelectedItem() == "开启") {
+			if ("开启".equals(e.getItem())) {
 				// 开启服务
 				service.openService(Communication.tPort);
-			} else if (comboBox.getSelectedItem() == "关闭") {
+			} else if ("关闭".equals(e.getItem())) {
 				// 关闭服务
+				if (service.getSendMessageThreads().size()>0) {
+					service.closeScreenShare();
+				}
 				service.closeServise();
-			} else if (comboBox.getSelectedItem() == "开启共享") {
+			} else if ("开启共享".equals(e.getItem())) {
 				// 开启屏幕共享
 				service.openScreenShare();
-			} else {
+			} else if ("关闭共享".equals(e.getItem())){
 				// 关闭屏幕共享
 				service.closeScreenShare();
 			}

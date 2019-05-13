@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -231,7 +232,7 @@ public class Login extends JFrame {
 		JLabel modifyPassword = new JLabel("修改密码");
 		modifyPassword.setForeground(SystemColor.textInactiveText);
 		modifyPassword.setBounds(235, 264, 54, 15);
-		LoginMouseActionListener lm = new LoginMouseActionListener();
+		LoginMouseActionListener lm = new LoginMouseActionListener(this);
 		modifyPassword.addMouseListener(lm);
 		bgContentPane.add(modifyPassword);
 	}
@@ -308,7 +309,7 @@ public class Login extends JFrame {
 		// 设置关闭状态
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// 设置图标
-		this.setIconImage(null);
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("image\\logo1.png"));
 		// 窗体可见
 		this.setVisible(true);
 	}

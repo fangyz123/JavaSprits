@@ -60,9 +60,26 @@ public class Suspensionbox extends JFrame implements ActionListener {
 	/* 随机点名菜单 */
 	private JPanel menu5;
 	/* 服务对象 */
-	Service service = new Service();
+	Service service;
+	/* 要最小化的那个页面 */
+	private Index index;
 	/* 是否调用回调事件，得到位置坐标 */
 	private boolean isdisplay = true;
+
+	/**
+	 * <p>
+	 * Title: setIsdisplay
+	 * </p>
+	 * <p>
+	 * Description: 设置窗体是否可见。
+	 * </p>
+	 * 
+	 * @param isdisplay
+	 */
+	public void setIsdisplay(boolean isdisplay) {
+		this.isdisplay = isdisplay;
+		setVisible(isdisplay);
+	}
 
 	/**
 	 * <p>
@@ -130,7 +147,7 @@ public class Suspensionbox extends JFrame implements ActionListener {
 		comboBox.addItem("开启共享");
 		comboBox.addItem("关闭共享");
 		// 监听下拉框的选择事件
-		comboBox.addItemListener(new MyItemListener(comboBox, service) {
+		comboBox.addItemListener(new MyItemListener(service) {
 		});
 		// 面板添加下拉菜单comboBox
 		menu1.add(comboBox);
@@ -249,10 +266,12 @@ public class Suspensionbox extends JFrame implements ActionListener {
 		JButton button_2 = new JButton("学生演示");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Index l = new Index();
-				l.jumpSelectstu();
-				setVisible(false);
-
+				// 窗体不可见
+				isdisplay = false;
+				setVisible(isdisplay);
+				dispose();
+				// 回到原页面
+				index.init();
 			}
 		});
 		button_2.setForeground(new Color(100, 149, 237));
@@ -291,9 +310,12 @@ public class Suspensionbox extends JFrame implements ActionListener {
 		button_3.setBounds(0, 65, 120, 32);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Index l = new Index();
-				l.jumpRandomcall();
-				setVisible(false);
+				// 窗体不可见
+				isdisplay = false;
+				setVisible(isdisplay);
+				dispose();
+				// 回到原页面
+				index.jumpRandomcall();
 			}
 		});
 		button_3.setForeground(new Color(100, 149, 237));
@@ -328,12 +350,12 @@ public class Suspensionbox extends JFrame implements ActionListener {
 		label.setIcon(new ImageIcon("image\\return.png"));
 		label.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				//窗体不可见
+				// 窗体不可见
 				isdisplay = false;
 				setVisible(isdisplay);
 				dispose();
-				Index l = new Index();
-				l.init();
+				// 回到原页面
+				index.init();
 			}
 		});
 		label.setBounds(684, 50, 58, 41);
@@ -359,6 +381,7 @@ public class Suspensionbox extends JFrame implements ActionListener {
 	 * </p>
 	 */
 	public void init() {
+		this.locationListener();
 		this.setBackground();
 		this.setRemotecontrol();
 		this.setRecordScreen();
@@ -369,14 +392,14 @@ public class Suspensionbox extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Create the frame.
+	 * <p>
+	 * Title: locationListener
+	 * </p>
+	 * <p>
+	 * Description: 设置位置监听
+	 * </p>
 	 */
-	public Suspensionbox() {
-		setUndecorated(true);
-		setType(Type.UTILITY);
-		// 窗口置顶
-		this.setAlwaysOnTop(true);
-
+	public void locationListener() {
 		timer.start();
 		addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -399,9 +422,27 @@ public class Suspensionbox extends JFrame implements ActionListener {
 				}
 			}
 		});
-		//窗体可见
-		isdisplay = true;
-		setVisible(isdisplay);
+	}
+
+	/**
+	 * <p>
+	 * Title:
+	 * </p>
+	 * <p>
+	 * Description: 有参构造函数
+	 * </p>
+	 * 
+	 * @param service
+	 * @param index
+	 */
+	public Suspensionbox(Service service, Index index) {
+		this.service = service;
+		this.index = index;
+		setUndecorated(true);
+		setType(Type.UTILITY);
+		// 窗口置顶
+		this.setAlwaysOnTop(true);
+//		setVisible(isdisplay);
 	}
 
 	/**
@@ -414,7 +455,7 @@ public class Suspensionbox extends JFrame implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		//如果隐藏或销毁了窗体，不执行
+		// 如果隐藏或销毁了窗体，不执行
 		if (isdisplay) {
 			frameLeft = getLocationOnScreen().x;
 			frameTop = getLocationOnScreen().y;

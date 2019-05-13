@@ -38,7 +38,8 @@ public class SignMouseListener implements MouseListener {
 		StudentCourseService scs = new StudentCourseService();
 		// 找到当前课程
 		if (scs.findCurrentCourse(Constant.myStudent.getSid())
-				&& scs.getStudentStatus(Constant.myStudent.getSid()) == 0) {
+				&& (scs.getStudentStatus(Constant.myStudent.getSid()) == 0
+						|| scs.getStudentStatus(Constant.myStudent.getSid()) == 4)) {
 			try {
 				if (Constant.myStudent.getImage() == null) {
 					// 人脸检测
@@ -60,7 +61,8 @@ public class SignMouseListener implements MouseListener {
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-		} else if (scs.getStudentStatus(Constant.myStudent.getSid()) != 0) {
+		} else if (scs.getStudentStatus(Constant.myStudent.getSid()) != 0
+				&& scs.getStudentStatus(Constant.myStudent.getSid()) != 4) {
 			JOptionPane.showMessageDialog(null, "您已签到");
 		} else {
 			JOptionPane.showMessageDialog(null, "当前没有可以签到的课程");

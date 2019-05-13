@@ -6,6 +6,17 @@ import javax.swing.JLabel;
 
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 
+/**
+ * <p>
+ * Title: RollCallThread
+ * </p>
+ * <p>
+ * Description: 随机点名线程类。每隔100毫秒换一个名字。
+ * </p>
+ * 
+ * @author Fang Yuzhen
+ * @date 2018年12月25日
+ */
 public class RollCallThread extends Thread {
 	private Boolean re = true;
 	private List<Students> list;

@@ -22,7 +22,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
+import team.javaSpirit.teachingAssistantPlatform.common.Communication;
 import team.javaSpirit.teachingAssistantPlatform.common.Constant;
+import team.javaSpirit.teachingAssistantPlatform.entity.FileContent;
 import team.javaSpirit.teachingAssistantPlatform.entity.ShareResource;
 import team.javaSpirit.teachingAssistantPlatform.entity.Students;
 import team.javaSpirit.teachingAssistantPlatform.entity.Teacher;
@@ -542,9 +544,11 @@ public class Index extends JFrame {
 		if (scs.findCurrentCourse(Constant.myStudent.getSid())) {
 			String cname = scs.findCname(Constant.cid);
 			time = new JLabel("<html>第" + w + "周<br><br>" + cname + "课</html>");
+			// 启动定时任务
+			new SignTimerTask();
 		} else {
-			;
 			time = new JLabel("<html>第" + w + "周<br><br>目前没课</html>");
+
 		}
 		time.setHorizontalAlignment(SwingConstants.CENTER);
 		time.setBounds(870, 49, 120, 47);
@@ -552,8 +556,6 @@ public class Index extends JFrame {
 		time.setForeground(new Color(128, 128, 128));
 		bgContentPane.add(time);
 
-		// 启动定时任务
-		new SignTimerTask();
 	}
 
 	/**
@@ -652,7 +654,7 @@ public class Index extends JFrame {
 		remortbt.setForeground(SystemColor.textInactiveText);
 		remortbt.setFont(new Font("宋体", Font.PLAIN, 14));
 		remortbt.setBounds(66, 130, 129, 31);
-		//添加事件监听
+		// 添加事件监听
 		remortbt.addActionListener(event);
 		contentpl.add(remortbt);
 
@@ -856,6 +858,12 @@ public class Index extends JFrame {
 				// 更改状态
 				StudentCourseDao scs = new StudentCourseDao();
 				scs.changeStudentStatus(Constant.myStudent.getSid(), 0);
+				// 给老师发送命令，告诉他关闭了连接
+				if (Constant.session != null) {
+					FileContent f = new FileContent();
+					f.setCommand(Communication.closeCommand);
+					Constant.session.write(f);
+				}
 			}
 		});
 	}

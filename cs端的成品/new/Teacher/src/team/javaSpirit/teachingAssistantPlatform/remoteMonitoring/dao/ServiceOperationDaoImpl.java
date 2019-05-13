@@ -26,5 +26,6 @@ public class ServiceOperationDaoImpl {
 		Teacherstatus ts=session.get(Teacherstatus.class, tid);
 		ts.setStatus(status);
 		tx.commit();
+		session.close();
 	}
 }

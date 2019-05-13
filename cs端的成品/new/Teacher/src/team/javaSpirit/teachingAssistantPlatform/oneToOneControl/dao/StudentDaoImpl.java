@@ -23,17 +23,18 @@ public class StudentDaoImpl {
 	 * Title: getIpByName
 	 * </p>
 	 * <p>
-	 * Description: 通过学生的名字，查询学生的IP。
+	 * Description: 通过学生的ip，查询学生的名字。
 	 * </p>
 	 * 
-	 * @param name 学生的名字
-	 * @return 学生的IP
+	 * @param ip 学生的ip
+	 * @return 学生的名字
 	 */
-	public String getIpByName(String name) {
+	public String getNameByIp(String ip) {
 		Session session = HibernateUtil.getSession();
-		Query q = session.createQuery("select ip from Students where name=?");
-		q.setParameter(0, name);
-		String ip = (String) q.uniqueResult();
-		return ip;
+		Query q = session.createQuery("select name from Students where ip=?");
+		q.setParameter(0, ip);
+		String name = (String) q.uniqueResult();
+		session.close();
+		return name;
 	}
 }

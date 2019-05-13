@@ -9,10 +9,10 @@ public class StudentServiceImpl {
 	/**
 	 * <p>Title: findIp</p>
 	 * <p>Description: 通过学生的名字，找到学生的IP</p>
-	 * @param name 学生的名字
-	 * @return 学生的IP地址
+	 * @param ip 学生的ip
+	 * @return 学生的名字
 	 */
-	public String findIp(String name) {
-		return studentDao.getIpByName(name);
+	public String findName(String ip) {
+		return studentDao.getNameByIp(ip);
 	}
 }

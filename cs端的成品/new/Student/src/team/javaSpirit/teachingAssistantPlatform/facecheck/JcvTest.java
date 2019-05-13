@@ -54,9 +54,9 @@ public class JcvTest {
 			ToIplImage ti = new ToIplImage();
 			Mat src = ti.convertToMat(frame);
 			boolean bool=true;
-			FaceDetection.faceDetection(src,bool);
+			int a = FaceDetection.faceDetection(src,bool);
 			canvas.showImage(frame);// 获取摄像头图像并放到窗口上显示，frame是一帧视频图像
-			if (FaceDetection.faceDetection(src,bool)==-1&&c) {
+			if (a!=-1&&c) {
 				c=false;
 				imagesrc = recordCamera.recordCamera(grabber,canvas);
 				try {

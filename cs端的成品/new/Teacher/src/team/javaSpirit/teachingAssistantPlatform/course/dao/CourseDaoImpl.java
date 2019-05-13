@@ -38,7 +38,9 @@ public class CourseDaoImpl {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("select class_id from ClassCourse where teacher.tid=?");
 		q.setParameter(0, tid);
-		return q.list();
+		List<Integer> list = q.list();
+		session.close();
+		return list;
 	}
 
 	/**
@@ -54,7 +56,9 @@ public class CourseDaoImpl {
 	 */
 	public ClassCourse getClassCourseBycid(int cid) {
 		Session session = HibernateUtil.getSession();
-		return session.get(ClassCourse.class, cid);
+		ClassCourse c = session.get(ClassCourse.class, cid);
+		session.close();
+		return c;
 	}
 
 	/**
@@ -72,7 +76,9 @@ public class CourseDaoImpl {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("from Times where classin.class_id=?");
 		q.setParameter(0, class_id);
-		return q.list();
+		List<Times> list = q.list();
+		session.close();
+		return list;
 	}
 
 	/**
@@ -88,7 +94,9 @@ public class CourseDaoImpl {
 	public Date getStartTime() {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("select time_begin from Term where status=1");
-		return (Date) q.uniqueResult();
+		Date d = (Date) q.uniqueResult();
+		session.close();
+		return d;
 	}
 
 	/**
@@ -106,7 +114,9 @@ public class CourseDaoImpl {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("select start_time from NodeNumber where node_id=?");
 		q.setParameter(0, node_id);
-		return (String) q.uniqueResult();
+		String s = (String) q.uniqueResult();
+		session.close();
+		return s;
 	}
 
 	/**
@@ -124,12 +134,19 @@ public class CourseDaoImpl {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("select end_time from NodeNumber where node_id=?");
 		q.setParameter(0, node_id);
-		return (String) q.uniqueResult();
+		String s = (String) q.uniqueResult();
+		session.close();
+		return s;
 	}
-	
+
 	/**
-	 * <p>Title: findCname</p>
-	 * <p>Description: 通过课程号，找到课程班级名</p>
+	 * <p>
+	 * Title: findCname
+	 * </p>
+	 * <p>
+	 * Description: 通过课程号，找到课程班级名
+	 * </p>
+	 * 
 	 * @param cid 课程班级号
 	 * @return 课程班级名
 	 */
@@ -137,6 +154,8 @@ public class CourseDaoImpl {
 		Session session = HibernateUtil.getSession();
 		Query q = session.createQuery("select class_name from ClassCourse where class_id=?");
 		q.setParameter(0, cid);
-		return (String)q.uniqueResult();
+		String s = (String) q.uniqueResult();
+		session.close();
+		return s;
 	}
 }
