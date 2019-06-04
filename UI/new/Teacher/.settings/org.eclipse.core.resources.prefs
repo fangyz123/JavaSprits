@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//src/team/javaSpirit/teachingAssistantPlatform/Screen/TScreen.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/entity/FileContent.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/mina/TCommunicaIoHandle.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/remoteMonitoring/service/SendMessageThread.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/remoteMonitoring/service/Service.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/test/Test.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/event/TeacherLoginActionListener.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/event/TeacherLoginMouseActionListener.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/event/TeacherModifyActionListener.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/view/Index.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/view/Login.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/view/LoginIng.java=UTF-8
+encoding//src/team/javaSpirit/teachingAssistantPlatform/ui/view/Modify.java=UTF-8
+encoding/<project>=UTF-8
