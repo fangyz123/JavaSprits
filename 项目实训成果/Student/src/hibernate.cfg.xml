@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- 【连接数据库的基本配置 】 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ttool</property>
+		<property name="hibernate.connection.characterEncoding">UTF-8</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">false</property>
+
+
+		<!-- 【实体类映射】 -->
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.ClassAdministration"/>
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.ClassCourse" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.Course" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.LeavePaper" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.LoadStudent" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.LoadTeacher" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.Manager" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.NodeNumber" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.Record" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.StudentClass" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.Students" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.Studentstatus" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.Teacher" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.Teacherstatus" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.Term" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.Times" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.ShareResource" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.Quiz" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.StudentQuiz" />
+		<mapping
+			class="team.javaSpirit.teachingAssistantPlatform.entity.FeedBack" />
+	</session-factory>
+</hibernate-configuration>

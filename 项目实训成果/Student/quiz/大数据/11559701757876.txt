@@ -1,0 +1,60 @@
+﻿1.JDK是( ) 
+A、一种全新的程序语言 
+B、一种程序开发辅助工具 
+C、一种由Java写成的，并支持Java Applet的浏览器 
+D、一种游戏软件 
+B
+2、Java语言中下面哪个可以用作正确的变量名称（ ） 
+A、3D
+B、name
+C、extends
+D、implements
+B
+3、构造函数何时被调用( ) 
+A.类定义时
+B.创建对象时 
+C.调用对象方法时
+D.使用对象的变量时
+B
+4、Java中，哪种不可以用来限制存取权限的关键字（ ） 
+A、public
+B、protected
+C、extends
+D、private 
+C
+5、要想定义一个不能被实例化的抽象类，在类定义中必须加上修饰符( )。 
+A、 final
+B、 public
+C、 private
+D、abstract 
+D
+6、Java源文件和编译后的文件扩展名分别为（ ） 
+A、.class和 .java
+B、.java和 .class
+C、.class和 .class
+D、.java和 .java 
+A
+7、若已定义 byte[ ] x= {11,22,33,-66} ; 其中0≤k≤3，则对x数组元素错误的引用是(  )。 
+A、 x[5-3]
+B、 x[k]
+C、 x[k+5] 
+D、 x[0]
+C
+8.欲构造ArrayList类的一个实例，此类继承了List接口，下列哪个方法是正确的 ？ 
+A、 ArrayList myList=new Object（）； 
+B、 List myList=new ArrayList（）； 
+C、 ArrayList myList=new List（）； 
+D、 List myList=new List（）；
+B
+9、哪个语句是正确的？ 
+A、 编译时将产生错误； 
+B、 编译时正确，运行时将产生错误； 
+C 、输出零； 
+D、 输出空
+C
+10、不能构成循环的语句是(  )。 
+A、for 语句
+B、while 语句
+C、switch 语句
+D、do while 语句
+C
