@@ -1,5 +1,4 @@
 # JavaSprits
-<img src="../../../image/logo.png"/>
 
 # 2016级项目实训成果展示 
 
